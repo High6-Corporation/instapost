@@ -6,22 +6,22 @@ import Image from 'next/image'
 
 const advantages = [
   {
-    icon: '/icons/instant.svg',
+    icon: '/icons/instant.png',
     title: 'Instantly Impactful Output',
     description: 'We deliver high-end content quickly without compromising on quality.',
   },
   {
-    icon: '/icons/generate.svg',
+    icon: '/icons/generate.png',
     title: 'We Generate Results',
     description: 'Our content is designed that connects and drive conversions.',
   },
   {
-    icon: '/icons/team.svg',
+    icon: '/icons/team.png',
     title: 'Your All-In-One Creative Team',
     description: 'From strategy to execution, we handle all aspects of your content marketing needs.',
   },
   {
-    icon: '/icons/strategize.svg',
+    icon: '/icons/strategize.png',
     title: 'We Strategize with You',
     description: 'We study your business, the market, and competitors to create tailored strategies that work.',
   },

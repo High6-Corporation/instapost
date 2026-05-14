@@ -11,7 +11,7 @@ export default function ServiceItem({ icon, title, description, className = '' }
   return (
     <div className={`flex gap-4 md:gap-[20px] lg:gap-[29px] items-center ${className}`}>
       {/* Icon Box */}
-      <div className="w-[80px] h-[80px] md:w-[100px] md:h-[100px] rounded-[16px] bg-primary border-2 border-secondary overflow-hidden flex-shrink-0 relative">
+      <div className="w-[80px] h-[80px] md:w-[100px] md:h-[100px] rounded-[16px] bg-[#EB0016] border-2 border-secondary overflow-hidden flex-shrink-0 relative">
         <Image
           src={icon}
           alt={title}
