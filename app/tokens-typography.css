@@ -1,0 +1,87 @@
+:root {
+  /* Font Family */
+  --font-family-primary: 'Raleway', sans-serif;
+
+  /* Heading 1 */
+  --heading-1-desktop-size: 76px;
+  --heading-1-desktop-line: 88px;
+  --heading-1-tablet-size: 60px;
+  --heading-1-tablet-line: 72px;
+  --heading-1-mobile-size: 36px;
+  --heading-1-mobile-line: 48px;
+  --heading-1-weight: 500;
+  --heading-1-tracking: -1%;
+  /* Heading 2 */
+  --heading-2-desktop-size: 48px;
+  --heading-2-desktop-line: 56px;
+  --heading-2-tablet-size: 36px;
+  --heading-2-tablet-line: 42px;
+  --heading-2-mobile-size: 24px;
+  --heading-2-mobile-line: 28px;
+  --heading-2-weight: 500;
+  --heading-2-tracking: -1%;
+  /* Heading 3 */
+  --heading-3-desktop-size: 24px;
+  --heading-3-desktop-line: 28px;
+  --heading-3-tablet-size: 20px;
+  --heading-3-tablet-line: 23px;
+  --heading-3-mobile-size: 18px;
+  --heading-3-mobile-line: 21px;
+  --heading-3-weight: 500;
+  --heading-3-tracking: -1%;
+  /* Body Large (Body 1) */
+  --body-lg-desktop-size: 22px;
+  --body-lg-desktop-line: 26px;
+  --body-lg-desktop-tracking: -3%;
+  --body-lg-tablet-size: 18px;
+  --body-lg-tablet-line: 21px;
+  --body-lg-tablet-tracking: -3%;
+  --body-lg-mobile-size: 16px;
+  --body-lg-mobile-line: 19px;
+  --body-lg-mobile-tracking: -3%;
+  --body-lg-tracking: -3%;
+  /* Body Medium (Body 2) */
+  --body-md-desktop-size: 18px;
+  --body-md-desktop-line: 26px;
+  --body-md-desktop-tracking: -1%;
+  --body-md-tablet-size: 16px;
+  --body-md-tablet-line: 22px;
+  --body-md-tablet-tracking: -1%;
+  --body-md-mobile-size: 14px;
+  --body-md-mobile-line: 18px;
+  --body-md-mobile-tracking: -1%;
+  --body-md-tracking: -1%;
+  /* Body Small (Body 3) */
+  --body-sm-desktop-size: 16px;
+  --body-sm-desktop-line: 26px;
+  --body-sm-desktop-tracking: -1%;
+  --body-sm-tablet-size: 16px;
+  --body-sm-tablet-line: 22px;
+  --body-sm-tablet-tracking: -1%;
+  --body-sm-mobile-size: 14px;
+  --body-sm-mobile-line: 18px;
+  --body-sm-mobile-tracking: -1%;
+  --body-sm-tracking: -1%;
+  /* Body XS (Body 4) */
+  --body-xs-desktop-size: 14px;
+  --body-xs-desktop-line: 16px;
+  --body-xs-desktop-tracking: -1%;
+  --body-xs-tablet-size: 14px;
+  --body-xs-tablet-line: 16px;
+  --body-xs-tablet-tracking: -1%;
+  --body-xs-mobile-size: 14px;
+  --body-xs-mobile-line: 16px;
+  --body-xs-mobile-tracking: -1%;
+  --body-xs-tracking: -1%;
+  /* Caption (Body 5) */
+  --caption-size: 12px;
+  --caption-line: 14px;
+  --caption-weight: 600;
+  --caption-tracking: -1%;
+
+  /* Label Medium (Menu / Footer) */
+  --label-md-size: 16px;
+  --label-md-line: 19px;
+  --label-md-weight: 500;
+  --label-md-tracking: -1%;
+}

@@ -1,0 +1,38 @@
+Primary Colors
+primary = #D01F25 (Red)
+
+Secondary Colors
+secondary = #FDD10D (Yellow)
+
+Neutral Scale
+neutral-0 = #FFFFFF (White)
+neutral-500 = #616161 (Gray)
+neutral-900 = #000000 (Black)
+
+Headings (Responsive - automatic breakpoints)
+heading-1 → Desktop: 76px/88px, Tablet: 60px/72px, Mobile: 36px/48px
+heading-2 → Desktop: 48px/56px, Tablet: 36px/42px, Mobile: 24px/28px
+heading-3 → Desktop: 24px/28px, Tablet: 20px/23px, Mobile: 18px/21px
+
+Body Text (Responsive - automatic breakpoints)
+body-lg → Desktop: 22px/26px, Tablet: 18px/21px, Mobile: 16px/19px
+body-md → Desktop: 18px/26px, Tablet: 16px/22px, Mobile: 14px/18px
+body-sm → Desktop: 16px/26px, Tablet: 16px/22px, Mobile: 14px/18px
+body-xs → Desktop: 14px/26px, Tablet: 14px/22px, Mobile: 14px/18px
+
+Special Text
+caption → 12px/14px, font-weight: 600 (semibold)
+label-md → 16px/19px, font-weight: 500 (medium) - for menu/footer
+
+💡 USAGE EXAMPLES
+// Typography (auto-responsive, no suffix needed!)
+<h1 className="heading-1 font-medium text-primary">Title</h1>
+<h2 className="heading-2 font-normal text-neutral-900">Subtitle</h2>
+<p className="body-md text-secondary">Description</p>
+<span className="caption">Small text</span>
+
+// Colors
+<div className="bg-primary text-inverse">Red background, white text</div>
+<button className="bg-secondary hover:bg-secondary-hover">Yellow button</button>
+<p className="text-secondary">Gray text</p>
+<div className="border border-focus">Border</div>
