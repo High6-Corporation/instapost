@@ -84,7 +84,7 @@ export function ServicesSection() {
                         key={tagIndex}
                         className="bg-[rgba(208,31,37,0.1)] px-[10px] py-[10px] rounded-[4px]"
                       >
-                        <p className="caption font-semibold text-primary text-center">
+                        <p className="caption font-semibold text-primary text-left">
                           {tag}
                         </p>
                       </div>
