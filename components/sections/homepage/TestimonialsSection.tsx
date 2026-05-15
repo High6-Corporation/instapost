@@ -186,12 +186,12 @@ export function TestimonialsSection() {
                                 alt="Play video"
                                 width={75}
                                 height={75}
-                                className="object-contain"
+                                className="object-contain max-md:w-[40px] max-md:h-[40px] md-w-[60px] md:h-[60px] lg-w-[75px] lg-h-[75px]"
                               />
                             </div>
 
                             {/* Text Content */}
-                            <div className="absolute left-[18px] bottom-[24px] w-[calc(100%-36px)]">
+                            <div className="absolute left-[18px] bottom-[8px] md:bottom-[24px] w-[calc(100%-36px)]">
                               <h3 className="heading-3 font-medium text-neutral-0 mb-[8px]">
                                 {testimonial.brand}
                               </h3>

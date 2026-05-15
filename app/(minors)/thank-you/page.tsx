@@ -39,7 +39,7 @@ export default function ThankYouPage() {
         {/* Floating Social Icons - Top Right */}
         <div className="absolute z-50 max-lg:top-1/2 max-lg:left-1/2 max-md:-translate-x-[-80px] max-md:-translate-y-[200px] max-lg:-translate-x-[-150px] max-lg:-translate-y-[200px] lg:top-[121px] lg:right-[82px] w-[100px] md:w-[180px] lg:w-[290px] h-[157px] pointer-events-none block">
           <Image
-            src="/icons/social-icons-cta-right.png"
+            src="/icons/social-icons-v2.png"
             alt="Social media reactions"
             width={290}
             height={157}
@@ -51,7 +51,7 @@ export default function ThankYouPage() {
         {/* Floating Social Icons - Bottom Left */}
         <div className="absolute z-50 max-lg:top-1/2 max-lg:left-1/2 max-md:-translate-x-[200px] max-md:-translate-y-[-50px] max-lg:-translate-x-[250px] max-lg:-translate-y-[-100px] lg:bottom-[121px] lg:left-[82px] w-[100px] md:w-[180px] lg:w-[290px] h-[157px] pointer-events-none block">
           <Image
-            src="/icons/social-icons-cta-right.png"
+            src="/icons/social-icons-v2.png"
             alt="Social media reactions"
             width={290}
             height={157}

@@ -8,7 +8,7 @@ export function CtaSection() {
   return (
     <Section className="bg-white relative overflow-hidden py-[40px] md:py-[60px] lg:py-[117px]">
       <Row 
-        className="!max-w-[1272px] p-8 md:p-14 lg:py-[82px] lg:px-16 relative rounded-[32px] !bg-primary overflow-hidden" 
+        className="!max-w-[1272px] p-6 md:p-14 lg:py-[82px] lg:px-16 relative rounded-[32px] !bg-primary overflow-hidden" 
       >
         {/* Background Image with Opacity */}
         <div 

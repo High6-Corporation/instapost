@@ -37,9 +37,9 @@ export default function NotFoundPage() {
         </div>
 
         {/* Floating Social Icons - Top Right */}
-        <div className="absolute z-20 max-lg:top-1/2 max-lg:left-1/2 max-md:hidden max-lg:-translate-x-[-200px] max-lg:-translate-y-[200px] lg:top-[121px] lg:right-[82px] w-[100px] md:w-[180px] lg:w-[290px] h-[157px] pointer-events-none block">
+        <div className="absolute z-20 max-lg:top-1/2 max-lg:left-1/2 max-md:-translate-x-[-120px] max-md:-translate-y-[250px]  max-lg:-translate-x-[-200px] max-lg:-translate-y-[200px] lg:top-[121px] lg:right-[82px] w-[100px] md:w-[180px] lg:w-[290px] h-[157px] pointer-events-none block">
           <Image
-            src="/icons/social-icons-cta-right.png"
+            src="/icons/social-icons-v2.png"
             alt="Social media reactions"
             width={290}
             height={157}

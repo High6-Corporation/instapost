@@ -1,4 +1,7 @@
 {
-  "/page": "app/page.js",
-  "/(minors)/404/page": "app/(minors)/404/page.js"
+  "/(minors)/thank-you/page": "app/(minors)/thank-you/page.js",
+  "/(minors)/maintenance/page": "app/(minors)/maintenance/page.js",
+  "/(minors)/404/page": "app/(minors)/404/page.js",
+  "/(minors)/coming-soon/page": "app/(minors)/coming-soon/page.js",
+  "/page": "app/page.js"
 }
