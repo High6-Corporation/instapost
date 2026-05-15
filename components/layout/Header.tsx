@@ -114,7 +114,7 @@ export default function Header({ variant = 'default' }: HeaderProps) {
 
             {/* Desktop CTA Button */}
             <div className="hidden lg:block">
-              <Link href="/">
+              <Link href="/coming-soon">
                 <Button variant="primary" showArrow={false}>
                   Get Started
                 </Button>
