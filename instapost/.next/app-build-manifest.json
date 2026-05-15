@@ -10,26 +10,6 @@
       "static/chunks/main-app.js",
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
-    ],
-    "/(minors)/thank-you/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(minors)/thank-you/page.js"
-    ],
-    "/(minors)/maintenance/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(minors)/maintenance/page.js"
-    ],
-    "/(minors)/coming-soon/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(minors)/coming-soon/page.js"
-    ],
-    "/(minors)/404/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(minors)/404/page.js"
     ]
   }
 }

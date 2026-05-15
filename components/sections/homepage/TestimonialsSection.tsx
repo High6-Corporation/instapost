@@ -177,7 +177,7 @@ export function TestimonialsSection() {
                             />
 
                             {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/90" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-transparent from-30% via-black/40 via-50% to-black/90" />
 
                             {/* Play Button (Absolute) */}
                             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">

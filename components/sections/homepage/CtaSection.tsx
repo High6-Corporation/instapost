@@ -8,7 +8,7 @@ export function CtaSection() {
   return (
     <Section className="bg-white relative overflow-hidden py-[40px] md:py-[60px] lg:py-[117px]">
       <Row 
-        className="!max-w-[1272px] p-6 md:p-14 lg:py-[82px] lg:px-16 relative rounded-[32px] !bg-primary overflow-hidden" 
+        className="!max-w-[1272px] p-8 md:p-14 lg:py-[82px] lg:px-16 relative rounded-[32px] !bg-primary overflow-hidden" 
       >
         {/* Background Image with Opacity */}
         <div 
@@ -50,8 +50,8 @@ export function CtaSection() {
         </div>
 
         {/* Decorative Social Icons - Top Left */}
-        <div className="max-[539px]:hidden block absolute left-1/2 top-1/2 -translate-x-[250px] -translate-y-[120px] md:-translate-x-[300px] md:-translate-y-[152px] lg:-translate-x-[452px] lg:-translate-y-[152px]">
-          <div className="relative w-[150px] h-[60px] md:w-[150px] md:h-[60px] lg:w-[197px] lg:h-[106px]">
+        <div className="max-[500px]:hidden block absolute left-1/2 top-1/2 -translate-x-[250px] -translate-y-[120px] md:-translate-x-[300px] md:-translate-y-[152px] lg:-translate-x-[452px] lg:-translate-y-[152px]">
+          <div className="relative w-[120px] h-[50px] md:w-[150px] md:h-[60px] lg:w-[197px] lg:h-[106px]">
             <Image
               src="/icons/social-icons-cta-left.png"
               alt="Social icons decoration"
@@ -63,8 +63,8 @@ export function CtaSection() {
         </div>
 
         {/* Decorative Social Icons - Top Right */}
-        <div className="max-[539px]:hidden block absolute left-1/2 top-1/2  -translate-x-[-120px] -translate-y-[100px] md:-translate-x-[-150px] md:-translate-y-[150px] lg:-translate-x-[-245px] lg:-translate-y-[180px]">
-          <div className="relative w-[140px] h-[50px] md:w-[140px] md:h-[50px] lg:w-[182px] lg:h-[99px]">
+        <div className="max-[500px]:hidden block absolute left-1/2 top-1/2  -translate-x-[-120px] -translate-y-[100px] md:-translate-x-[-150px] md:-translate-y-[150px] lg:-translate-x-[-245px] lg:-translate-y-[180px]">
+          <div className="relative w-[120px] h-[50px] md:w-[140px] md:h-[50px] lg:w-[182px] lg:h-[99px]">
             <Image
               src="/icons/social-icons-cta-right.png"
               alt="Social icons decoration"
