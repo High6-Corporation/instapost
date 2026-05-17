@@ -63,6 +63,9 @@ export function TestimonialsSection() {
   const [itemsPerSlide, setItemsPerSlide] = useState(2)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragStart, setDragStart] = useState(0)
+  const [dragOffset, setDragOffset] = useState(0)
 
   // Minimum swipe distance to trigger slide change
   const minSwipeDistance = 50
@@ -111,6 +114,40 @@ export function TestimonialsSection() {
     }
   }
 
+  // Mouse drag handlers for desktop
+  const onMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true)
+    setDragStart(e.clientX)
+    setDragOffset(0)
+  }
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return
+    const offset = dragStart - e.clientX
+    setDragOffset(offset)
+  }
+
+  const onMouseUp = () => {
+    if (!isDragging) return
+    setIsDragging(false)
+    
+    if (Math.abs(dragOffset) > minSwipeDistance) {
+      if (dragOffset > 0) {
+        nextSlide()
+      } else {
+        prevSlide()
+      }
+    }
+    setDragOffset(0)
+  }
+
+  const onMouseLeave = () => {
+    if (isDragging) {
+      setIsDragging(false)
+      setDragOffset(0)
+    }
+  }
+
   const totalPages = Math.ceil(testimonials.length / itemsPerSlide)
 
   const nextSlide = () => {
@@ -151,14 +188,22 @@ export function TestimonialsSection() {
         <div className="relative z-10">
           {/* Slides Container */}
           <div 
-            className="overflow-hidden"
+            className={`overflow-hidden ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+            style={{ userSelect: 'none' }}
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
             onTouchEnd={onTouchEnd}
+            onMouseDown={onMouseDown}
+            onMouseMove={onMouseMove}
+            onMouseUp={onMouseUp}
+            onMouseLeave={onMouseLeave}
           >
             <div
               className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              style={{ 
+                transform: `translateX(-${currentIndex * 100}%)`,
+                transition: isDragging ? 'none' : 'transform 0.5s ease-in-out'
+              }}
             >
               {slides.map((slideItems, slideIndex) => (
                 <div key={slideIndex} className="w-full flex-shrink-0">
