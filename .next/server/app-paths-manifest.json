@@ -1,1 +1,15 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/(minors)/404/page": "app/(minors)/404/page.js",
+  "/(minors)/coming-soon/page": "app/(minors)/coming-soon/page.js",
+  "/(minors)/maintenance/page": "app/(minors)/maintenance/page.js",
+  "/(minors)/thank-you/page": "app/(minors)/thank-you/page.js",
+  "/(pages)/cart/page": "app/(pages)/cart/page.js",
+  "/(pages)/checkout/page": "app/(pages)/checkout/page.js",
+  "/(pages)/contact/page": "app/(pages)/contact/page.js",
+  "/(pages)/services/page": "app/(pages)/services/page.js",
+  "/(pages)/shop/page": "app/(pages)/shop/page.js",
+  "/api/revalidate/route": "app/api/revalidate/route.js",
+  "/design-tokens-demo/page": "app/design-tokens-demo/page.js",
+  "/page": "app/page.js"
+}
