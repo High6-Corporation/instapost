@@ -27,4 +27,6 @@ yarn-error.log*
 .vscode/
 .idea/
 .DS_Store
-Thumbs.db
+Thumbs.db.next
+node_modules
+package-lock.json
