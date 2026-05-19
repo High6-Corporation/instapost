@@ -42,7 +42,7 @@ export function ServicesSection() {
       >
         {/* Header */}
         <div className="relative z-10 flex flex-col items-center pt-[40px] pb-[24px] md:pt-[60px] md:pb-[40px] lg:pt-[100px] lg:pb-[54px]">
-          <Badge className="max-w-[103px] w-full">
+          <Badge className="max-w-[103px] w-full bg-neutral-0">
             What We Do
           </Badge>
           <h2 className="heading-2 font-normal text-neutral-900 text-center max-w-[775px] w-full mx-6">

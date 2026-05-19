@@ -109,7 +109,7 @@ export default function ContactPage() {
             <div className="flex flex-col gap-4 md:gap-[30px] w-full lg:w-auto">
               {/* Heading & Description */}
               <div className="flex flex-col gap-2 md:gap-6 lg:gap-[30px]">
-                <h2 className="heading-2 text-neutral-900">
+                <h2 className="heading-2 font-normal text-neutral-900">
                   Get in Touch!
                 </h2>
                 <p className="body-md text-neutral-500">

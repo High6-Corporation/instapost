@@ -23,7 +23,7 @@ export default function SubpageBanner({ title, className = '' }: SubpageBannerPr
         </div>
       <Row className="relative">
         {/* Heading */}
-        <h1 className="relative z-10 heading-1 text-neutral-0 text-center">
+        <h1 className="relative z-10 font-normal heading-1 text-neutral-0 text-center">
           {title}
         </h1>
       </Row>

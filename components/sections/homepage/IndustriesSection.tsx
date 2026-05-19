@@ -70,7 +70,7 @@ export function IndustriesSection() {
               </div>
 
               {/* Label */}
-              <p className="body-sm text-netural-900 text-center whitespace-pre-line">
+              <p className="body-sm text-neutral-500 text-center whitespace-pre-line">
                 {industry.label}
               </p>
             </div>

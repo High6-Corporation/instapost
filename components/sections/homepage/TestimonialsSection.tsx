@@ -174,7 +174,7 @@ export function TestimonialsSection() {
       >
         {/* Header */}
         <div className="relative z-10 flex flex-col items-center pt-[40px] pb-[24px] md:pb-[40px] md:pt-[60px] lg:pt-[81px] lg:pb-[58px]">
-          <Badge className="max-w-[158px] w-full">
+          <Badge className="max-w-[158px] w-full bg-neutral-0">
             What Our Clients Say
           </Badge>
           <h2 className="heading-2 font-normal text-neutral-900 text-center">
