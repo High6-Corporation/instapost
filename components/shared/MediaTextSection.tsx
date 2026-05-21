@@ -3,6 +3,7 @@ import Row from '@/components/layout/Row'
 import Button from '@/components/ui/Button'
 import Image from 'next/image'
 import Link from 'next/link'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 interface MediaTextSectionProps {
   title?: string;
@@ -26,10 +27,11 @@ export function MediaTextSection({
   const isDark = variant === 'dark';
 
   return (
-    <Section className={`${
-      isDark ? 'bg-[#222222]' : 'bg-white'
-    } overflow-hidden py-[24px] md:py-[40px] lg:py-[70px]`}>
-      <Row className="!max-w-[1280px] flex flex-col-reverse min-[1140px]:flex-row justify-between items-center gap-6 md:gap-[40px]">
+    <ScrollAnimationWrapper>
+      <Section className={`${
+        isDark ? 'bg-[#222222]' : 'bg-white'
+      } overflow-hidden py-[24px] md:py-[40px] lg:py-[70px]`}>
+        <Row className="!max-w-[1280px] flex flex-col-reverse min-[1140px]:flex-row justify-between items-center gap-6 md:gap-[40px]">
         {/* Left Column - Content */}
         <div className="w-full flex flex-col gap-[24px] md:gap-[30px]">
           {/* Title */}
@@ -83,5 +85,6 @@ export function MediaTextSection({
         </div>
       </Row>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

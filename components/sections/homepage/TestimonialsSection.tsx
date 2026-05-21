@@ -5,6 +5,7 @@ import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
 import Badge from '@/components/blocks/Badge'
 import Image from 'next/image'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 const testimonials = [
   {
@@ -165,13 +166,14 @@ export function TestimonialsSection() {
   }
 
   return (
-    <Section className="bg-white relative overflow-hidden">
-      <Row 
-        className="!max-w-[1269px] relative rounded-[32px] px-[12px] md:px-[24px] lg:px-[78px]" 
-        style={{
-          background: 'radial-gradient(ellipse at center, rgba(253,209,13,0.15) 0%, rgba(253,209,13,1) 100%)',
-        }}
-      >
+    <ScrollAnimationWrapper>
+      <Section className="bg-white relative overflow-hidden">
+        <Row 
+          className="!max-w-[1269px] relative rounded-[32px] px-[12px] md:px-[24px] lg:px-[78px]" 
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(253,209,13,0.15) 0%, rgba(253,209,13,1) 100%)',
+          }}
+        >
         {/* Header */}
         <div className="relative z-10 flex flex-col items-center pt-[40px] pb-[24px] md:pb-[40px] md:pt-[60px] lg:pt-[81px] lg:pb-[58px]">
           <Badge className="max-w-[158px] w-full bg-neutral-0">
@@ -318,5 +320,6 @@ export function TestimonialsSection() {
         </div>
       </Row>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

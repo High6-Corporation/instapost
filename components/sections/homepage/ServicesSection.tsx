@@ -3,6 +3,7 @@ import Row from '@/components/layout/Row'
 import Badge from '@/components/blocks/Badge'
 import ServiceItem from '@/components/blocks/ServiceItem'
 import Image from 'next/image'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 const services = [
   {
@@ -33,13 +34,14 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <Section className="bg-white relative overflow-hidden pb-[40px] md:pb-[80px lg:pb-[120px] pt-[20px] md:pt-[40px] lg:pt-[5px]">
-      <Row 
-        className="!max-w-[1155px] relative rounded-[32px] flex items-center flex-col px-3 md:px-8 pb-[12px] md:pb-[36px] lg:pb-[100px]" 
-        style={{
-          background: 'radial-gradient(circle at 50% 30%, rgba(253, 209, 13, 0.15) 0%, rgba(253, 209, 13, 1) 100%)',
-        }}
-      >
+    <ScrollAnimationWrapper>
+      <Section className="bg-white relative overflow-hidden pb-[40px] md:pb-[80px lg:pb-[120px] pt-[20px] md:pt-[40px] lg:pt-[5px]">
+        <Row 
+          className="!max-w-[1155px] relative rounded-[32px] flex items-center flex-col px-3 md:px-8 pb-[12px] md:pb-[36px] lg:pb-[100px]" 
+          style={{
+            background: 'radial-gradient(circle at 50% 30%, rgba(253, 209, 13, 0.15) 0%, rgba(253, 209, 13, 1) 100%)',
+          }}
+        >
         {/* Header */}
         <div className="relative z-10 flex flex-col items-center pt-[40px] pb-[24px] md:pt-[60px] md:pb-[40px] lg:pt-[100px] lg:pb-[54px]">
           <Badge className="max-w-[103px] w-full bg-neutral-0">
@@ -107,5 +109,6 @@ export function ServicesSection() {
         </div>
       </Row>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

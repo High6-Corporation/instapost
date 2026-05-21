@@ -3,13 +3,15 @@ import Row from '@/components/layout/Row'
 import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import Link from 'next/link'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 export function CtaSection() {
   return (
-    <Section className="bg-white relative overflow-hidden py-[40px] md:py-[64px] lg:py-[70px]">
-      <Row 
-        className="!max-w-[1272px] p-8 md:p-14 lg:py-[82px] lg:px-16 relative rounded-[32px] !bg-primary overflow-hidden" 
-      >
+    <ScrollAnimationWrapper>
+      <Section className="bg-white relative overflow-hidden py-[40px] md:py-[64px] lg:py-[70px]">
+        <Row 
+          className="!max-w-[1272px] p-8 md:p-14 lg:py-[82px] lg:px-16 relative rounded-[32px] !bg-primary overflow-hidden" 
+        >
         {/* Background Image with Opacity */}
         <div 
           className="absolute inset-0"
@@ -76,5 +78,6 @@ export function CtaSection() {
         </div>
       </Row>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

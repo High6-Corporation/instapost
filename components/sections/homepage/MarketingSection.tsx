@@ -1,6 +1,7 @@
 import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
 import Badge from '@/components/blocks/Badge'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 const philosophySteps = [
   {
@@ -27,8 +28,9 @@ const philosophySteps = [
 
 export function MarketingSection() {
   return (
-    <Section className="bg-white relative overflow-hidden">
-      <Row className="!max-w-[1280px] relative">
+    <ScrollAnimationWrapper>
+      <Section className="bg-white relative overflow-hidden">
+        <Row className="!max-w-[1280px] relative">
         {/* Header */}
         <div className="relative z-10 flex flex-col items-center gap-[16px] mb-[24px] md:mb-[40px]">
           <div className="bg-[#fae9e9] px-[10px] py-[10px] rounded-[4px] max-w-[106px] w-full">
@@ -61,5 +63,6 @@ export function MarketingSection() {
         </div>
       </Row>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

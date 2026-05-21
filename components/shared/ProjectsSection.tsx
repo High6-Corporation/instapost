@@ -4,6 +4,7 @@ import Button from '@/components/ui/Button'
 import ProjectCard from '@/components/blocks/ProjectCard'
 import Badge from '@/components/blocks/Badge'
 import Link from 'next/link'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 interface ProjectsSectionProps {
   badgeLabel?: string;
@@ -78,8 +79,9 @@ export function ProjectsSection({
   projects = defaultProjects,
 }: ProjectsSectionProps) {
   return (
-    <Section className="bg-white">
-      <Row className="!max-w-[1279px]">
+    <ScrollAnimationWrapper>
+      <Section className="bg-white">
+        <Row className="!max-w-[1279px]">
         <div className="flex flex-col items-center">
           {/* Section Label - Can be hidden */}
           {showBadge && (
@@ -125,5 +127,6 @@ export function ProjectsSection({
         </div>
       </Row>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

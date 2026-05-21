@@ -2,6 +2,7 @@ import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
 import Image from 'next/image'
 import ServiceItem from '@/components/blocks/ServiceItem'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 const coreValues = [
   {
@@ -33,7 +34,8 @@ const coreValues = [
 
 export function CoreValuesSection() {
   return (
-    <Section className="relative bg-white overflow-hidden py-[24px] md:py-[40px] lg:py-[70px]">
+    <ScrollAnimationWrapper>
+      <Section className="relative bg-white overflow-hidden py-[24px] md:py-[40px] lg:py-[70px]">
       {/* Background Image with 10% Opacity */}
       <div className="absolute inset-0" style={{ opacity: 0.1 }}>
         <Image
@@ -99,5 +101,6 @@ export function CoreValuesSection() {
       </Row>
       </div>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

@@ -4,6 +4,7 @@ import Badge from '@/components/blocks/Badge'
 import Button from '@/components/ui/Button'
 import Image from 'next/image'
 import Link from 'next/link'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 const industries = [
   { icon: '/icons/products-icon.svg', label: 'Mom & Baby Products' },
@@ -20,8 +21,9 @@ const industries = [
 
 export function IndustriesSection() {
   return (
-    <Section className="bg-white relative overflow-hidden py-[40px] md:py-[60px] lg:pt-[72px] lg:pb-[102px]">
-      <Row className="!max-w-[1280px] relative">
+    <ScrollAnimationWrapper>
+      <Section className="bg-white relative overflow-hidden py-[40px] md:py-[60px] lg:pt-[72px] lg:pb-[102px]">
+        <Row className="!max-w-[1280px] relative">
         {/* Header */}
         <div className="relative z-10 flex flex-col items-center mb-[24px] md:mb-[40px] lg:mb-[56px]">
           <Badge className="max-w-[166px] w-full">
@@ -87,5 +89,6 @@ export function IndustriesSection() {
         </div>
       </Row>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

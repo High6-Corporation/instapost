@@ -3,6 +3,7 @@ import Row from '@/components/layout/Row'
 import Badge from '@/components/blocks/Badge'
 import ServiceItem from '@/components/blocks/ServiceItem'
 import Image from 'next/image'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 interface MaskedMediaSectionProps {
   variant?: 'default' | 'reversed';
@@ -40,10 +41,11 @@ export function MaskedMediaSection({ variant = 'default', advantages = defaultAd
   const isReversed = variant === 'reversed';
 
   return (
-    <Section className={`${
-      isReversed ? 'bg-primary' : 'bg-white'
-    } overflow-hidden py-[40px] md:py-[60px] lg:py-[100px]`}>
-      <Row className={`!max-w-[1270px] flex ${isReversed ? 'flex-col-reverse' : 'flex-col'} min-[1140px]:flex-row justify-center items-center gap-6 md:gap-[33px]`}>
+    <ScrollAnimationWrapper>
+      <Section className={`${
+        isReversed ? 'bg-primary' : 'bg-white'
+      } overflow-hidden py-[40px] md:py-[60px] lg:py-[100px]`}>
+        <Row className={`!max-w-[1270px] flex ${isReversed ? 'flex-col-reverse' : 'flex-col'} min-[1140px]:flex-row justify-center items-center gap-6 md:gap-[33px]`}>
           {/* Left Column - Visual (default) or Content (reversed) */}
           {!isReversed ? (
             <>
@@ -174,5 +176,6 @@ export function MaskedMediaSection({ variant = 'default', advantages = defaultAd
           )}
       </Row>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

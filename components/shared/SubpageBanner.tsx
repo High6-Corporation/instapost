@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 interface SubpageBannerProps {
   title: string;
@@ -9,7 +10,8 @@ interface SubpageBannerProps {
 
 export default function SubpageBanner({ title, className = '' }: SubpageBannerProps) {
   return (
-    <Section className="relative w-full p-4 flex justify-center items-center bg-primary min-h-[150px] md:min-h-[200px] overflow-hidden">
+    <ScrollAnimationWrapper>
+      <Section className="relative w-full p-4 flex justify-center items-center bg-primary min-h-[150px] md:min-h-[200px] overflow-hidden">
       {/* Dotted Background Pattern */}
         <div className="absolute inset-0 opacity-30">
           <Image
@@ -28,5 +30,6 @@ export default function SubpageBanner({ title, className = '' }: SubpageBannerPr
         </h1>
       </Row>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

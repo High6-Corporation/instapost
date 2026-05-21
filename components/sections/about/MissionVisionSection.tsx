@@ -1,11 +1,13 @@
 import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
 import Image from 'next/image'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 export function MissionVisionSection() {
   return (
-    <Section className="bg-white overflow-hidden py-[24px] md:py-[40px] lg:py-[70px]">
-      <Row className="!max-w-[1197px] flex flex-col min-[1140px]:flex-row justify-center items-center gap-6 md:gap-[40px]">
+    <ScrollAnimationWrapper>
+      <Section className="bg-white overflow-hidden py-[24px] md:py-[40px] lg:py-[70px]">
+        <Row className="!max-w-[1197px] flex flex-col min-[1140px]:flex-row justify-center items-center gap-6 md:gap-[40px]">
         {/* Left Column - Visual */}
         <div className="relative w-full min-[1140px]:min-w-[594px] min-[1140px]:max-w-[594px] flex justify-center min-[1140px]:justify-start">
           {/* Yellow Shape Background */}
@@ -83,5 +85,6 @@ export function MissionVisionSection() {
         </div>
       </Row>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

@@ -1,7 +1,6 @@
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import BackToTop from "@/components/global/BackToTop"
-import ScrollAnimationWrapper from "@/components/global/ScrollAnimationWrapper"
 import { Hero } from "@/components/sections/homepage/Hero"
 import { HighlightsSection } from "@/components/sections/homepage/HighlightsSection"
 import { BrandsSection } from "@/components/sections/homepage/BrandsSection"
@@ -19,34 +18,18 @@ export default function Home() {
       <Header />
       <Hero />
       <HighlightsSection />
-      <ScrollAnimationWrapper>
-        <BrandsSection />
-      </ScrollAnimationWrapper>
-      <ScrollAnimationWrapper>
-        <ProjectsSection 
-          showBadge={true}
-          title="Discover how we bring brands to life through content and campaigns that deliver."
-          showDescription={false}
-        />
-      </ScrollAnimationWrapper>
-      <ScrollAnimationWrapper>
-        <MaskedMediaSection />
-      </ScrollAnimationWrapper>
-      <ScrollAnimationWrapper>
-        <ServicesSection />
-      </ScrollAnimationWrapper>
-      <ScrollAnimationWrapper>
-        <MarketingSection />
-      </ScrollAnimationWrapper>
-      <ScrollAnimationWrapper>
-        <IndustriesSection />
-      </ScrollAnimationWrapper>
-      <ScrollAnimationWrapper>
-        <TestimonialsSection />
-      </ScrollAnimationWrapper>
-      <ScrollAnimationWrapper>
-        <CtaSection />
-      </ScrollAnimationWrapper>
+      <BrandsSection />
+      <ProjectsSection 
+        showBadge={true}
+        title="Discover how we bring brands to life through content and campaigns that deliver."
+        showDescription={false}
+      />
+      <MaskedMediaSection />
+      <ServicesSection />
+      <MarketingSection />
+      <IndustriesSection />
+      <TestimonialsSection />
+      <CtaSection />
       <Footer />
       <BackToTop />
     </main>

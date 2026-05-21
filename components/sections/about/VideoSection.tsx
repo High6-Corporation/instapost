@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react'
 import Image from 'next/image'
 import Section from '@/components/layout/Section'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 interface VideoSectionProps {
   videoSrc?: string;
@@ -28,7 +29,8 @@ export function VideoSection({
   }
 
   return (
-    <Section className="relative w-full overflow-hidden">
+    <ScrollAnimationWrapper>
+      <Section className="relative w-full overflow-hidden">
       {/* Video Container */}
       <div className="relative w-full aspect-video max-h-[600px]">
         {/* Video Element */}
@@ -73,5 +75,6 @@ export function VideoSection({
         )}
       </div>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 const brands = [
   { src: '/logo/rgb.png', alt: 'RGB', width: 86, height: 66 },
@@ -38,8 +39,9 @@ export function BrandsSection() {
   const displayBrands = shouldSlide ? [...brands, ...brands] : brands
   
   return (
-    <Section className="py-[40px] md:py-[60px] lg:py-[108px] lg:pb-[88px] bg-white">
-      <Row className="!max-w-[1231px]">
+    <ScrollAnimationWrapper>
+      <Section className="py-[40px] md:py-[60px] lg:py-[108px] lg:pb-[88px] bg-white">
+        <Row className="!max-w-[1231px]">
         <div className="flex flex-col items-center gap-[30px]">
           {/* Section Title */}
           <p className="body-sm font-semibold text-text-secondary text-center">
@@ -97,5 +99,6 @@ export function BrandsSection() {
         </div>
       </Row>
     </Section>
+    </ScrollAnimationWrapper>
   )
 }

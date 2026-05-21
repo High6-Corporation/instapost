@@ -6,6 +6,7 @@ import { Navigation, Autoplay, Pagination } from 'swiper/modules'
 import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
 import Image from 'next/image'
+import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -148,7 +149,8 @@ export function TeamSliderSection() {
           transition: transform 0.3s ease;
         }
       `}</style>
-      <Section className="bg-white relative overflow-hidden py-[24px] md:py-[40px] lg:py-[70px]">
+      <ScrollAnimationWrapper>
+        <Section className="bg-white relative overflow-hidden py-[24px] md:py-[40px] lg:py-[70px]">
       {/* Yellow Background - Extends to right edge */}
       <div 
         className="absolute hidden lg:block right-0 top-1/2 -translate-y-1/2 w-[45%] z-0 rounded-l-[50px]" 
@@ -240,6 +242,7 @@ export function TeamSliderSection() {
         </div>
       </Row>
     </Section>
+      </ScrollAnimationWrapper>
     </>
   )
 }
