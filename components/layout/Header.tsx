@@ -13,7 +13,7 @@ interface HeaderProps {
 
 const navLinks = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/coming-soon' },
+  { label: 'About', href: '/about' },
   { label: 'Services', href: '/coming-soon' },
   { label: 'Industries', href: '/coming-soon' },
   { label: 'Packages', href: '/coming-soon' },

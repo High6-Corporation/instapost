@@ -5,13 +5,13 @@ import ScrollAnimationWrapper from "@/components/global/ScrollAnimationWrapper"
 import { Hero } from "@/components/sections/homepage/Hero"
 import { HighlightsSection } from "@/components/sections/homepage/HighlightsSection"
 import { BrandsSection } from "@/components/sections/homepage/BrandsSection"
-import { ProjectsSection } from "@/components/sections/homepage/ProjectsSection"
-import { AdvantageSection } from "@/components/sections/homepage/AdvantageSection"
+import { ProjectsSection } from "@/components/shared/ProjectsSection"
+import { MaskedMediaSection } from "@/components/shared/MaskedMediaSection"
 import { ServicesSection } from "@/components/sections/homepage/ServicesSection"
 import { MarketingSection } from "@/components/sections/homepage/MarketingSection"
 import { IndustriesSection } from "@/components/sections/homepage/IndustriesSection"
 import { TestimonialsSection } from "@/components/sections/homepage/TestimonialsSection"
-import { CtaSection } from "@/components/sections/homepage/CtaSection"
+import { CtaSection } from "@/components/global/CtaSection"
 
 export default function Home() {
   return (
@@ -23,10 +23,14 @@ export default function Home() {
         <BrandsSection />
       </ScrollAnimationWrapper>
       <ScrollAnimationWrapper>
-        <ProjectsSection />
+        <ProjectsSection 
+          showBadge={true}
+          title="Discover how we bring brands to life through content and campaigns that deliver."
+          showDescription={false}
+        />
       </ScrollAnimationWrapper>
       <ScrollAnimationWrapper>
-        <AdvantageSection />
+        <MaskedMediaSection />
       </ScrollAnimationWrapper>
       <ScrollAnimationWrapper>
         <ServicesSection />

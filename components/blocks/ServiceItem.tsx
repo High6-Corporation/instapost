@@ -5,9 +5,11 @@ interface ServiceItemProps {
   title: string
   description: string
   className?: string
+  titleClassName?: string
+  descriptionClassName?: string
 }
 
-export default function ServiceItem({ icon, title, description, className = '' }: ServiceItemProps) {
+export default function ServiceItem({ icon, title, description, className = '', titleClassName = '', descriptionClassName = '' }: ServiceItemProps) {
   return (
     <div className={`flex gap-4 md:gap-[20px] lg:gap-[29px] items-center ${className}`}>
       {/* Icon Box */}
@@ -23,10 +25,10 @@ export default function ServiceItem({ icon, title, description, className = '' }
 
       {/* Text Content */}
       <div className="flex flex-col gap-[8px] flex-1">
-        <h3 className="heading-3">
+        <h3 className={`heading-3 ${titleClassName}`}>
           {title}
         </h3>
-        <p className="body-md text-neutral-500">
+        <p className={`body-md ${descriptionClassName || 'text-neutral-500'}`}>
           {description}
         </p>
       </div>

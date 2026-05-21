@@ -215,3 +215,43 @@
 @import './tokens/radius.css';
 @import './tokens/shadows.css';
 @import './tokens/zindex.css';
+
+/* Team Swiper Styles */
+.team-swiper {
+  width: 100%;
+  height: auto;
+}
+
+.team-swiper .swiper-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.team-swiper .swiper-slide {
+  height: auto;
+  display: flex;
+}
+
+.team-swiper .swiper-pagination {
+  position: relative;
+  bottom: 0 !important;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-swiper .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: #68686a;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.team-swiper .swiper-pagination-bullet-active {
+  background: #D01F25 !important;
+  opacity: 1;
+  width: 12px;
+  height: 12px;
+}

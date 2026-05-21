@@ -65,8 +65,8 @@ export default function Footer() {
                 }`}>
                   Home
                 </a>
-                <a href="/coming-soon" className={`label-md font-medium transition-colors ${
-                  pathname === '/coming-soon' ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
+                <a href="/about" className={`label-md font-medium transition-colors ${
+                  pathname === '/about' ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
                 }`}>
                   About
                 </a>
