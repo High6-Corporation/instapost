@@ -40,7 +40,7 @@ export function CtaSection() {
           </div>
 
           {/* CTA Button */}
-          <Link href="/coming-soon">
+          <Link href="/contact">
             <Button
               variant="white"
               className="shadow-[0px_0px_7px_rgba(0,0,0,0.16)] heading-3 font-semibold whitespace-nowrap"

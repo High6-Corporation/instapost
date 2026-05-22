@@ -20,7 +20,7 @@ export default function AboutPage() {
       <SubpageBanner title="About Us" />
 
       {/* Media Text Section */}
-      <MediaTextSection variant="light" />
+      <MediaTextSection variant="light" buttonText="Inquire Now" buttonLink="/contact"/>
 
       {/* Video Section */}
       <VideoSection />
