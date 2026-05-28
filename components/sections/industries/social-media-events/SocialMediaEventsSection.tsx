@@ -1,5 +1,4 @@
 import { IndustryCard } from '@/components/shared/IndustryCard'
-import { socialMediaEventsData } from './socialMediaEventsData'
 
 export default function SocialMediaEventsSection() {
   return (

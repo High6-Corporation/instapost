@@ -9,10 +9,8 @@ import Image from 'next/image'
 import Button from '@/components/ui/Button'
 import { useState } from 'react'
 import { submitContactForm } from '@/lib/contact-form'
-import { useRouter } from 'next/navigation'
 
 export default function ContactPage() {
-  const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})

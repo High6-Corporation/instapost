@@ -2,7 +2,8 @@
 
 import { useRef, useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Autoplay, Pagination } from 'swiper/modules'
+import type { Swiper as SwiperType } from 'swiper'
+import { Navigation, Pagination } from 'swiper/modules'
 import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
 import Image from 'next/image'
@@ -102,7 +103,7 @@ function TeamCard({
 }
 
 export function TeamSliderSection() {
-  const swiperRef = useRef<any>(null)
+  const swiperRef = useRef<SwiperType | null>(null)
   const [spaceBetween, setSpaceBetween] = useState(40)
   const [showPagination, setShowPagination] = useState(false)
   const [swiperPadding, setSwiperPadding] = useState('16px')

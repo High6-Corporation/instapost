@@ -1,6 +1,5 @@
 import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
-import Badge from '@/components/blocks/Badge'
 import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
 const philosophySteps = [

@@ -1,9 +1,7 @@
 import { notFound } from 'next/navigation'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
-import SubpageBanner from '@/components/shared/SubpageBanner'
 import BackToTop from '@/components/global/BackToTop'
-import { IndustryCard } from '@/components/shared/IndustryCard'
 import { MediaTextSection } from '@/components/shared/MediaTextSection'
 import CaseStudySection from '@/components/sections/industries/CaseStudySection'
 import { CtaSection } from '@/components/global/CtaSection'
@@ -32,7 +30,9 @@ export function generateStaticParams() {
 }
 
 // Map slugs to their data files
-const industryDataMap: Record<string, any> = {
+type IndustrySinglePageData = typeof beautyLifestyleData
+
+const industryDataMap: Record<string, IndustrySinglePageData> = {
   'beauty-lifestyle': beautyLifestyleData,
   'food-beverage': foodBeverageData,
   'services': servicesData,

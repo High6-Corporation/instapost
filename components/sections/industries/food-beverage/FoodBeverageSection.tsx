@@ -1,5 +1,4 @@
 import { IndustryCard } from '@/components/shared/IndustryCard'
-import { foodBeverageData } from './foodBeverageData'
 
 export default function FoodBeverageSection() {
   return (

@@ -11,12 +11,27 @@ interface HeaderProps {
   variant?: 'default' | 'sticky';
 }
 
-const navLinks = [
+interface NavChildLink {
+  label: string
+  href: string
+}
+
+interface NavLink {
+  label: string
+  href: string
+  children?: NavChildLink[]
+}
+
+const navLinks: NavLink[] = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Services', href: '/coming-soon' },
   { label: 'Industries', href: '/industries' },
-  { label: 'Packages', href: '/coming-soon' },
+  {
+    label: 'Packages',
+    href: '/packages',
+    children: [{ label: 'Agency', href: '/agency' }],
+  },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -26,6 +41,16 @@ export default function Header({ variant = 'default' }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null)
   const placeholderRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
+
+  const isNavLinkActive = (link: NavLink) => {
+    const isMainActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+    const isChildActive =
+      link.children?.some(
+        (child) => pathname === child.href || (child.href !== '/' && pathname.startsWith(child.href)),
+      ) ?? false
+
+    return isMainActive || isChildActive
+  }
 
   // Default variant: scroll effect on any scroll
   // Sticky variant: only becomes sticky when original position is out of view
@@ -95,9 +120,9 @@ export default function Header({ variant = 'default' }: HeaderProps) {
             <nav className="hidden lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:flex rounded-lg bg-bg-primary max-w-[553px] w-full justify-center py-auto h-[43px] shadow-[0px_0px_7px_rgba(0,0,0,0.09)]">
               <ul className="flex items-center justify-center gap-8">
                 {navLinks.map((link) => {
-                  const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+                  const isActive = isNavLinkActive(link)
                   return (
-                    <li key={link.label}>
+                    <li key={link.label} className={`relative ${link.children ? 'group' : ''}`}>
                       <Link
                         href={link.href}
                         className={`label-md whitespace-nowrap transition-colors duration-200 hover:text-primary ${
@@ -106,6 +131,35 @@ export default function Header({ variant = 'default' }: HeaderProps) {
                       >
                         {link.label}
                       </Link>
+
+                      {link.children && (
+                        <div className="absolute left-1/2 top-full z-50 hidden -translate-x-1/2 pt-2 group-hover:block group-focus-within:block">
+                          <div className="min-w-[170px] rounded-lg bg-bg-primary p-2 shadow-[0px_0px_7px_rgba(0,0,0,0.09)]">
+                            <ul className="flex flex-col gap-1">
+                              {link.children.map((child) => {
+                                const isChildActive =
+                                  pathname === child.href ||
+                                  (child.href !== '/' && pathname.startsWith(child.href))
+
+                                return (
+                                  <li key={child.label}>
+                                    <Link
+                                      href={child.href}
+                                      className={`block rounded-md px-3 py-2 label-md transition-colors duration-200 hover:text-primary ${
+                                        isChildActive
+                                          ? 'text-primary font-semibold bg-white/60'
+                                          : 'text-text-primary'
+                                      }`}
+                                    >
+                                      {child.label}
+                                    </Link>
+                                  </li>
+                                )
+                              })}
+                            </ul>
+                          </div>
+                        </div>
+                      )}
                     </li>
                   )
                 })}
@@ -146,7 +200,7 @@ export default function Header({ variant = 'default' }: HeaderProps) {
                 <nav className="p-4 ">
                   <ul className="flex flex-col lg:gap-4">
                     {navLinks.map((link, index) => {
-                      const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
+                      const isActive = isNavLinkActive(link)
                       return (
                         <li 
                           key={link.label}
@@ -166,6 +220,30 @@ export default function Header({ variant = 'default' }: HeaderProps) {
                           >
                             {link.label}
                           </Link>
+
+                          {link.children && (
+                            <ul className="ml-4 mt-1 flex flex-col gap-1 border-l border-border pl-3">
+                              {link.children.map((child) => {
+                                const isChildActive =
+                                  pathname === child.href ||
+                                  (child.href !== '/' && pathname.startsWith(child.href))
+
+                                return (
+                                  <li key={child.label}>
+                                    <Link
+                                      href={child.href}
+                                      onClick={() => setIsMenuOpen(false)}
+                                      className={`block label-md py-1 transition-colors duration-200 hover:text-primary ${
+                                        isChildActive ? 'text-primary font-semibold' : 'text-text-primary'
+                                      }`}
+                                    >
+                                      {child.label}
+                                    </Link>
+                                  </li>
+                                )
+                              })}
+                            </ul>
+                          )}
                         </li>
                       )
                     })}

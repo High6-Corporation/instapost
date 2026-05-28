@@ -1,7 +1,6 @@
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Button from '@/components/ui/Button'
-import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -68,7 +67,7 @@ export default function NotFoundPage() {
 
               {/* Description */}
               <p className="body-lg text-neutral-500 max-w-[452px] mb-[30px]">
-                The page you are looking for doesn't exist or another error occurred, go back to homepage.
+                The page you are looking for does not exist or another error occurred, go back to homepage.
               </p>
 
               {/* CTA Button */}

@@ -11,7 +11,7 @@ interface SubpageBannerProps {
 export default function SubpageBanner({ title, className = '' }: SubpageBannerProps) {
   return (
     <ScrollAnimationWrapper>
-      <Section className="relative w-full p-4 flex justify-center items-center bg-primary min-h-[150px] md:min-h-[200px] overflow-hidden">
+      <Section className={`relative w-full p-4 flex justify-center items-center bg-primary min-h-[150px] md:min-h-[200px] overflow-hidden ${className}`}>
       {/* Dotted Background Pattern */}
         <div className="absolute inset-0 opacity-30">
           <Image

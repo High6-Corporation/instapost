@@ -28,7 +28,7 @@ export function CtaSection() {
           {/* Text Content */}
           <div className="flex flex-col gap-4 items-center max-w-[770px] w-full">
             <h2 className="heading-2 font-normal text-neutral-0 text-center">
-              Let's Build Your
+              Let&apos;s Build Your
               <br />
               Social Media Presence
             </h2>

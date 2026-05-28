@@ -1,5 +1,4 @@
 import { IndustryCard } from '@/components/shared/IndustryCard'
-import { homeLivingData } from './homeLivingData'
 
 export default function HomeLivingSection() {
   return (

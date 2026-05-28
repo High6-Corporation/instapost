@@ -1,5 +1,4 @@
 import { IndustryCard } from '@/components/shared/IndustryCard'
-import { servicesData } from './servicesData'
 
 export default function ServicesSection() {
   return (

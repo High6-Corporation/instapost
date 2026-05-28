@@ -26,16 +26,12 @@ export function IndustryCard({
   description,
   imageSrc,
   imageAlt = title,
-  bannerImageSrc,
   iconSrc,
   iconAlt = title,
   buttonText = 'Learn More',
   buttonLink = '#',
 }: IndustryCardProps) {
   const isRed = theme === 'red';
-  const isImageLeft = isReversed;
-  // Use banner image if provided, otherwise fallback to main image
-  const effectiveBannerImage = bannerImageSrc || imageSrc;
 
   return (
     <ScrollAnimationWrapper>
@@ -55,7 +51,7 @@ export function IndustryCard({
           />
         )}
         
-        <Row className={`!max-w-[1280px] flex flex-col lg:flex-row justify-center items-center gap-8 md:gap-[50px] relative z-10 ${!isRed ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+        <Row className={`!max-w-[1280px] flex flex-col justify-center items-center gap-8 md:gap-[50px] relative z-10 ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
           {/* Image Column */}
           <div className={`lg:flex-1 order-1 w-full lg:max-w-[500px]`}>
             <div className="relative w-full max-w-[500px] aspect-square mx-auto lg:mx-0 lg:w-[500px] lg:h-[500px]">
@@ -72,7 +68,7 @@ export function IndustryCard({
           </div>
 
           {/* Content Column */}
-          <div className={`w-full lg:flex-1 order-2 gap-4 md:gap-[20px] lg:gap-[0] ${!isRed ? 'lg:order-2' : 'lg:order-1'} flex flex-col`}>
+          <div className={`w-full lg:flex-1 order-2 gap-4 md:gap-[20px] lg:gap-[0] ${isReversed ? 'lg:order-1' : 'lg:order-2'} flex flex-col`}>
             {/* Icon */}
             {iconSrc && (
               <div className={`w-[70px] h-[70px] rounded-[16px] overflow-hidden flex-shrink-0 relative lg:mb-[20px] ${

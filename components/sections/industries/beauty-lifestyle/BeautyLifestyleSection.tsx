@@ -1,5 +1,4 @@
 import { IndustryCard } from '@/components/shared/IndustryCard'
-import { beautyLifestyleData } from './beautyLifestyleData'
 
 export default function BeautyLifestyleSection() {
   return (

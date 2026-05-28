@@ -1,5 +1,3 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
 import Button from '@/components/ui/Button'
 import Row from '@/components/layout/Row'
 import Image from 'next/image'

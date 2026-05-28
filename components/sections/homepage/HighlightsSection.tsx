@@ -1,7 +1,6 @@
 'use client'
 
 import Section from '@/components/layout/Section'
-import Row from '@/components/layout/Row'
 import HighlightCard from '@/components/blocks/HighlightCard'
 
 const highlights = [

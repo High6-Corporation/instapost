@@ -1,9 +1,5 @@
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
-import Button from '@/components/ui/Button'
 import Row from '@/components/layout/Row'
 import Image from 'next/image'
-import Link from 'next/link'
 
 export default function MaintenancePage() {
   const currentYear = new Date().getFullYear();
@@ -67,7 +63,7 @@ export default function MaintenancePage() {
 
               {/* Main Heading */}
               <h1 className="heading-1 text-text-primary text-center mb-[20px]">
-                We'll Be Back Soon!
+                We&apos;ll Be Back Soon!
               </h1>
 
               {/* Subtitle */}

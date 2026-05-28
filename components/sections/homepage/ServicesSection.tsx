@@ -1,7 +1,6 @@
 import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
 import Badge from '@/components/blocks/Badge'
-import ServiceItem from '@/components/blocks/ServiceItem'
 import Image from 'next/image'
 import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
