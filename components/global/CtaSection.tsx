@@ -10,7 +10,7 @@ export function CtaSection() {
     <ScrollAnimationWrapper>
       <Section className="bg-white relative overflow-hidden py-[40px] md:py-[64px] lg:py-[70px]">
         <Row 
-          className="!max-w-[1272px] p-8 md:p-14 lg:py-[82px] lg:px-16 relative rounded-[32px] !bg-primary overflow-hidden" 
+          className="!max-w-[1272px] box-border p-8 md:p-14 lg:py-[82px] lg:px-16 relative rounded-[32px] !bg-primary overflow-hidden" 
         >
         {/* Background Image with Opacity */}
         <div 
