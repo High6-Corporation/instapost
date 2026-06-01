@@ -57,7 +57,7 @@ export default function ServicesPage() {
             imageSrc="/images/kol-marketing.jpg"
             imageAlt="Influencer content creation setup"
             imagePosition="left"
-            bgColor="#EFEFEF"
+            bgColor=""
             ctaText="Inquire Now"
             ctaHref="/contact"
           />
