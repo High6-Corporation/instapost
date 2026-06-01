@@ -86,11 +86,11 @@ export default function ServiceFeatureSection({
             <p className={cn('body-md mb-5 max-w-[620px] text-neutral-500 md:mb-6 lg:mb-7', descriptionClassName)}>{description}</p>
 
             {features.length > 0 && (
-              <ul className="mb-8 flex flex-wrap gap-3 md:mb-10">
+              <ul className="mb-8 flex flex-col items-start gap-3 md:mb-10">
                 {features.map((feature) => (
                   <li
                     key={feature}
-                    className={cn('body-sm rounded-[6px] bg-[#FBE9E9] px-3 py-2 text-primary', featureClassName)}
+                    className={cn('body-xs text-[12px] font-semibold rounded-[6px] bg-[#FBE9E9] px-3 py-2 text-primary', featureClassName)}
                   >
                     {feature}
                   </li>

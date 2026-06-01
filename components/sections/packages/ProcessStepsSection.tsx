@@ -33,7 +33,7 @@ const defaultSteps: ProcessStep[] = [
       'Proof of Payment',
       'Onboarding Questionnaire',
     ],
-    image: '/images/media-textr.jpg',
+    image: '/images/onboarding.jpg',
   },
   {
     label: 'Brand Study',
@@ -45,7 +45,7 @@ const defaultSteps: ProcessStep[] = [
       'Competitor analysis',
       'Target audience profiling',
     ],
-    image: '/images/media-textr.jpg',
+    image: '/images/ads-manager.jpg',
   },
   {
     label: 'Kickoff Meeting',
@@ -57,7 +57,7 @@ const defaultSteps: ProcessStep[] = [
       'Alignment on brand voice',
       'Q&A and clarifications',
     ],
-    image: '/images/media-textr.jpg',
+    image: '/images/momentum.jpg',
   },
   {
     label: 'Concept Deck',
@@ -69,7 +69,7 @@ const defaultSteps: ProcessStep[] = [
       'Visual mood board',
       'Content themes and formats',
     ],
-    image: '/images/media-textr.jpg',
+    image: '/images/scale.jpg',
   },
   {
     label: 'Content Deck',
@@ -81,7 +81,7 @@ const defaultSteps: ProcessStep[] = [
       'Captions and hashtags',
       'Scheduled posting plan',
     ],
-    image: '/images/media-textr.jpg',
+    image: '/images/content-marketing.jpg',
   },
   {
     label: 'Output Delivery',
@@ -93,7 +93,7 @@ const defaultSteps: ProcessStep[] = [
       'Posting begins',
       'Performance monitoring starts',
     ],
-    image: '/images/media-textr.jpg',
+    image: '/images/influencer.jpg',
   },
 ]
 
@@ -124,7 +124,7 @@ export function ProcessStepsSection({
                   }`}
                 >
                   <div
-                    className="shrink-0 w-[70px] h-[70px] rounded-[18px] flex items-center justify-center border-2 border-secondary bg-primary"
+                    className="shrink-0 w-[70px] h-[70px] rounded-[18px] flex items-center justify-center border-2 border-secondary bg-[#EB0016]"
                   >
                     <Image
                       src={step.icon}
@@ -156,11 +156,11 @@ export function ProcessStepsSection({
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center p-6 md:p-8 text-center gap-1">
+                <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center p-6 md:p-8 text-center gap-[30px]">
                   {active.day && (
-                    <span className="body-sm font-medium text-white/70">{active.day}</span>
+                    <span className="body-sm text-2xl font-medium text-white/70">{active.day}</span>
                   )}
-                  <h3 className="heading-3 font-semibold text-white">{active.title}</h3>
+                  <h3 className="heading-3 font-medium text-5xl text-white">{active.title}</h3>
                   <ul className="flex flex-col gap-1 mt-2 items-center">
                     {active.bulletPoints.map((point, i) => (
                       <li key={i} className="flex items-baseline gap-2 text-white/90 body-sm">
