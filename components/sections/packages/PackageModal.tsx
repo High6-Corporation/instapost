@@ -49,18 +49,18 @@ export function PackageModal({ data, onClose }: PackageModalProps) {
           {/* Header */}
           <div className="flex flex-col gap-2">
             <h2 className="heading-2 font-normal text-neutral-900">{data.title}</h2>
-            <p className="body-sm italic text-neutral-900/70">Best for: {data.bestFor}</p>
+            <p className="body-md  italic text-neutral-900/70">Best for: {data.bestFor}</p>
           </div>
 
           {/* Sections */}
           {data.sections.map((section, i) => (
             <div key={i} className="flex flex-col gap-2">
-              <h3 className="text-[13px] font-bold uppercase tracking-wide text-neutral-900">
+              <h3 className="text-[24px] font-medium leading-[28px] uppercase tracking-wide text-neutral-900">
                 {section.heading}
               </h3>
               <ul className="flex flex-col gap-1">
                 {section.bullets.map((b, j) => (
-                  <li key={j} className="flex items-baseline gap-2 body-sm text-neutral-900">
+                  <li key={j} className="flex items-baseline gap-2 body-sm text-[18px] text-neutral-900">
                     <span className="shrink-0">·</span>
                     <span>{b}</span>
                   </li>
@@ -93,12 +93,12 @@ export function PackageModal({ data, onClose }: PackageModalProps) {
           <div className="flex flex-col gap-6 mt-4 justify-center flex-1">
             {data.addOns.map((addon, i) => (
               <div key={i} className="flex flex-col gap-2">
-                <h3 className="text-[13px] font-bold uppercase tracking-wide text-white">
+                <h3 className="text-[24px] font-medium leading-[28px] uppercase tracking-wide text-white">
                   {addon.heading}
                 </h3>
                 <ul className="flex flex-col gap-1">
                   {addon.bullets.map((b, j) => (
-                    <li key={j} className="flex items-baseline gap-2 body-sm text-white">
+                    <li key={j} className="flex items-baseline gap-2 body-sm text-[18px] text-white">
                       <span className="shrink-0">·</span>
                       <span>{b}</span>
                     </li>
