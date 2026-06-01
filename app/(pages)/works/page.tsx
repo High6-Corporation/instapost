@@ -18,23 +18,36 @@ const CARD_COLORS = [
   '#CA202D', // dark red
 ]
 
-// Generate 15 placeholder cards
-const works: WorkCardData[] = Array.from({ length: 15 }, (_, i) => ({
-  id: i + 1,
-  bgColor: CARD_COLORS[i % CARD_COLORS.length],
-  logoSrc: '/images/sm_logo.png',
-  logoAlt: 'SM Supermalls',
-  category: 'Videography',
-  title: 'SM Supermalls',
-  description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  images: ['/images/sample-slides.jpg', '/images/sample-slides.jpg'],
-  results: [
-    { value: '150k', label: 'Lorem Ipsum Dolor' },
-    { value: '150k', label: 'Lorem Ipsum Dolor' },
-    { value: '150k', label: 'Lorem Ipsum Dolor' },
-  ],
-}))
+// Brand logo configs (repeating for 15 cards)
+const BRAND_LOGOS = [
+  { src: '/images/sm_logo.png', alt: 'SM Supermalls' },
+  { src: '/logo/fat-cousins-proj.png', alt: 'Fat Cousins' },
+  { src: '/logo/kanzen-proj.jpg', alt: 'Kanzen' },
+  { src: '/logo/onesimus-proj.jpg', alt: 'Onésimus' },
+  { src: '/logo/arisun-proj.png', alt: 'Arisun' },
+  { src: '/logo/nissan-proj.jpg', alt: 'Nissan' },
+]
+
+// Generate 15 work cards
+const works: WorkCardData[] = Array.from({ length: 15 }, (_, i) => {
+  const brand = BRAND_LOGOS[i % BRAND_LOGOS.length]
+  return {
+    id: i + 1,
+    bgColor: CARD_COLORS[i % CARD_COLORS.length],
+    logoSrc: brand.src,
+    logoAlt: brand.alt,
+    category: 'Videography',
+    title: brand.alt,
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    images: ['/images/sample-slides.jpg', '/images/sample-slides.jpg'],
+    results: [
+      { value: '150k', label: 'Lorem Ipsum Dolor' },
+      { value: '150k', label: 'Lorem Ipsum Dolor' },
+      { value: '150k', label: 'Lorem Ipsum Dolor' },
+    ],
+  }
+})
 
 export default function WorksPage() {
   return (

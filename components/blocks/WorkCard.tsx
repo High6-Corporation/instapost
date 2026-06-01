@@ -35,11 +35,11 @@ export default function WorkCard({ data, onClick }: WorkCardProps) {
       onFocus={handlePreload}
       onTouchStart={handlePreload}
       aria-label={`View case study: ${data.title}`}
-      className="relative w-full aspect-[413/263] rounded-[24px] overflow-hidden cursor-pointer transition-transform duration-300 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+      className="relative w-full aspect-[413/263] rounded-[24px] overflow-hidden cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
       style={{ backgroundColor: data.bgColor }}
     >
       <div className="absolute inset-0 flex items-center justify-center p-6">
-        <div className="relative w-[60%] h-[80%]">
+        <div className="relative w-[60%] h-[80%] transition-transform duration-300 group-hover:scale-110">
           <Image
             src={data.logoSrc}
             alt={data.logoAlt}

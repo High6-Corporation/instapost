@@ -109,8 +109,8 @@ export default function WorkPopup({ data, onClose }: WorkPopupProps) {
 
           {/* Bottom — Red Results bar */}
           {data.results.length > 0 && (
-            <div className="bg-primary px-6 md:px-10 lg:px-[58px] py-8 md:py-10 lg:py-[40px]">
-              <p className="font-sans font-semibold text-white text-[20px] md:text-[22px] lg:text-[24px] tracking-[-0.24px] mb-8 lg:mb-[40px]">
+            <div className="bg-primary px-6 md:px-10 lg:px-[58px] pt-6 md:pt-7 lg:pt-[28px] pb-7 md:pb-8 lg:pb-[37px]">
+              <p className="font-sans font-semibold text-white text-[20px] md:text-[22px] lg:text-[24px] tracking-[-0.24px] mb-3 lg:mb-[13px]">
                 Results
               </p>
               <div className="flex flex-wrap gap-x-10 gap-y-6 md:gap-x-16 lg:gap-x-[180px] lg:justify-center">
