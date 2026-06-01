@@ -5,6 +5,7 @@ import Row from '@/components/layout/Row'
 import SubpageBanner from '@/components/shared/SubpageBanner'
 import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 import { CtaSection } from '@/components/global/CtaSection'
+import BackToTop from '@/components/global/BackToTop'
 import WorksGridSection from '@/components/sections/works/WorksGridSection'
 import type { WorkCardData } from '@/components/blocks/WorkCard'
 
@@ -78,6 +79,9 @@ export default function WorksPage() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Back to Top Button */}
+      <BackToTop />
     </main>
   )
 }

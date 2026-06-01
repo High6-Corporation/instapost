@@ -98,6 +98,13 @@
     letter-spacing: var(--heading-3-tracking);
   }
 
+  .heading-4 {
+    @apply font-sans font-medium;
+    font-size: var(--heading-4-mobile-size);
+    line-height: var(--heading-4-mobile-line);
+    letter-spacing: var(--heading-4-tracking);
+  }
+
   .body-lg {
     @apply font-sans font-medium;
     font-size: var(--body-lg-mobile-size);
@@ -157,6 +164,11 @@
       line-height: var(--heading-3-tablet-line);
     }
 
+    .heading-4 {
+      font-size: var(--heading-4-tablet-size);
+      line-height: var(--heading-4-tablet-line);
+    }
+
     .body-lg {
       font-size: var(--body-lg-tablet-size);
       line-height: var(--body-lg-tablet-line);
@@ -200,6 +212,12 @@
       font-size: var(--heading-3-desktop-size);
       line-height: var(--heading-3-desktop-line);
       letter-spacing: var(--heading-3-tracking);
+    }
+
+    .heading-4 {
+      font-size: var(--heading-4-desktop-size);
+      line-height: var(--heading-4-desktop-line);
+      letter-spacing: var(--heading-4-tracking);
     }
 
     .body-lg {

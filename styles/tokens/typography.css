@@ -32,6 +32,16 @@
   --heading-3-weight: 500;
   --heading-3-tracking: -1%;
 
+  /* Heading 4 */
+  --heading-4-desktop-size: 20px;
+  --heading-4-desktop-line: 32px;
+  --heading-4-tablet-size: 18px;
+  --heading-4-tablet-line: 28px;
+  --heading-4-mobile-size: 18px;
+  --heading-4-mobile-line: 28px;
+  --heading-4-weight: 500;
+  --heading-4-tracking: -1%;
+
   /* Body Large (Body 1) */
   --body-lg-desktop-size: 22px;
   --body-lg-desktop-line: 26px;

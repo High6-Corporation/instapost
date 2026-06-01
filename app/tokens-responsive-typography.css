@@ -13,6 +13,9 @@
     --heading-3-active-size: var(--heading-3-tablet-size);
     --heading-3-active-line: var(--heading-3-tablet-line);
     
+    --heading-4-active-size: var(--heading-4-tablet-size);
+    --heading-4-active-line: var(--heading-4-tablet-line);
+    
     --body-lg-active-size: var(--body-lg-tablet-size);
     --body-lg-active-line: var(--body-lg-tablet-line);
     
@@ -38,6 +41,9 @@
     
     --heading-3-active-size: var(--heading-3-desktop-size);
     --heading-3-active-line: var(--heading-3-desktop-line);
+    
+    --heading-4-active-size: var(--heading-4-desktop-size);
+    --heading-4-active-line: var(--heading-4-desktop-line);
     
     --body-lg-active-size: var(--body-lg-desktop-size);
     --body-lg-active-line: var(--body-lg-desktop-line);
@@ -73,6 +79,13 @@
   line-height: var(--heading-3-mobile-line);
   font-weight: var(--heading-3-weight);
   letter-spacing: var(--heading-3-tracking);
+}
+
+.h4 {
+  font-size: var(--heading-4-mobile-size);
+  line-height: var(--heading-4-mobile-line);
+  font-weight: var(--heading-4-weight);
+  letter-spacing: var(--heading-4-tracking);
 }
 
 .body-1 {
@@ -126,6 +139,11 @@
     line-height: var(--heading-3-tablet-line);
   }
   
+  .h4 {
+    font-size: var(--heading-4-tablet-size);
+    line-height: var(--heading-4-tablet-line);
+  }
+  
   .body-1 {
     font-size: var(--body-lg-tablet-size);
     line-height: var(--body-lg-tablet-line);
@@ -161,6 +179,11 @@
   .h3 {
     font-size: var(--heading-3-desktop-size);
     line-height: var(--heading-3-desktop-line);
+  }
+  
+  .h4 {
+    font-size: var(--heading-4-desktop-size);
+    line-height: var(--heading-4-desktop-line);
   }
   
   .body-1 {
