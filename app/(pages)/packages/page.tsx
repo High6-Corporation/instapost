@@ -223,7 +223,7 @@ const onboardingSteps: ProcessStep[] = [
       "Competitor analysis",
       "Target audience profiling",
     ],
-    image: "/images/media-textr.jpg",
+    image: "/images/ads-manager.jpg",
   },
   {
     label: "Kickoff Meeting",
@@ -235,7 +235,7 @@ const onboardingSteps: ProcessStep[] = [
       "Alignment on brand voice",
       "Q&A and clarifications",
     ],
-    image: "/images/media-textr.jpg",
+    image: "/images/momentum.jpg",
   },
   {
     label: "Concept Deck",
@@ -247,7 +247,7 @@ const onboardingSteps: ProcessStep[] = [
       "Visual mood board",
       "Content themes and formats",
     ],
-    image: "/images/media-textr.jpg",
+    image: "/images/scale.jpg",
   },
   {
     label: "Content Deck",
@@ -259,7 +259,7 @@ const onboardingSteps: ProcessStep[] = [
       "Captions and hashtags",
       "Scheduled posting plan",
     ],
-    image: "/images/media-textr.jpg",
+    image: "/images/content-marketing.jpg",
   },
   {
     label: "Output Delivery",
@@ -271,7 +271,7 @@ const onboardingSteps: ProcessStep[] = [
       "Posting begins",
       "Performance monitoring starts",
     ],
-    image: "/images/media-textr.jpg",
+    image: "/images/influencer.jpg",
   },
 ]
 

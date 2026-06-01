@@ -274,7 +274,7 @@ export default function Agency() {
 
         <MediaTextSection
           variant="primary"
-          title="Short from Videos"
+          title="Short form Videos"
           bulletPoints={[
             "Best for reels",
             "Engagement Boost",

@@ -30,10 +30,10 @@ export function GuaranteeSection({ heading, items, className }: GuaranteeSection
                   isYellow ? 'bg-secondary text-neutral-900' : 'bg-primary text-neutral-0'
                 }`}
               >
-                <h3 className="max-w-[240px] font-sans text-[24px] font-semibold leading-[28px] md:text-[26px] md:leading-[30px]">
+                <h3 className="max-w-[240px] font-sans text-[20px] font-semibold leading-[28px] md:text-[24px] md:leading-[30px]">
                   {item.title}
                 </h3>
-                <p className={`mt-4 max-w-[240px] font-sans text-[14px] leading-[20px] md:text-[15px] md:leading-[22px] ${isYellow ? 'text-neutral-900' : 'text-neutral-0'}`}>
+                <p className={`mt-4 max-w-[240px] font-sans text-[14px] leading-[20px] md:text-[16px] md:leading-[22px] ${isYellow ? 'text-neutral-900' : 'text-neutral-0'}`}>
                   {item.description}
                 </p>
               </article>

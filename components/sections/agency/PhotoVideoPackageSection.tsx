@@ -50,13 +50,16 @@ export function PhotoVideoPackageSection({
               key={item.tier}
               className="flex min-h-[520px] w-full max-w-[407px] flex-col items-center justify-center rounded-[10px] bg-secondary px-6 py-8 md:min-h-[550px] md:px-8 md:py-10 lg:h-[575px] lg:min-h-0 lg:w-[407px]"
             >
-              <div className="mb-4 flex h-[100px] w-[100px] items-center justify-center rounded-[16px] bg-primary text-[40px] font-semibold leading-none text-neutral-0">
+              <div
+                className="mb-4 flex h-[100px] w-[100px] items-center justify-center rounded-[16px] bg-primary font-plus-jakarta text-[40px] font-semibold leading-none text-neutral-0"
+                style={{ fontFamily: '"Plus Jakarta Sans", sans-serif' }}
+              >
                 {item.tier}
               </div>
 
               <h3 className="heading-3 mb-4 text-center text-neutral-900 font-semibold">{item.hours}</h3>
 
-              <ul className="body-md mb-8 list-inside list-disc space-y-1 text-center text-neutral-900">
+              <ul className="body-sm mb-8 list-inside list-disc space-y-1 text-center text-neutral-900">
                 {item.points.map((point, index) => (
                   <li key={`${item.tier}-point-${index}`}>{point}</li>
                 ))}

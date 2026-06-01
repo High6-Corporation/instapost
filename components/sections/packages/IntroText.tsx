@@ -13,7 +13,7 @@ export function IntroText({
     <ScrollAnimationWrapper>
       <Section className="bg-white pt-[32px] md:pt-[40px] lg:pt-[70px]">
         <Row className="!max-w-[1064px]">
-          <h2 className="h2 !font-normal text-center mb-4">
+          <h2 className="h2 !font-normal text-center mb-[30px]">
             {title}
           </h2>
           <p className="body-md text-neutral-500 text-center leading-relaxed">

@@ -56,7 +56,7 @@ export function CoreValuesSection({
     <ScrollAnimationWrapper>
       <Section
         className={cn(
-          'relative overflow-hidden bg-white py-[24px] md:py-[40px] lg:py-[70px]',
+          'relative overflow-hidden bg-white py-[24px] md:py-[40px] lg:py-[77px]',
           className,
         )}
       >
@@ -80,11 +80,11 @@ export function CoreValuesSection({
           >
             <div
               className={cn(
-                'relative flex w-full justify-center min-[1140px]:min-w-[594px] min-[1330px]:max-w-[594px]',
+                'relative flex h-[320px] w-full justify-center sm:h-[420px] md:h-[541px] min-[1140px]:min-w-[617px] min-[1330px]:max-w-[617px] min-[1140px]:h-[610px]',
                 isImageRight ? 'min-[1330px]:justify-end' : 'min-[1330px]:justify-start',
               )}
             >
-              <div className="relative h-[280px] w-full max-w-[594px] md:h-[400px] min-[1140px]:h-[541px]">
+              <div className="relative w-full max-w-[594px] h-[320px] sm:h-[420px] md:h-[541px] min-[1140px]:h-[541px]">
                 <Image
                   src={shapeSrc}
                   alt="Decorative shape"
@@ -94,9 +94,9 @@ export function CoreValuesSection({
               </div>
 
               <div className="absolute inset-0 z-10 flex items-center justify-center">
-                <div className="relative h-[280px] w-[280px] shrink-0 md:h-[400px] md:w-[400px] min-[1140px]:h-[500px] min-[1140px]:w-[500px]">
+                <div className="relative h-[260px] w-[260px] shrink-0 sm:h-[340px] sm:w-[340px] md:h-[400px] md:w-[400px] min-[1140px]:h-[562.2962px] min-[1140px]:w-[567.402px]">
                   <div className="relative h-full w-full overflow-hidden">
-                    <Image src={imageSrc} alt={imageAlt} fill className="object-cover" />
+                    <Image src={imageSrc} alt={imageAlt} fill className="object-contain" />
                   </div>
                 </div>
               </div>
