@@ -171,10 +171,13 @@ const FAQSection = () => {
                   onClick={() => setActiveCategory(category.slug)}
                   className={`text-left px-[var(--spacing-lg)] py-[var(--spacing-md)] my-[var(--spacing-xs)] transition-all cursor-pointer label-md ${
                     activeCategory === category.slug
-                      ? 'bg-primary text-[#fff] font-bold rounded-[var(--radius-lg)]'
-                      : 'bg-transparent text-neutral-900 hover:bg-primary hover:text-[#fff] hover:font-bold hover:rounded-[var(--radius-lg)]'
+                      ? 'bg-primary text-[#fff] rounded-[var(--radius-lg)]'
+                      : 'bg-transparent text-neutral-900 hover:bg-primary hover:text-[#fff] hover:font-[700] hover:rounded-[var(--radius-lg)]'
                   }`}
-                  style={{ color: activeCategory === category.slug ? '#fff' : undefined }}
+                  style={{ 
+                    color: activeCategory === category.slug ? '#fff' : undefined,
+                    fontWeight: activeCategory === category.slug ? 700 : undefined
+                  }}
                 >
                   {category.label}
                 </button>

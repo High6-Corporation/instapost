@@ -9,7 +9,7 @@ export default function FAQPage() {
     <main className="bg-white min-h-screen w-full overflow-x-hidden">
       <Header variant="sticky" />
       <SubpageBanner 
-        title="Frequently Asked Questions"
+        title="FAQs"
       />
       <FAQSection />
       <Footer />
