@@ -512,21 +512,21 @@ async function validateCleanTalkToken(
           code: result.codes || result.code
         };
       }
-    } catch (fetchError: any) {
+    } catch (fetchError: unknown) {
       clearTimeout(timeout);
       
       // Handle timeout specifically
-      if (fetchError.name === 'AbortError') {
+      if (fetchError instanceof Error && fetchError.name === 'AbortError') {
         console.error('CleanTalk API request timed out');
       } else {
-        console.error('CleanTalk validation network error:', fetchError.message);
+        console.error('CleanTalk validation network error:', fetchError instanceof Error ? fetchError.message : String(fetchError));
       }
       
       // Fail closed - block submission on network errors
       return { allow: false, message: 'Verification service unavailable. Please try again later.' };
     }
-  } catch (error: any) {
-    console.error('CleanTalk validation unexpected error:', error.message);
+  } catch (error: unknown) {
+    console.error('CleanTalk validation unexpected error:', error instanceof Error ? error.message : String(error));
     // Fail closed - block submission on unexpected errors
     return { allow: false, message: 'Verification service unavailable. Please try again later.' };
   }
