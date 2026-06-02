@@ -12,6 +12,7 @@ interface MediaTextSectionProps {
   buttonText?: string;
   buttonLink?: string;
   onButtonClick?: () => void;
+  showButton?: boolean;
   imageSrc?: string;
   imageAlt?: string;
   bgImage?: string;
@@ -28,6 +29,7 @@ export function MediaTextSection({
   buttonText = 'Inquire Now',
   buttonLink = '/coming-soon',
   onButtonClick,
+  showButton = true,
   imageSrc = '/images/about-fs-right.jpg',
   imageAlt = 'Creative team working',
   bgImage,
@@ -101,6 +103,7 @@ export function MediaTextSection({
           )}
 
           {/* CTA Button */}
+          {showButton && (
           <div>
             {onButtonClick ? (
               <Button variant={buttonVariant} showArrow={true} onClick={onButtonClick}>
@@ -114,6 +117,7 @@ export function MediaTextSection({
               </Link>
             )}
           </div>
+          )}
         </div>
 
         {/* Right Column - Visual */}

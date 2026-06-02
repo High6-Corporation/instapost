@@ -76,6 +76,7 @@ export default function IndustryDetailPage({ params }: IndustryPageProps) {
         imageSrc={industry.imageSrc}
         imageAlt={industry.imageAlt}
         variant="light"
+        showButton={false}
       />
       
       {/* 3rd Section - Case Study 1 (Yellow Background) */}

@@ -70,8 +70,8 @@ export default function Footer() {
                 }`}>
                   About
                 </a>
-                <a href="/coming-soon" className={`label-md font-medium transition-colors ${
-                  pathname === '/coming-soon' ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
+                <a href="/services" className={`label-md font-medium transition-colors ${
+                  pathname === '/services' || pathname.startsWith('/services') || pathname.startsWith('/agency') ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
                 }`}>
                   Services
                 </a>
@@ -79,13 +79,13 @@ export default function Footer() {
 
               {/* Column 2 */}
               <div className="flex flex-col gap-[24px] md:gap-[32px]">
-                <a href="/coming-soon" className={`label-md font-medium transition-colors ${
-                  pathname === '/coming-soon' ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
+                <a href="/industries" className={`label-md font-medium transition-colors ${
+                  pathname === '/industries' || pathname.startsWith('/industries') ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
                 }`}>
                   Industries
                 </a>
-                <a href="/coming-soon" className={`label-md font-medium transition-colors ${
-                  pathname === '/coming-soon' ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
+                <a href="/packages" className={`label-md font-medium transition-colors ${
+                  pathname === '/packages' || pathname.startsWith('/packages') ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
                 }`}>
                   Packages
                 </a>
