@@ -1,5 +1,9 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { ConsentProvider } from '@/components/consent/ConsentProvider'
+import { CookieConsentBanner } from '@/components/consent/CookieConsentBanner'
+import { CookieSettingsModal } from '@/components/consent/CookieSettingsModal'
+import { ConsentScriptLoader } from '@/components/consent/ConsentScriptLoader'
 
 export const metadata: Metadata = {
   title: {
@@ -22,7 +26,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        <ConsentProvider>
+          {children}
+          <CookieConsentBanner />
+          <CookieSettingsModal />
+          <ConsentScriptLoader />
+        </ConsentProvider>
+      </body>
     </html>
   )
 }

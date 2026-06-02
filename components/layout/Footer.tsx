@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import Row from './Row'
+import { CookieSettingsLink } from '@/components/consent/CookieSettingsLink'
 
 export default function Footer() {
   const pathname = usePathname()
@@ -168,9 +169,12 @@ export default function Footer() {
 
 
         {/* 2nd Column - Copyright */}
-          <p className="body-xs font-medium text-neutral-900 text-center">
-            {currentYear} Copyright Instapost. All Rights Reserved.
-          </p>
+          <div className="flex flex-col items-center gap-2">
+            <p className="body-xs font-medium text-neutral-900 text-center">
+              {currentYear} Copyright Instapost. All Rights Reserved.
+            </p>
+            <CookieSettingsLink />
+          </div>
       </Row>
     </footer>
   )

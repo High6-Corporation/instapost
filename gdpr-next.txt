@@ -1,0 +1,1060 @@
+﻿Developer Instructions: Reusable GDPR / Cookie Consent Module for Next.js + Headless WordPress
+Objective
+Create a reusable cookie consent module for our Next.js websites, especially websites using Headless WordPress as the CMS.
+The module must:
+* Show a cookie consent banner on first visit.
+* Allow users to Accept all, Reject all, or Customize.
+* Store consent choices locally.
+* Prevent non-essential scripts from loading before consent.
+* Support Google Analytics, Google Tag Manager, Meta Pixel, and future third-party scripts.
+* Support Headless WordPress embeds such as YouTube, Google Maps, forms, and widgets.
+* Provide a footer “Cookie Settings” link so users can change consent later.
+Important: The goal is not just to show a banner. The real requirement is to block analytics, marketing, and third-party embeds until the user gives consent.
+ICO cookie guidance says websites must clearly explain cookies, obtain active consent, and only exempt cookies that are strictly necessary for the service requested by the user.
+________________
+
+
+Assumptions
+This implementation assumes:
+* Next.js App Router is used.
+* Project has a src/ directory.
+* Tailwind CSS is available.
+* Website uses Headless WordPress for page/post content.
+* Third-party scripts are loaded from the Next.js frontend, not directly from WordPress content.
+________________
+
+
+Step 1: Install Required Package
+Run this in the Next.js project:
+npm install @next/third-parties
+Next.js recommends @next/third-parties/google for Google Analytics and Google Tag Manager.
+________________
+
+
+Step 2: Create Folder Structure
+Create these folders:
+src/components/consent/
+src/lib/consent/
+Final structure should be:
+src/
+ components/
+   consent/
+     ConsentProvider.tsx
+     CookieConsentBanner.tsx
+     CookieSettingsModal.tsx
+     ConsentScriptLoader.tsx
+     ConsentGate.tsx
+     CookieSettingsLink.tsx
+
+
+ lib/
+   consent/
+     consent-types.ts
+     consent-config.ts
+     consent-storage.ts
+
+________________
+Step 3: Create consent-types.ts
+Path:
+src/lib/consent/consent-types.ts
+Code:
+export type ConsentCategory =
+ | 'necessary'
+ | 'analytics'
+ | 'marketing'
+ | 'preferences'
+ | 'embedded'
+
+
+export type ConsentState = {
+ necessary: true
+ analytics: boolean
+ marketing: boolean
+ preferences: boolean
+ embedded: boolean
+}
+
+
+export type StoredConsent = ConsentState & {
+ version: string
+ updatedAt: string
+}
+
+________________
+Step 4: Create consent-config.ts
+Path:
+src/lib/consent/consent-config.ts
+Code:
+export const consentConfig = {
+ version: '1.0',
+
+
+ companyName: 'Client Company',
+
+
+ privacyPolicyUrl: '/privacy-policy',
+ cookiePolicyUrl: '/cookie-policy',
+
+
+ scripts: {
+   gaId: process.env.NEXT_PUBLIC_GA_ID,
+   gtmId: process.env.NEXT_PUBLIC_GTM_ID,
+   metaPixelId: process.env.NEXT_PUBLIC_META_PIXEL_ID,
+ },
+
+
+ categories: {
+   necessary: {
+     title: 'Necessary',
+     description:
+       'Required for the website to work properly. These cannot be disabled.',
+   },
+   analytics: {
+     title: 'Analytics',
+     description:
+       'Helps us understand website traffic, page performance, and user behavior so we can improve the website.',
+   },
+   marketing: {
+     title: 'Marketing',
+     description:
+       'Used for ads, remarketing, conversion tracking, and measuring campaign performance.',
+   },
+   preferences: {
+     title: 'Preferences',
+     description:
+       'Saves user preferences such as language, display settings, or other personalization choices.',
+   },
+   embedded: {
+     title: 'Embedded Content',
+     description:
+       'Allows third-party content such as YouTube videos, Google Maps, external forms, and widgets.',
+   },
+ },
+}
+For every client website, update:
+companyName: 'Client Company'
+privacyPolicyUrl: '/privacy-policy'
+cookiePolicyUrl: '/cookie-policy'
+
+________________
+Step 5: Create consent-storage.ts
+Path:
+src/lib/consent/consent-storage.ts
+Code:
+import type { ConsentState, StoredConsent } from './consent-types'
+import { consentConfig } from './consent-config'
+
+
+const CONSENT_KEY = 'h6_cookie_consent'
+
+
+export const defaultConsent: ConsentState = {
+ necessary: true,
+ analytics: false,
+ marketing: false,
+ preferences: false,
+ embedded: false,
+}
+
+
+export function getStoredConsent(): StoredConsent | null {
+ if (typeof window === 'undefined') return null
+
+
+ try {
+   const stored = localStorage.getItem(CONSENT_KEY)
+   if (!stored) return null
+
+
+   const parsed = JSON.parse(stored) as StoredConsent
+
+
+   if (parsed.version !== consentConfig.version) {
+     return null
+   }
+
+
+   return parsed
+ } catch {
+   return null
+ }
+}
+
+
+export function saveStoredConsent(consent: ConsentState): StoredConsent {
+ const storedConsent: StoredConsent = {
+   ...consent,
+   necessary: true,
+   version: consentConfig.version,
+   updatedAt: new Date().toISOString(),
+ }
+
+
+ localStorage.setItem(CONSENT_KEY, JSON.stringify(storedConsent))
+
+
+ window.dispatchEvent(
+   new CustomEvent('h6-consent-updated', {
+     detail: storedConsent,
+   })
+ )
+
+
+ return storedConsent
+}
+
+
+export function clearStoredConsent() {
+ localStorage.removeItem(CONSENT_KEY)
+}
+
+________________
+Step 6: Create ConsentProvider.tsx
+Path:
+src/components/consent/ConsentProvider.tsx
+Code:
+'use client'
+
+
+import {
+ createContext,
+ useContext,
+ useEffect,
+ useMemo,
+ useState,
+} from 'react'
+import type { ConsentState } from '@/lib/consent/consent-types'
+import {
+ defaultConsent,
+ getStoredConsent,
+ saveStoredConsent,
+} from '@/lib/consent/consent-storage'
+
+
+type ConsentContextValue = {
+ consent: ConsentState
+ hasChosen: boolean
+ isSettingsOpen: boolean
+ acceptAll: () => void
+ rejectAll: () => void
+ saveConsent: (consent: ConsentState) => void
+ openSettings: () => void
+ closeSettings: () => void
+}
+
+
+const ConsentContext = createContext<ConsentContextValue | null>(null)
+
+
+export function ConsentProvider({ children }: { children: React.ReactNode }) {
+ const [consent, setConsent] = useState<ConsentState>(defaultConsent)
+ const [hasChosen, setHasChosen] = useState(false)
+ const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+
+
+ useEffect(() => {
+   const stored = getStoredConsent()
+
+
+   if (stored) {
+     setConsent({
+       necessary: true,
+       analytics: stored.analytics,
+       marketing: stored.marketing,
+       preferences: stored.preferences,
+       embedded: stored.embedded,
+     })
+
+
+     setHasChosen(true)
+   }
+
+
+   const openSettings = () => setIsSettingsOpen(true)
+
+
+   window.addEventListener('open-cookie-settings', openSettings)
+
+
+   return () => {
+     window.removeEventListener('open-cookie-settings', openSettings)
+   }
+ }, [])
+
+
+ const saveConsent = (newConsent: ConsentState) => {
+   const saved = saveStoredConsent(newConsent)
+
+
+   setConsent({
+     necessary: true,
+     analytics: saved.analytics,
+     marketing: saved.marketing,
+     preferences: saved.preferences,
+     embedded: saved.embedded,
+   })
+
+
+   setHasChosen(true)
+   setIsSettingsOpen(false)
+ }
+
+
+ const acceptAll = () => {
+   saveConsent({
+     necessary: true,
+     analytics: true,
+     marketing: true,
+     preferences: true,
+     embedded: true,
+   })
+ }
+
+
+ const rejectAll = () => {
+   saveConsent(defaultConsent)
+ }
+
+
+ const value = useMemo(
+   () => ({
+     consent,
+     hasChosen,
+     isSettingsOpen,
+     acceptAll,
+     rejectAll,
+     saveConsent,
+     openSettings: () => setIsSettingsOpen(true),
+     closeSettings: () => setIsSettingsOpen(false),
+   }),
+   [consent, hasChosen, isSettingsOpen]
+ )
+
+
+ return (
+   <ConsentContext.Provider value={value}>
+     {children}
+   </ConsentContext.Provider>
+ )
+}
+
+
+export function useConsent() {
+ const context = useContext(ConsentContext)
+
+
+ if (!context) {
+   throw new Error('useConsent must be used inside ConsentProvider')
+ }
+
+
+ return context
+}
+
+________________
+Step 7: Create CookieConsentBanner.tsx
+Path:
+src/components/consent/CookieConsentBanner.tsx
+Code:
+'use client'
+
+
+import { useConsent } from './ConsentProvider'
+import { consentConfig } from '@/lib/consent/consent-config'
+
+
+export function CookieConsentBanner() {
+ const { hasChosen, acceptAll, rejectAll, openSettings } = useConsent()
+
+
+ if (hasChosen) return null
+
+
+ return (
+   <div className="fixed inset-x-0 bottom-0 z-50 border-t bg-white p-4 shadow-lg">
+     <div className="mx-auto flex max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
+       <div className="max-w-3xl">
+         <h2 className="text-base font-semibold">
+           We use cookies
+         </h2>
+
+
+         <p className="mt-1 text-sm text-gray-600">
+           {consentConfig.companyName} uses cookies and similar technologies
+           to make this website work, improve performance, and support
+           analytics or marketing when you allow it.
+         </p>
+
+
+         <div className="mt-2 flex gap-3 text-sm">
+           <a href={consentConfig.privacyPolicyUrl} className="underline">
+             Privacy Policy
+           </a>
+
+
+           <a href={consentConfig.cookiePolicyUrl} className="underline">
+             Cookie Policy
+           </a>
+         </div>
+       </div>
+
+
+       <div className="flex flex-col gap-2 sm:flex-row">
+         <button
+           type="button"
+           onClick={rejectAll}
+           className="rounded-md border px-4 py-2 text-sm font-medium"
+         >
+           Reject all
+         </button>
+
+
+         <button
+           type="button"
+           onClick={openSettings}
+           className="rounded-md border px-4 py-2 text-sm font-medium"
+         >
+           Customize
+         </button>
+
+
+         <button
+           type="button"
+           onClick={acceptAll}
+           className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white"
+         >
+           Accept all
+         </button>
+       </div>
+     </div>
+   </div>
+ )
+}
+Important UI rule:
+* Do not hide the “Reject all” button.
+* Do not make rejection harder than acceptance.
+* Do not use pre-checked optional categories inside the settings modal.
+________________
+
+
+Step 8: Create CookieSettingsModal.tsx
+Path:
+src/components/consent/CookieSettingsModal.tsx
+Code:
+'use client'
+
+
+import { useEffect, useState } from 'react'
+import { useConsent } from './ConsentProvider'
+import { consentConfig } from '@/lib/consent/consent-config'
+import type { ConsentState } from '@/lib/consent/consent-types'
+
+
+export function CookieSettingsModal() {
+ const {
+   consent,
+   isSettingsOpen,
+   closeSettings,
+   saveConsent,
+   acceptAll,
+   rejectAll,
+ } = useConsent()
+
+
+ const [draft, setDraft] = useState<ConsentState>(consent)
+
+
+ useEffect(() => {
+   if (isSettingsOpen) {
+     setDraft(consent)
+   }
+ }, [isSettingsOpen, consent])
+
+
+ if (!isSettingsOpen) return null
+
+
+ const updateDraft = (key: keyof ConsentState, value: boolean) => {
+   if (key === 'necessary') return
+
+
+   setDraft((current) => ({
+     ...current,
+     [key]: value,
+   }))
+ }
+
+
+ const rows: Array<{
+   key: keyof ConsentState
+   title: string
+   description: string
+   disabled?: boolean
+ }> = [
+   {
+     key: 'necessary',
+     title: consentConfig.categories.necessary.title,
+     description: consentConfig.categories.necessary.description,
+     disabled: true,
+   },
+   {
+     key: 'analytics',
+     title: consentConfig.categories.analytics.title,
+     description: consentConfig.categories.analytics.description,
+   },
+   {
+     key: 'marketing',
+     title: consentConfig.categories.marketing.title,
+     description: consentConfig.categories.marketing.description,
+   },
+   {
+     key: 'preferences',
+     title: consentConfig.categories.preferences.title,
+     description: consentConfig.categories.preferences.description,
+   },
+   {
+     key: 'embedded',
+     title: consentConfig.categories.embedded.title,
+     description: consentConfig.categories.embedded.description,
+   },
+ ]
+
+
+ return (
+   <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
+     <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg bg-white p-6 shadow-xl">
+       <div className="flex items-start justify-between gap-4">
+         <div>
+           <h2 className="text-xl font-semibold">
+             Cookie Settings
+           </h2>
+
+
+           <p className="mt-1 text-sm text-gray-600">
+             Choose which cookies and third-party services you want to allow.
+           </p>
+         </div>
+
+
+         <button type="button" onClick={closeSettings} className="text-sm">
+           Close
+         </button>
+       </div>
+
+
+       <div className="mt-6 space-y-4">
+         {rows.map((row) => (
+           <div
+             key={row.key}
+             className="flex items-start justify-between gap-4 rounded-md border p-4"
+           >
+             <div>
+               <h3 className="font-medium">{row.title}</h3>
+
+
+               <p className="mt-1 text-sm text-gray-600">
+                 {row.description}
+               </p>
+             </div>
+
+
+             <label className="flex items-center gap-2 text-sm">
+               <input
+                 type="checkbox"
+                 checked={draft[row.key]}
+                 disabled={row.disabled}
+                 onChange={(event) =>
+                   updateDraft(row.key, event.target.checked)
+                 }
+               />
+
+
+               {row.disabled ? 'Always on' : 'Allow'}
+             </label>
+           </div>
+         ))}
+       </div>
+
+
+       <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-end">
+         <button
+           type="button"
+           onClick={rejectAll}
+           className="rounded-md border px-4 py-2 text-sm font-medium"
+         >
+           Reject all
+         </button>
+
+
+         <button
+           type="button"
+           onClick={() =>
+             saveConsent({
+               ...draft,
+               necessary: true,
+             })
+           }
+           className="rounded-md border px-4 py-2 text-sm font-medium"
+         >
+           Save settings
+         </button>
+
+
+         <button
+           type="button"
+           onClick={acceptAll}
+           className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white"
+         >
+           Accept all
+         </button>
+       </div>
+     </div>
+   </div>
+ )
+}
+
+________________
+Step 9: Create ConsentScriptLoader.tsx
+Path:
+src/components/consent/ConsentScriptLoader.tsx
+Code:
+'use client'
+
+
+import Script from 'next/script'
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google'
+import { useConsent } from './ConsentProvider'
+import { consentConfig } from '@/lib/consent/consent-config'
+
+
+export function ConsentScriptLoader() {
+ const { consent } = useConsent()
+
+
+ const gaId = consentConfig.scripts.gaId
+ const gtmId = consentConfig.scripts.gtmId
+ const metaPixelId = consentConfig.scripts.metaPixelId
+
+
+ return (
+   <>
+     {consent.analytics && gaId && <GoogleAnalytics gaId={gaId} />}
+
+
+     {consent.analytics && gtmId && <GoogleTagManager gtmId={gtmId} />}
+
+
+     {consent.marketing && metaPixelId && (
+       <Script id="meta-pixel" strategy="afterInteractive">
+         {`
+           !function(f,b,e,v,n,t,s)
+           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+           n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+           if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+           n.queue=[];t=b.createElement(e);t.async=!0;
+           t.src=v;s=b.getElementsByTagName(e)[0];
+           s.parentNode.insertBefore(t,s)}(window, document,'script',
+           'https://connect.facebook.net/en_US/fbevents.js');
+           fbq('init', '${metaPixelId}');
+           fbq('track', 'PageView');
+         `}
+       </Script>
+     )}
+   </>
+ )
+}
+Notes:
+* Use @next/third-parties/google for GA4 and GTM.
+* Use next/script for custom third-party scripts.
+* Do not use beforeInteractive for analytics or marketing scripts. Next.js documents beforeInteractive for scripts that must load before hydration, such as critical scripts or consent managers, not ordinary analytics/marketing scripts.
+* afterInteractive is acceptable for scripts that should load after hydration and after consent.
+________________
+
+
+Step 10: Create ConsentGate.tsx
+This is used to block Headless WordPress embeds.
+Path:
+src/components/consent/ConsentGate.tsx
+Code:
+'use client'
+
+
+import { useConsent } from './ConsentProvider'
+import type { ConsentCategory } from '@/lib/consent/consent-types'
+
+
+type ConsentGateProps = {
+ category?: ConsentCategory
+ children: React.ReactNode
+ fallbackTitle?: string
+ fallbackDescription?: string
+}
+
+
+export function ConsentGate({
+ category = 'embedded',
+ children,
+ fallbackTitle = 'Content blocked',
+ fallbackDescription = 'This content uses third-party services. Please allow embedded content to view it.',
+}: ConsentGateProps) {
+ const { consent, openSettings } = useConsent()
+
+
+ if (consent[category]) {
+   return <>{children}</>
+ }
+
+
+ return (
+   <div className="rounded-md border bg-gray-50 p-6 text-center">
+     <h3 className="font-medium">{fallbackTitle}</h3>
+
+
+     <p className="mt-2 text-sm text-gray-600">
+       {fallbackDescription}
+     </p>
+
+
+     <button
+       type="button"
+       onClick={openSettings}
+       className="mt-4 rounded-md bg-black px-4 py-2 text-sm font-medium text-white"
+     >
+       Manage cookie settings
+     </button>
+   </div>
+ )
+}
+
+________________
+Step 11: Create CookieSettingsLink.tsx
+Path:
+src/components/consent/CookieSettingsLink.tsx
+Code:
+'use client'
+
+
+export function CookieSettingsLink() {
+ return (
+   <button
+     type="button"
+     onClick={() => window.dispatchEvent(new Event('open-cookie-settings'))}
+     className="underline"
+   >
+     Cookie Settings
+   </button>
+ )
+}
+Use this in the website footer.
+Example:
+import { CookieSettingsLink } from '@/components/consent/CookieSettingsLink'
+
+
+export function Footer() {
+ return (
+   <footer>
+     <CookieSettingsLink />
+   </footer>
+ )
+}
+
+________________
+Step 12: Update app/layout.tsx
+Path usually:
+src/app/layout.tsx
+Add:
+import { ConsentProvider } from '@/components/consent/ConsentProvider'
+import { CookieConsentBanner } from '@/components/consent/CookieConsentBanner'
+import { CookieSettingsModal } from '@/components/consent/CookieSettingsModal'
+import { ConsentScriptLoader } from '@/components/consent/ConsentScriptLoader'
+Then wrap the site:
+export default function RootLayout({
+ children,
+}: {
+ children: React.ReactNode
+}) {
+ return (
+   <html lang="en">
+     <body>
+       <ConsentProvider>
+         {children}
+
+
+         <CookieConsentBanner />
+         <CookieSettingsModal />
+         <ConsentScriptLoader />
+       </ConsentProvider>
+     </body>
+   </html>
+ )
+}
+Important:
+Remove existing third-party scripts from:
+src/app/layout.tsx
+src/app/head.tsx
+src/pages/_app.tsx
+src/pages/_document.tsx
+WordPress global header/footer fields
+WordPress page/post content
+Theme/plugin custom script injection
+Do not load these directly anymore:
+Google Analytics
+Google Tag Manager
+Meta Pixel
+TikTok Pixel
+LinkedIn Insight Tag
+Microsoft Clarity
+Hotjar
+Chat widgets
+Marketing automation widgets
+Tracking pixels
+They must be loaded through ConsentScriptLoader.
+________________
+
+
+Step 13: Add Environment Variables
+Create or update:
+.env.local
+Example:
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
+NEXT_PUBLIC_META_PIXEL_ID=123456789
+Only add the IDs the website uses.
+Then restart the dev server:
+npm run dev
+
+________________
+Step 14: Headless WordPress Embed Handling
+Problem
+If WordPress content includes raw iframe embeds, this can bypass consent.
+Bad example:
+<div dangerouslySetInnerHTML={{ __html: post.content }} />
+This may immediately load:
+YouTube
+Google Maps
+Typeform
+Jotform
+Calendly
+Facebook embeds
+Instagram embeds
+External widgets
+Required Rule
+Do not allow third-party embeds to load directly from raw WordPress HTML if they create cookies, tracking, or external requests.
+Use approved React components wrapped with ConsentGate.
+________________
+
+
+Step 15: Create Approved Embed Components
+YouTube Embed
+import { ConsentGate } from '@/components/consent/ConsentGate'
+
+
+export function YouTubeEmbed({ src }: { src: string }) {
+ return (
+   <ConsentGate
+     category="embedded"
+     fallbackTitle="YouTube video blocked"
+     fallbackDescription="Please allow embedded content to watch this video."
+   >
+     <iframe
+       src={src}
+       className="aspect-video w-full rounded-md"
+       allowFullScreen
+     />
+   </ConsentGate>
+ )
+}
+Google Map Embed
+import { ConsentGate } from '@/components/consent/ConsentGate'
+
+
+export function GoogleMapEmbed({ src }: { src: string }) {
+ return (
+   <ConsentGate
+     category="embedded"
+     fallbackTitle="Google Map blocked"
+     fallbackDescription="Please allow embedded content to view this map."
+   >
+     <iframe
+       src={src}
+       className="h-[400px] w-full rounded-md"
+       loading="lazy"
+     />
+   </ConsentGate>
+ )
+}
+External Form Embed
+import { ConsentGate } from '@/components/consent/ConsentGate'
+
+
+export function ExternalFormEmbed({ src }: { src: string }) {
+ return (
+   <ConsentGate
+     category="embedded"
+     fallbackTitle="Form blocked"
+     fallbackDescription="Please allow embedded content to view this external form."
+   >
+     <iframe
+       src={src}
+       className="min-h-[600px] w-full rounded-md"
+     />
+   </ConsentGate>
+ )
+}
+
+________________
+Step 16: WordPress Content Policy
+For Headless WordPress websites, follow this policy:
+Allowed in WordPress Content
+Text
+Images
+Internal links
+Buttons
+Shortcodes that render static content
+ACF fields
+Gutenberg blocks that do not load third-party scripts
+Not Allowed Directly in WordPress Content
+Google Analytics scripts
+Google Tag Manager scripts
+Meta Pixel scripts
+TikTok Pixel scripts
+Hotjar scripts
+Microsoft Clarity scripts
+Chat widget scripts
+Raw iframe embeds from YouTube, Google Maps, Typeform, Jotform, Calendly, etc.
+Required Approach
+For third-party embeds, WordPress should store only structured data, such as:
+video_url
+map_embed_url
+form_embed_url
+embed_type
+Then the Next.js frontend renders the correct approved component.
+Example:
+<YouTubeEmbed src={videoEmbedUrl} />
+<GoogleMapEmbed src={mapEmbedUrl} />
+<ExternalFormEmbed src={formEmbedUrl} />
+
+________________
+Step 17: QA Testing Checklist
+Before launch, test the following.
+First Visit
+* Open site in incognito/private window.
+* Cookie banner should appear.
+* No analytics or marketing scripts should load before consent.
+Check browser DevTools > Network.
+Before consent, these should not load:
+google-analytics.com
+googletagmanager.com
+connect.facebook.net
+facebook.com/tr
+clarity.ms
+hotjar.com
+tiktok.com
+linkedin.com
+Reject All
+Click:
+Reject all
+Expected result:
+* Banner disappears.
+* Analytics does not load.
+* Marketing scripts do not load.
+* Embedded third-party content remains blocked.
+* Local storage saves consent.
+Accept All
+Clear localStorage or open a new incognito session.
+Click:
+Accept all
+Expected result:
+* Banner disappears.
+* GA/GTM loads if configured.
+* Meta Pixel loads if configured.
+* Embedded content becomes available.
+* Local storage saves consent.
+Customize
+Click:
+Customize
+Test these cases:
+Analytics ON, Marketing OFF
+Analytics OFF, Marketing ON
+Embedded ON, Analytics OFF
+Reject all from modal
+Accept all from modal
+Save settings
+Expected result:
+* Only approved categories load.
+* Disabled categories do not load.
+Footer Settings
+Click:
+Cookie Settings
+Expected result:
+* Settings modal opens.
+* User can change consent.
+* Updated choice is saved.
+Version Reset
+Change this:
+version: '1.0'
+to:
+version: '1.1'
+Expected result:
+* Existing consent is ignored.
+* Banner appears again.
+* This is useful when privacy/cookie policy changes.
+________________
+
+
+Step 18: Definition of Done
+This task is complete only when:
+* Cookie banner appears on first visit.
+* “Accept all”, “Reject all”, and “Customize” work.
+* Settings modal works.
+* Footer “Cookie Settings” link works.
+* Consent is stored with version and timestamp.
+* GA/GTM/Meta Pixel do not load before consent.
+* Headless WordPress third-party embeds are gated.
+* Privacy Policy and Cookie Policy links work.
+* No tracking scripts remain hardcoded in layout, head, WordPress content, or plugin fields.
+* QA checklist has been tested in incognito mode.
+________________
+
+
+Important Developer Notes
+Consent Categories
+Use this mapping:
+Necessary:
+Login, security, cart, form protection, basic website functionality
+
+
+Analytics:
+GA4, GTM analytics tags, Microsoft Clarity, Hotjar analytics
+
+
+Marketing:
+Meta Pixel, TikTok Pixel, Google Ads remarketing, LinkedIn Insight Tag
+
+
+Preferences:
+Language, saved display settings, remembered preferences
+
+
+Embedded:
+YouTube, Google Maps, Typeform, Jotform, Calendly, third-party widgets
+Critical Rule
+Do not load third-party scripts directly.
+All non-essential scripts must pass through:
+ConsentScriptLoader
+ConsentGate
+Practical High6 Standard
+For every Headless WordPress + Next.js website:
+1. Install the consent module.
+2. Configure company name and policy URLs.
+3. Add environment variables for tracking IDs.
+4. Remove hardcoded scripts.
+5. Gate WordPress embeds.
+6. Add footer cookie settings link.
+7. Test in incognito before launch.
+
+________________
+Optional Future Improvement
+After this module is used successfully in several websites, we can extract it into:
+@high6/next-cookie-consent
+But for now, use it as an internal reusable module inside the Next.js starter template.
