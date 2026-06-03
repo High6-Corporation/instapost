@@ -110,7 +110,7 @@ export function Hero() {
             </div>
 
             {/* CTA Button */}
-            <Link href="/coming-soon">
+            <Link href="/contact">
               <Button variant="primary" className="mt-5 max-w-[366px] w-full max-md:!text-[14px]">
                 Book a Discovery Meeting with Us
               </Button>

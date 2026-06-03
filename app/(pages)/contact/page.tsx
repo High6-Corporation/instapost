@@ -82,7 +82,7 @@ export default function ContactPage() {
             </div>
 
             {/* Social Media */}
-            <div className="flex flex-col gap-[10px]">
+            <div id="follow-us" className="flex flex-col gap-[10px]">
               <h3 className="heading-3 font-medium text-neutral-900">
                 Follow Us
               </h3>

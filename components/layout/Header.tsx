@@ -222,7 +222,7 @@ export default function Header({ variant = 'default' }: HeaderProps) {
                           </Link>
 
                           {link.children && (
-                            <ul className="ml-4 mt-1 flex flex-col gap-1 border-l border-border pl-3">
+                            <ul className="ml-4 mt-1 flex flex-col gap-1 pl-3">
                               {link.children.map((child) => {
                                 const isChildActive =
                                   pathname === child.href ||
@@ -249,7 +249,7 @@ export default function Header({ variant = 'default' }: HeaderProps) {
                     })}
                     {/* CTA Button at the bottom */}
                     <li 
-                      className={`pt-4 border-t border-border transition-all duration-300 ease-out ${
+                      className={`pt-4 transition-all duration-300 ease-out ${
                         isMenuOpen 
                           ? 'opacity-100 translate-x-0' 
                           : 'opacity-0 -translate-x-4'

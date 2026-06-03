@@ -77,7 +77,7 @@ export default function ThankYouPage() {
             </div>
 
             {/* CTA Button */}
-            <Link href="/coming-soon">
+            <Link href="/contact#follow-us">
               <Button variant="primary" showArrow={true} className="px-6 py-4">
                 Visit Our Socials
               </Button>

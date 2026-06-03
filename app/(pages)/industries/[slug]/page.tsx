@@ -55,7 +55,7 @@ export default function IndustryDetailPage({ params }: IndustryPageProps) {
       <Header variant="sticky" />
       
       {/* 1st Section - Hero Banner */}
-      <section className="pb-6 lg:pb-0">
+      <section className="pt-4 pb-6 lg:pb-0">
         <Row className="!max-w-[1280px]">
           <div className="relative w-full h-[300px] md:h-[400px] lg:h-[600px] rounded-[40px] md:rounded-[50px] lg:rounded-[60px] overflow-hidden">
             <Image

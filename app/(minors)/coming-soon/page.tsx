@@ -33,12 +33,12 @@ export default function ComingSoonPage() {
         </div>
 
         {/* Floating Social Icons - Top Left */}
-        <div className="absolute z-20 max-lg:top-1/2 max-lg:left-1/2 max-md:-translate-x-[160px] max-md:-translate-y-[280px] max-lg:-translate-x-[350px] max-lg:-translate-y-[250px] lg:top-[121px] lg:left-[82px] w-[100px] md:w-[180px] lg:w-[290px] h-[157px] pointer-events-none block">
+        <div className="absolute z-20 max-lg:top-1/2 max-lg:left-1/2 max-md:-translate-x-[180px] max-md:-translate-y-[320px] max-lg:-translate-x-[380px] max-lg:-translate-y-[290px] lg:top-[100px] lg:left-[60px] w-[140px] md:w-[240px] lg:w-[380px] h-[136px] md:h-[233px] lg:h-[369px] pointer-events-none block">
           <Image
-            src="/icons/social-icons-cta-left.png"
+            src="/images/social-icons-left-new.png"
             alt="Social media reactions"
-            width={290}
-            height={157}
+            width={349}
+            height={339}
             className="w-full h-full object-contain"
             priority
           />

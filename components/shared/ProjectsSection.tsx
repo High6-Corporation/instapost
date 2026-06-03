@@ -18,8 +18,6 @@ interface ProjectsSectionProps {
     imageSrc: string;
     alt: string;
     backgroundColor: string;
-    imageWidth: number;
-    imageHeight: number;
   }>;
 }
 
@@ -28,43 +26,31 @@ const defaultProjects = [
     imageSrc: '/logo/sm-proj.jpg',
     alt: 'SM Project',
     backgroundColor: '#0f2feb',
-    imageWidth: 225,
-    imageHeight: 200,
   },
   {
     imageSrc: '/logo/fat-cousins-proj.png',
     alt: 'Fat Cousins Project',
     backgroundColor: '#f8311a',
-    imageWidth: 323,
-    imageHeight: 200,
   },
   {
     imageSrc: '/logo/kanzen-proj.jpg',
     alt: 'Kanzen Project',
     backgroundColor: '#fef102',
-    imageWidth: 217,
-    imageHeight: 200,
   },
   {
     imageSrc: '/logo/onesimus-proj.jpg',
     alt: 'Onesimus Project',
     backgroundColor: '#000000',
-    imageWidth: 262,
-    imageHeight: 200,
   },
   {
     imageSrc: '/logo/arisun-proj.png',
     alt: 'Arisun Project',
     backgroundColor: '#f6f6f6',
-    imageWidth: 300,
-    imageHeight: 200,
   },
   {
     imageSrc: '/logo/nissan-proj.jpg',
     alt: 'Nissan Project',
     backgroundColor: '#ca202d',
-    imageWidth: 224,
-    imageHeight: 200,
   },
 ]
 
@@ -75,7 +61,7 @@ export function ProjectsSection({
   description = 'We partner with brands across the country, delivering creative solutions that drive real results and long-term growth.',
   showDescription = true,
   buttonText = 'View All Works',
-  buttonLink = '/coming-soon',
+  buttonLink = '/works',
   projects = defaultProjects,
 }: ProjectsSectionProps) {
   return (
@@ -110,8 +96,6 @@ export function ProjectsSection({
                 imageSrc={project.imageSrc}
                 alt={project.alt}
                 backgroundColor={project.backgroundColor}
-                imageWidth={project.imageWidth}
-                imageHeight={project.imageHeight}
               />
             ))}
           </div>
