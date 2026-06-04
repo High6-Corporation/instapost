@@ -77,9 +77,9 @@ export default function IndustryProjectCard({ project, index }: IndustryProjectC
   const isReversed = index % 2 === 1 // 1, 3, 5... = reversed
 
   const results = [
-    { value: formatNumber(project.totalReach), label: 'Total Reach' },
-    { value: formatNumber(project.engagements), label: 'Engagements' },
-    { value: formatNumber(project.impressions), label: 'Impressions' },
+    { value: formatNumber(project.totalReach) + 'k', label: 'Total Reach' },
+    { value: formatNumber(project.engagements) + 'k', label: 'Engagements' },
+    { value: formatNumber(project.impressions) + 'k', label: 'Impressions' },
   ]
 
   return (
