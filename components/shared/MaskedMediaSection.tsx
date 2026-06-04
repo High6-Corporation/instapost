@@ -12,6 +12,9 @@ interface MaskedMediaSectionProps {
     title: string;
     description: string;
   }>;
+  imageSrc?: string;
+  imageAlt?: string;
+  title?: string;
 }
 
 const defaultAdvantages = [
@@ -37,8 +40,16 @@ const defaultAdvantages = [
   },
 ]
 
-export function MaskedMediaSection({ variant = 'default', advantages = defaultAdvantages }: MaskedMediaSectionProps) {
+const DEFAULT_IMAGE = '/images/advantage-main-img.jpg'
+const DEFAULT_IMAGE_ALT = 'Instapost advantage visual'
+
+const DEFAULT_TITLE = 'Why Instapost Stands Out'
+
+export function MaskedMediaSection({ variant = 'default', advantages = defaultAdvantages, imageSrc, imageAlt, title }: MaskedMediaSectionProps) {
   const isReversed = variant === 'reversed';
+  const resolvedImage = imageSrc ?? DEFAULT_IMAGE
+  const resolvedImageAlt = imageAlt ?? DEFAULT_IMAGE_ALT
+  const resolvedTitle = title ?? DEFAULT_TITLE
 
   return (
     <ScrollAnimationWrapper>
@@ -66,8 +77,8 @@ export function MaskedMediaSection({ variant = 'default', advantages = defaultAd
                     className="w-full h-full relative overflow-hidden wavy-clip"
                   >
                     <Image
-                      src="/images/advantage-main-img.jpg"
-                      alt="Instapost advantage visual"
+                      src={resolvedImage}
+                      alt={resolvedImageAlt}
                       fill
                       className="object-cover"
                     />
@@ -93,7 +104,7 @@ export function MaskedMediaSection({ variant = 'default', advantages = defaultAd
                     Our Advantage
                   </Badge>
                   <h2 className="heading-2 font-normal text-black">
-                    Why Instapost Stands Out
+                    {resolvedTitle}
                   </h2>
                 </div>
 
@@ -117,7 +128,7 @@ export function MaskedMediaSection({ variant = 'default', advantages = defaultAd
               <div className="w-full min-[1140px]:max-w-[620px] w-full flex flex-col gap-[24px] md:gap-[40px] lg:gap-[48px]">
                 <div className="flex flex-col">
                   <h2 className="heading-2 font-normal text-neutral-0">
-                    Why Instapost Stands Out
+                    {resolvedTitle}
                   </h2>
                 </div>
 
@@ -153,8 +164,8 @@ export function MaskedMediaSection({ variant = 'default', advantages = defaultAd
                     className="w-full h-full relative overflow-hidden wavy-clip"
                   >
                     <Image
-                      src="/images/advantage-main-img.jpg"
-                      alt="Instapost advantage visual"
+                      src={resolvedImage}
+                      alt={resolvedImageAlt}
                       fill
                       className="object-cover"
                     />

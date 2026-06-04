@@ -9,33 +9,85 @@ import { MaskedMediaSection } from '@/components/shared/MaskedMediaSection'
 import { ProjectsSection } from '@/components/shared/ProjectsSection'
 import { CtaSection } from '@/components/global/CtaSection'
 import Footer from '@/components/layout/Footer'
+import { getAboutPageData, type AboutPageData } from '@/lib/about'
+import type { CoreValueItem } from '@/components/shared/CoreValuesSection'
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const data: AboutPageData = await getAboutPageData()
+  const dc = data.dynamicContent
+
+  // Map GraphQL core values to CoreValueItem[]
+  const coreValueItems: CoreValueItem[] = dc.coreValueSection.valuesList.map(
+    (v) => ({
+      icon: v.icon.node.sourceUrl,
+      title: v.title,
+      description: v.paragarph,
+    }),
+  )
+
+  // Map GraphQL stand out items to advantages[]
+  const standOutAdvantages = dc.standOutSection.standOut.map((s) => ({
+    icon: s.icon.node.sourceUrl,
+    title: s.title,
+    description: s.paragarph,
+  }))
+
+  // Mission & Vision (first item from each array)
+  const mission = dc.missionAndVisionSection.missionContents[0]
+  const vision = dc.missionAndVisionSection.visionContents[0]
+
   return (
     <>
       {/* Sticky Header */}
       <Header variant="sticky" />
 
       {/* Subpage Banner */}
-      <SubpageBanner title="About Us" />
+      <SubpageBanner title={data.title} />
 
       {/* Media Text Section */}
-      <MediaTextSection variant="light" buttonText="Inquire Now" buttonLink="/contact"/>
+      <MediaTextSection
+        variant="light"
+        title={dc.introduction.introductionTitle}
+        description={dc.introduction.introductionParagraph}
+        imageSrc={dc.introduction.introductionImage.node.sourceUrl}
+        imageAlt={dc.introduction.introductionTitle}
+        buttonText="Inquire Now"
+        buttonLink="/contact"
+      />
 
       {/* Video Section */}
-      <VideoSection />
+      {dc.videoBanner.node.mediaItemUrl && (
+        <VideoSection videoSrc={dc.videoBanner.node.mediaItemUrl} />
+      )}
 
       {/* Mission & Vision Section */}
-      <MissionVisionSection />
+      <MissionVisionSection
+        imageSrc={dc.missionAndVisionSection.missionAndVisionImage.node.sourceUrl}
+        missionTitle={mission?.missionTitle}
+        missionParagraph={mission?.missionParagraph}
+        visionTitle={vision?.visionTitle}
+        visionParagraph={vision?.visionParagraph}
+      />
 
       {/* Core Values Section */}
-      <CoreValuesSection />
+      <CoreValuesSection
+        imageSrc={dc.coreValueSection.valuesImage.node.sourceUrl}
+        items={coreValueItems}
+      />
 
       {/* Masked Media Section - Reversed Variant */}
-      <MaskedMediaSection variant="reversed" />
+      <MaskedMediaSection
+        variant="reversed"
+        title={dc.standOutSection.standOutTitle}
+        advantages={standOutAdvantages}
+        imageSrc={dc.standOutSection.standOutImage.node.sourceUrl}
+      />
 
       {/* Team Slider Section */}
-      <TeamSliderSection />
+      <TeamSliderSection
+        title={dc.ourTeamSection.teamTitle}
+        description={dc.ourTeamSection.teamParagraph}
+      />
 
       {/* Projects Section - Custom Content, Hidden Description and Badge */}
       <ProjectsSection 

@@ -102,7 +102,21 @@ function TeamCard({
   )
 }
 
-export function TeamSliderSection() {
+export interface TeamSliderData {
+  title?: string
+  description?: string
+}
+
+const DEFAULT_TEAM_TITLE = 'Meet Our Team'
+const DEFAULT_TEAM_DESCRIPTION =
+  'Get to know the passionate creatives behind the work—dedicated to bringing ideas to life and delivering meaningful results.'
+
+export function TeamSliderSection({
+  title,
+  description,
+}: TeamSliderData = {}) {
+  const resolvedTitle = title ?? DEFAULT_TEAM_TITLE
+  const resolvedDescription = description ?? DEFAULT_TEAM_DESCRIPTION
   const swiperRef = useRef<SwiperType | null>(null)
   const [spaceBetween, setSpaceBetween] = useState(40)
   const [showPagination, setShowPagination] = useState(false)
@@ -168,11 +182,11 @@ export function TeamSliderSection() {
             <div className="flex flex-col gap-[16px] lg:gap-[30px] text-center lg:text-left">
               <div className="flex flex-col gap-[8px]">
                 <h2 className="heading-2 font-normal text-neutral-900">
-                  Meet Our Team
+                  {resolvedTitle}
                 </h2>
               </div>
               <p className="body-md text-neutral-500">
-                Get to know the passionate creatives behind the work—dedicated to bringing ideas to life and delivering meaningful results.
+                {resolvedDescription}
               </p>
             </div>
 

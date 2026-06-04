@@ -3,7 +3,18 @@ import {
   type CoreValueItem,
 } from '@/components/shared/CoreValuesSection'
 
-const coreValues: CoreValueItem[] = [
+export interface CoreValuesData {
+  heading?: string
+  imageSrc?: string
+  imageAlt?: string
+  items?: CoreValueItem[]
+}
+
+const DEFAULT_HEADING = 'Our Core Values'
+const DEFAULT_IMAGE = '/images/about-4th-left.jpg'
+const DEFAULT_ALT = 'Instapost team'
+
+const DEFAULT_VALUES: CoreValueItem[] = [
   {
     icon: '/icons/instant.png',
     title: 'Lead with Integrity',
@@ -31,13 +42,18 @@ const coreValues: CoreValueItem[] = [
   },
 ]
 
-export function CoreValuesSection() {
+export function CoreValuesSection({
+  heading,
+  imageSrc,
+  imageAlt,
+  items,
+}: CoreValuesData = {}) {
   return (
     <SharedCoreValuesSection
-      heading="Our Core Values"
-      items={coreValues}
-      imageSrc="/images/about-4th-left.jpg"
-      imageAlt="Instapost team"
+      heading={heading ?? DEFAULT_HEADING}
+      items={items ?? DEFAULT_VALUES}
+      imageSrc={imageSrc ?? DEFAULT_IMAGE}
+      imageAlt={imageAlt ?? DEFAULT_ALT}
     />
   )
 }

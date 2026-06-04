@@ -3,7 +3,35 @@ import Row from '@/components/layout/Row'
 import Image from 'next/image'
 import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
-export function MissionVisionSection() {
+export interface MissionVisionData {
+  imageSrc?: string
+  missionTitle?: string
+  missionParagraph?: string
+  visionTitle?: string
+  visionParagraph?: string
+}
+
+const DEFAULT_MISSION_TITLE = 'Mission'
+const DEFAULT_MISSION_PARAGRAPH =
+  'To empower brands through high quality, strategic visual content combining photography, videography, graphics, and animation to drive engagement, inspire audiences, and deliver measurable results.'
+const DEFAULT_VISION_TITLE = 'Vision'
+const DEFAULT_VISION_PARAGRAPH =
+  'To be a trusted creative partner for brands across industries recognized for transforming content into powerful experiences that inspire, connect, and drive lasting impact.'
+const DEFAULT_IMAGE = '/images/about-fs-right.jpg'
+
+export function MissionVisionSection({
+  imageSrc,
+  missionTitle,
+  missionParagraph,
+  visionTitle,
+  visionParagraph,
+}: MissionVisionData = {}) {
+  const resolvedImage = imageSrc ?? DEFAULT_IMAGE
+  const resolvedMissionTitle = missionTitle ?? DEFAULT_MISSION_TITLE
+  const resolvedMissionParagraph = missionParagraph ?? DEFAULT_MISSION_PARAGRAPH
+  const resolvedVisionTitle = visionTitle ?? DEFAULT_VISION_TITLE
+  const resolvedVisionParagraph = visionParagraph ?? DEFAULT_VISION_PARAGRAPH
+
   return (
     <ScrollAnimationWrapper>
       <Section className="bg-white overflow-hidden py-[24px] md:py-[40px] lg:py-[70px]">
@@ -25,7 +53,7 @@ export function MissionVisionSection() {
             <div className="relative shrink-0 w-[280px] h-[280px] md:w-[400px] md:h-[400px] min-[1140px]:w-[500px] min-[1140px]:h-[500px]">
               <div className="w-full h-full relative overflow-hidden rounded-[30px]">
                 <Image
-                  src="/images/about-fs-right.jpg"
+                  src={resolvedImage}
                   alt="Creative team working"
                   fill
                   className="object-cover"
@@ -52,10 +80,10 @@ export function MissionVisionSection() {
             {/* Content */}
             <div className="relative z-10">
               <h3 className="heading-3 font-semibold text-neutral-0 mb-[10px]">
-                Mission
+                {resolvedMissionTitle}
               </h3>
               <p className="body-md text-neutral-0">
-                To empower brands through high quality, strategic visual content combining photography, videography, graphics, and animation to drive engagement, inspire audiences, and deliver measurable results.
+                {resolvedMissionParagraph}
               </p>
             </div>
           </div>
@@ -75,10 +103,10 @@ export function MissionVisionSection() {
             {/* Content */}
             <div className="relative z-10">
               <h3 className="heading-3 font-semibold text-neutral-0 mb-[10px]">
-                Vision
+                {resolvedVisionTitle}
               </h3>
               <p className="body-md text-neutral-0">
-                To be a trusted creative partner for brands across industries recognized for transforming content into powerful experiences that inspire, connect, and drive lasting impact.
+                {resolvedVisionParagraph}
               </p>
             </div>
           </div>
