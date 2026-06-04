@@ -7,6 +7,8 @@ import { IndustryCard } from '@/components/shared/IndustryCard'
 import { CtaSection } from '@/components/global/CtaSection'
 import { getIndustries } from '@/lib/industries'
 
+export const dynamic = 'force-dynamic'
+
 export default async function IndustriesPage() {
   const industries = await getIndustries()
 

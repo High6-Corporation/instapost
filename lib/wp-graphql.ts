@@ -38,7 +38,6 @@ export async function wpGraphQLPersistedQuery<T = unknown>(
   const res = await fetch(url, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
-    next: { revalidate: 60 },
   })
 
   if (!res.ok) {
