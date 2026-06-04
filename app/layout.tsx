@@ -4,6 +4,8 @@ import { ConsentProvider } from '@/components/consent/ConsentProvider'
 import { CookieConsentBanner } from '@/components/consent/CookieConsentBanner'
 import { CookieSettingsModal } from '@/components/consent/CookieSettingsModal'
 import { ConsentScriptLoader } from '@/components/consent/ConsentScriptLoader'
+import { QuoteModalProvider } from '@/components/sections/quote/QuoteModalProvider'
+import QuoteModalRenderer from '@/components/sections/quote/QuoteModalRenderer'
 
 export const metadata: Metadata = {
   title: {
@@ -28,7 +30,10 @@ export default function RootLayout({
     <html lang="en">
       <body className="font-sans">
         <ConsentProvider>
-          {children}
+          <QuoteModalProvider>
+            {children}
+            <QuoteModalRenderer />
+          </QuoteModalProvider>
           <CookieConsentBanner />
           <CookieSettingsModal />
           <ConsentScriptLoader />

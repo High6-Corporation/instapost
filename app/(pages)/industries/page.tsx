@@ -1,18 +1,15 @@
-import Header from "@/components/layout/Header"
-import Footer from "@/components/layout/Footer"
-import SubpageBanner from "@/components/shared/SubpageBanner"
-import BackToTop from "@/components/global/BackToTop"
-import { IntroText } from "@/components/sections/industries/IntroText"
-import FoodBeverageSection from "@/components/sections/industries/FoodBeverageSection"
-import ServicesSection from "@/components/sections/industries/ServicesSection"
-import SocialMediaEventsSection from "@/components/sections/industries/SocialMediaEventsSection"
-import HomeLivingSection from "@/components/sections/industries/HomeLivingSection"
-import HealthSafetySection from "@/components/sections/industries/HealthSafetySection"
-import BeautyLifestyleSection from "@/components/sections/industries/beauty-lifestyle"
-import HomeImprovementConstructionSection from "@/components/sections/industries/HomeImprovementConstructionSection"
-import { CtaSection } from "@/components/global/CtaSection"
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
+import SubpageBanner from '@/components/shared/SubpageBanner'
+import BackToTop from '@/components/global/BackToTop'
+import { IntroText } from '@/components/sections/industries/IntroText'
+import { IndustryCard } from '@/components/shared/IndustryCard'
+import { CtaSection } from '@/components/global/CtaSection'
+import { getIndustries } from '@/lib/industries'
 
-export default function IndustriesPage() {
+export default async function IndustriesPage() {
+  const industries = await getIndustries()
+
   return (
     <main className="bg-white min-h-screen w-full overflow-x-hidden">
       <Header variant="sticky" />
@@ -20,13 +17,24 @@ export default function IndustriesPage() {
       <IntroText />
       
       {/* Industry Sections - Alternating White/Red Pattern */}
-      <FoodBeverageSection /> {/* White - Image Right */}
-      <ServicesSection /> {/* Red - Image Left (Reversed) */}
-      <SocialMediaEventsSection /> {/* White - Image Right */}
-      <HomeLivingSection /> {/* Red - Image Left (Reversed) */}
-      <HealthSafetySection /> {/* White - Image Right */}
-      <BeautyLifestyleSection /> {/* Red - Image Left (Reversed) */}
-      <HomeImprovementConstructionSection /> {/* White - Image Right */}
+      {industries.map((industry, index) => {
+        const isEven = index % 2 === 1
+        return (
+          <IndustryCard
+            key={industry.id}
+            theme={isEven ? 'red' : 'white'}
+            isReversed={isEven}
+            title={industry.title}
+            description={industry.description}
+            imageSrc={industry.imageSrc}
+            imageAlt={industry.imageAlt}
+            iconSrc={industry.iconSrc ?? undefined}
+            iconAlt={industry.iconAlt}
+            buttonText="Learn More"
+            buttonLink={`/industries/${industry.slug}`}
+          />
+        )
+      })}
       
       {/* CTA Section */}
       <CtaSection />

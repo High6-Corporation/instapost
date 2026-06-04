@@ -61,11 +61,6 @@ export default function Footer() {
             <div className="flex max-md:flex-col max-md:items-center max-md:text-center gap-[24px] md:gap-[80px]">
               {/* Column 1 */}
               <div className="flex flex-col gap-[24px] md:gap-[32px]">
-                <a href="/" className={`label-md font-medium transition-colors ${
-                  pathname === '/' ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
-                }`}>
-                  Home
-                </a>
                 <a href="/about" className={`label-md font-medium transition-colors ${
                   pathname === '/about' ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
                 }`}>
@@ -76,19 +71,24 @@ export default function Footer() {
                 }`}>
                   Services
                 </a>
-              </div>
-
-              {/* Column 2 */}
-              <div className="flex flex-col gap-[24px] md:gap-[32px]">
                 <a href="/industries" className={`label-md font-medium transition-colors ${
                   pathname === '/industries' || pathname.startsWith('/industries') ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
                 }`}>
                   Industries
                 </a>
+              </div>
+
+              {/* Column 2 */}
+              <div className="flex flex-col gap-[24px] md:gap-[32px]">
                 <a href="/packages" className={`label-md font-medium transition-colors ${
                   pathname === '/packages' || pathname.startsWith('/packages') ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
                 }`}>
                   Packages
+                </a>
+                <a href="/faq" className={`label-md font-medium transition-colors ${
+                  pathname === '/faq' ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'
+                }`}>
+                  FAQ
                 </a>
                 <a href="/contact" className={`label-md font-medium transition-colors ${
                   pathname === '/contact' ? 'text-primary font-semibold' : 'text-neutral-900 hover:text-primary'

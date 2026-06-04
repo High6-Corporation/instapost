@@ -22,6 +22,11 @@ export async function POST(request: NextRequest) {
       if (slug) {
         revalidatePath(`/product/${slug}`)
       }
+    } else if (type === 'industry') {
+      revalidatePath('/industries')
+      if (slug) {
+        revalidatePath(`/industries/${slug}`)
+      }
     } else {
       revalidatePath('/')
     }

@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import Button from '@/components/ui/Button'
 import Row from './Row'
+import { useQuoteModal } from '@/components/sections/quote/QuoteModalProvider'
 
 interface HeaderProps {
   variant?: 'default' | 'sticky';
@@ -41,6 +42,7 @@ export default function Header({ variant = 'default' }: HeaderProps) {
   const headerRef = useRef<HTMLElement>(null)
   const placeholderRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
+  const { openQuoteModal } = useQuoteModal()
 
   const isNavLinkActive = (link: NavLink) => {
     const isMainActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href))
@@ -168,11 +170,9 @@ export default function Header({ variant = 'default' }: HeaderProps) {
 
             {/* Desktop CTA Button */}
             <div className="hidden lg:block">
-              <Link href="/coming-soon">
-                <Button variant="primary" showArrow={false}>
-                  Get Started
-                </Button>
-              </Link>
+              <Button variant="primary" showArrow={false} onClick={() => openQuoteModal({ variant: 'quote' })}>
+                Get Started
+              </Button>
             </div>
 
             {/* Mobile/Tablet Hamburger Button */}
@@ -256,11 +256,9 @@ export default function Header({ variant = 'default' }: HeaderProps) {
                       }`}
                       style={{ transitionDelay: `${navLinks.length * 50 + 100}ms` }}
                     >
-                      <Link href="/coming-soon">
-                        <Button variant="primary" showArrow={false} className="w-full">
-                          Get Started
-                        </Button>
-                      </Link>
+                      <Button variant="primary" showArrow={false} className="w-full" onClick={() => { setIsMenuOpen(false); openQuoteModal(); }}>
+                        Get Started
+                      </Button>
                     </li>
                   </ul>
                 </nav>

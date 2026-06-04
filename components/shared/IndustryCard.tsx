@@ -76,12 +76,10 @@ export function IndustryCard({
                   ? 'bg-white border-2 border-secondary' 
                   : 'bg-[#EB0016] border-2 border-secondary'
               }`}>
-                <Image
+                <img
                   src={iconSrc}
                   alt={iconAlt}
-                  width={50}
-                  height={50}
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] object-contain"
                 />
               </div>
             )}

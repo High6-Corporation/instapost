@@ -28,6 +28,7 @@ export default function ServicesPage() {
             bgColor="#fff"
             ctaText="Inquire Now"
             ctaHref="/contact"
+            useModal={true}
           />
           <ServiceFeatureSection
             title="Conceptual Videos"
@@ -47,6 +48,7 @@ export default function ServicesPage() {
             buttonVariant="white"
             ctaText="Inquire Now"
             ctaHref="/contact"
+            useModal={true}
           />
           <ServiceFeatureSection
             title="KOL Marketing"
@@ -60,6 +62,7 @@ export default function ServicesPage() {
             bgColor=""
             ctaText="Inquire Now"
             ctaHref="/contact"
+            useModal={true}
           />
           <ServiceFeatureSection
             title="Content Marketing"
@@ -79,6 +82,7 @@ export default function ServicesPage() {
             buttonVariant="white"
             ctaText="Inquire Now"
             ctaHref="/contact"
+            useModal={true}
           />
           <CtaSection />
           

@@ -5,6 +5,7 @@ import Row from '@/components/layout/Row'
 import Section from '@/components/layout/Section'
 import Button from '@/components/ui/Button'
 import { cn } from '@/lib/cn'
+import ServiceInquireButton from './ServiceInquireButton'
 
 interface ServiceFeatureSectionProps {
   title: string
@@ -23,6 +24,7 @@ interface ServiceFeatureSectionProps {
   titleClassName?: string
   descriptionClassName?: string
   featureClassName?: string
+  useModal?: boolean
 }
 
 export default function ServiceFeatureSection({
@@ -42,6 +44,7 @@ export default function ServiceFeatureSection({
   titleClassName,
   descriptionClassName,
   featureClassName,
+  useModal = false,
 }: ServiceFeatureSectionProps) {
   return (
     <ScrollAnimationWrapper>
@@ -98,9 +101,17 @@ export default function ServiceFeatureSection({
               </ul>
             )}
 
-            <Link href={ctaHref}>
-              <Button variant={buttonVariant}>{ctaText}</Button>
-            </Link>
+            {useModal ? (
+              <ServiceInquireButton
+                serviceName={title}
+                text={ctaText}
+                variant={buttonVariant}
+              />
+            ) : (
+              <Link href={ctaHref}>
+                <Button variant={buttonVariant}>{ctaText}</Button>
+              </Link>
+            )}
           </div>
         </Row>
       </Section>
