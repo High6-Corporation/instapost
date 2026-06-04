@@ -1,6 +1,51 @@
-import { wpGraphQLPersistedQuery, wpGraphQLQuery } from './wp-graphql'
+import { wpGraphQLQuery } from './wp-graphql'
 
-const INDUSTRIES_QUERY_ALIAS = '91b3622e57ea0cdb672e1c42e7807b6ed857bbc57b062fb5ab21317a8a7ef2ad'
+// ── Shared query fragment for industry fields ──────────────────────────────────
+
+const INDUSTRY_FIELDS_FRAGMENT = `
+  id
+  title
+  slug
+  content
+  featuredImage {
+    node {
+      sourceUrl
+      altText
+    }
+  }
+  industriesField {
+    industryIcon {
+      node {
+        sourceUrl
+        altText
+      }
+    }
+    industryBanner {
+      node {
+        sourceUrl
+        altText
+      }
+    }
+    industryWriteUp
+    industryWriteUpImage {
+      node {
+        sourceUrl
+        altText
+      }
+    }
+    industryProject {
+      projectTags
+      projectTitle
+      projectDescription
+      mediaLeft
+      mediaRight
+      totalReach
+      engagements
+      impressions
+      packageLink
+    }
+  }
+`
 
 // ── WPGraphQL response types ──────────────────────────────────────────────────
 
@@ -129,7 +174,16 @@ function mapIndustryNode(node: WPIndustryNode): Industry {
 // ── Fetch functions ──────────────────────────────────────────────────────────────
 
 export async function getIndustries(): Promise<Industry[]> {
-  const data = await wpGraphQLPersistedQuery<GetIndustriesResponse>(INDUSTRIES_QUERY_ALIAS)
+  const query = `
+    query GetIndustries {
+      industries(first: 100, where: { orderby: { field: MODIFIED, order: ASC } }) {
+        nodes {
+          ${INDUSTRY_FIELDS_FRAGMENT}
+        }
+      }
+    }
+  `
+  const data = await wpGraphQLQuery<GetIndustriesResponse>(query)
   return data.industries.nodes.map(mapIndustryNode)
 }
 
@@ -137,48 +191,7 @@ export async function getIndustryBySlug(slug: string): Promise<Industry | null> 
   const query = `
     query GetIndustryBySlug($slug: ID!) {
       industry(id: $slug, idType: SLUG) {
-        id
-        title
-        slug
-        content
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
-        industriesField {
-          industryIcon {
-            node {
-              sourceUrl
-              altText
-            }
-          }
-          industryBanner {
-            node {
-              sourceUrl
-              altText
-            }
-          }
-          industryWriteUp
-          industryWriteUpImage {
-            node {
-              sourceUrl
-              altText
-            }
-          }
-          industryProject {
-            projectTags
-            projectTitle
-            projectDescription
-            mediaLeft
-            mediaRight
-            totalReach
-            engagements
-            impressions
-            packageLink
-          }
-        }
+        ${INDUSTRY_FIELDS_FRAGMENT}
       }
     }
   `

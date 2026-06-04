@@ -15,6 +15,8 @@ interface IndustryPageProps {
   }
 }
 
+export const dynamic = 'force-dynamic'
+
 export async function generateStaticParams() {
   const slugs = await getAllIndustrySlugs()
   return slugs.map((slug) => ({ slug }))
