@@ -11,6 +11,7 @@ import { CtaSection } from '@/components/global/CtaSection'
 import Footer from '@/components/layout/Footer'
 import { getAboutPageData, type AboutPageData } from '@/lib/about'
 import type { CoreValueItem } from '@/components/shared/CoreValuesSection'
+import type { TeamMember } from '@/components/sections/about/TeamSliderSection'
 
 export default async function AboutPage() {
   const data: AboutPageData = await getAboutPageData()
@@ -35,6 +36,16 @@ export default async function AboutPage() {
   // Mission & Vision (first item from each array)
   const mission = dc.missionAndVisionSection.missionContents[0]
   const vision = dc.missionAndVisionSection.visionContents[0]
+
+  // Map GraphQL team members to TeamMember[]
+  const teamMembers: TeamMember[] =
+    dc.ourTeamSection.teamMembersImage?.map((m, i) => ({
+      id: i + 1,
+      image: m.teamMembersImage.node.sourceUrl,
+      name: m.name,
+      title: m.role,
+      playIcon: '/icons/play-button.svg',
+    })) ?? []
 
   return (
     <>
@@ -87,6 +98,7 @@ export default async function AboutPage() {
       <TeamSliderSection
         title={dc.ourTeamSection.teamTitle}
         description={dc.ourTeamSection.teamParagraph}
+        members={teamMembers.length > 0 ? teamMembers : undefined}
       />
 
       {/* Projects Section - Custom Content, Hidden Description and Badge */}

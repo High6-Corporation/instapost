@@ -51,10 +51,20 @@ export interface AboutMissionVisionSection {
   visionContents: AboutVisionContent[]
 }
 
+export interface AboutTeamMember {
+  teamMembersImage: {
+    node: {
+      sourceUrl: string
+    }
+  }
+  name: string
+  role: string
+}
+
 export interface AboutOurTeamSection {
   teamTitle: string
   teamParagraph: string
-  teamMembersImage: unknown
+  teamMembersImage: AboutTeamMember[] | null
 }
 
 export interface AboutStandOutItem {
@@ -100,7 +110,7 @@ export interface AboutPageData {
 // ── Persisted Query ID ──────────────────────────────────────────────────────
 
 const ABOUT_PAGE_QUERY_ID =
-  '0931be4bcf0c0ff8140dbe44b17001e65182fa12deb39701d604813e245d12f1'
+  'fe74ae901a85e0979c175514105401c66547dbc2c5e3ce506db198631826fd34'
 
 // ── Fetch ────────────────────────────────────────────────────────────────────
 

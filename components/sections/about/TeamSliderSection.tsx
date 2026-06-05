@@ -12,7 +12,15 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-const teamMembers = [
+export interface TeamMember {
+  id: number
+  image: string
+  name: string
+  title: string
+  playIcon: string
+}
+
+const DEFAULT_MEMBERS: TeamMember[] = [
   {
     id: 1,
     image: '/images/sample-slides.jpg',
@@ -71,11 +79,11 @@ function TeamCard({
             alt={name}
             width={315}
             height={388}
-            className="object-cover rounded-[24px] max-sm:w-[194.5px] max-sm:h-[250px] max-lg:w-[250px] maxlg:h-[250px]"
+            className="object-cover rounded-[24px] max-sm:w-[194.5px] max-sm:h-[250px] max-lg:w-[250px] max-lg:h-[300px] lg:h-[388px]"
           />
           
-          {/* Play Button Overlay */}
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 rounded-b-[24px]">
+          {/* Play Button Overlay - commented out (not a video) */}
+          {/* <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 rounded-b-[24px]">
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
               <Image
                 src={playIcon}
@@ -85,14 +93,14 @@ function TeamCard({
                 className="object-contain max-md:w-[40px] max-md:h-[40px] md:w-[60px] md:h-[60px] lg:w-[75px] lg:h-[75px]"
               />
             </div>
-          </div>
+          </div> */}
 
           {/* Name & Title Overlay */}
           <div className="absolute bottom-0 left-0 right-0 p-[16px] md:p-[20px] lg:p-[30px] bg-gradient-to-t from-black/80 to-transparent z-10 rounded-b-[24px]">
             <p className="body-md max-md:!text-[16px] font-medium text-neutral-0 !mb-0 leading-[26px]">
               {name}
             </p >
-            <p className="caption !font-medium text-neutral-0 !leading-[26px]">
+            <p className="caption !font-medium text-neutral-0  leading-[16px] md:!leading-[26px]">
               {title}
             </p>
           </div>
@@ -105,6 +113,7 @@ function TeamCard({
 export interface TeamSliderData {
   title?: string
   description?: string
+  members?: TeamMember[]
 }
 
 const DEFAULT_TEAM_TITLE = 'Meet Our Team'
@@ -114,9 +123,11 @@ const DEFAULT_TEAM_DESCRIPTION =
 export function TeamSliderSection({
   title,
   description,
+  members,
 }: TeamSliderData = {}) {
   const resolvedTitle = title ?? DEFAULT_TEAM_TITLE
   const resolvedDescription = description ?? DEFAULT_TEAM_DESCRIPTION
+  const resolvedMembers = members ?? DEFAULT_MEMBERS
   const swiperRef = useRef<SwiperType | null>(null)
   const [spaceBetween, setSpaceBetween] = useState(40)
   const [showPagination, setShowPagination] = useState(false)
@@ -176,7 +187,7 @@ export function TeamSliderSection({
       />
 
       <Row className="!max-w-[1280px] max-lg:!w-[100%] relative z-10 lg:h-[758px] flex items-center">
-        <div className="flex flex-col lg:flex-row lg:items-center gap-[20px] md:gap-[32px] lg:gap-[85px]">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-[12px] md:gap-[24px] lg:gap-[85px]">
           {/* Left Side: Content & Navigation */}
           <div className="w-full lg:w-[439px] shrink-0 px-[5%] lg:px-0">
             <div className="flex flex-col gap-[16px] lg:gap-[30px] text-center lg:text-left">
@@ -242,7 +253,7 @@ export function TeamSliderSection({
               className="team-swiper"
               style={{ padding: swiperPadding, overflow: 'hidden' }}
             >
-              {teamMembers.map((member) => (
+              {resolvedMembers.map((member) => (
                 <SwiperSlide key={member.id} className="!w-auto">
                   <TeamCard
                     image={member.image}
