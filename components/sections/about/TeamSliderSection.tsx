@@ -17,7 +17,6 @@ export interface TeamMember {
   image: string
   name: string
   title: string
-  playIcon: string
 }
 
 const DEFAULT_MEMBERS: TeamMember[] = [
@@ -26,35 +25,30 @@ const DEFAULT_MEMBERS: TeamMember[] = [
     image: '/images/sample-slides.jpg',
     name: 'Jelyn Battung',
     title: 'CEO / BRAND STRATEGIST',
-    playIcon: '/icons/play-button.svg',
   },
   {
     id: 2,
     image: '/images/sample-slides.jpg',       
     name: 'Julius Patricio',
     title: 'VISIONARY / CREATIVE DIRECTOR',
-    playIcon: '/icons/play-button.svg',
   },
   {
     id: 3,
     image: '/images/sample-slides.jpg',
     name: 'Team Member 3',
     title: 'ROLE / POSITION',
-    playIcon: '/icons/play-button.svg',
   },
   {
     id: 4,
     image: '/images/sample-slides.jpg',
     name: 'Team Member 4',
     title: 'ROLE / POSITION',
-    playIcon: '/icons/play-button.svg',
   },
   {
     id: 5,
     image: '/images/sample-slides.jpg',
     name: 'Team Member 5',
     title: 'ROLE / POSITION',
-    playIcon: '/icons/play-button.svg',
   },
 ]
 
@@ -62,12 +56,10 @@ function TeamCard({
   image,
   name,
   title,
-  playIcon,
 }: {
   image: string
   name: string
   title: string
-  playIcon: string
 }) {
   return (
     <div className="bg-white w-full flex justify-center items-center relative rounded-[32px] mx-auto" style={{ boxShadow: '0 0 16px 0 rgba(0, 0, 0, 0.1)' }}>
@@ -259,7 +251,6 @@ export function TeamSliderSection({
                     image={member.image}
                     name={member.name}
                     title={member.title}
-                    playIcon={member.playIcon}
                   />
                 </SwiperSlide>
               ))}

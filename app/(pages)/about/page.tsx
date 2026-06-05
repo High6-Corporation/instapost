@@ -44,7 +44,6 @@ export default async function AboutPage() {
       image: m.teamMembersImage.node.sourceUrl,
       name: m.name,
       title: m.role,
-      playIcon: '/icons/play-button.svg',
     })) ?? []
 
   return (
