@@ -6,6 +6,7 @@ import { IntroText } from "@/components/sections/packages/IntroText";
 import { MediaTextSection } from '@/components/shared/MediaTextSection'
 import { PackagesMain, PackageItem } from '@/components/sections/packages/PackagesMain'
 import { ProcessStepsSection, ProcessStep } from '@/components/sections/packages/ProcessStepsSection'
+import { AddOnsSection } from '@/components/sections/packages/AddOnsSection'
 
 // ─── MAIN PACKAGES ────────────────────────────────────────────────────────────
 const packages: PackageItem[] = [
@@ -294,37 +295,7 @@ export default function PackagesPage() {
           title="Optional Add-Ons"
           description="Enhance your campaign with premium creative services designed to boost engagement, elevate your brand, and drive measurable results."
         />
-        <MediaTextSection
-          variant="light"
-          title="Ads Management (Per Month)"
-          bulletPoints={[
-            "Management for SET AMOUNT of ad budget (client funded)",
-            "Optimizations and targeting protocol",
-            "Report",
-          ]}
-          buttonText="Learn More"
-          buttonLink="/contact"
-          imageSrc="/images/ads-manager.jpg"
-          imageAlt="Creative team working"
-          imagePosition="left"
-          bgColor=""
-          bgImage=""
-        />
-        <MediaTextSection
-          variant="light"
-          title="Influencer Management (Per Influencer)"
-          bulletPoints={[
-            "SET AMOUNT micro Influencer to post FB/IG (client will provide x-deal)",
-            "Rights and ownership to (SET AMOUNT Influencer vertical video 15–30s)",
-          ]}
-          buttonText="Learn More"
-          buttonLink="/contact"
-          imageSrc="/images/influencer.jpg"
-          imageAlt="Creative team working"
-          imagePosition="right"
-          bgColor=""
-          bgImage=""
-        />
+        <AddOnsSection />
 
         {/* ── Onboarding Journey ── */}
         <IntroText
