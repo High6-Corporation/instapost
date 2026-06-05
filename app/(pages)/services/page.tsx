@@ -1,9 +1,24 @@
-import Header from "@/components/layout/Header";
-import SubpageBanner from "@/components/shared/SubpageBanner";
-import Footer from "@/components/layout/Footer";
-import { IntroText } from "@/components/sections/services/IntroText";
-import ServiceFeatureSection from "@/components/sections/services/ServiceFeatureSection";
-import { CtaSection } from "@/components/global/CtaSection";
+import Header from "@/components/layout/Header"
+import SubpageBanner from "@/components/shared/SubpageBanner"
+import Footer from "@/components/layout/Footer"
+import { IntroText } from "@/components/sections/services/IntroText"
+import ServiceFeatureSection from "@/components/sections/services/ServiceFeatureSection"
+import { CtaSection } from "@/components/global/CtaSection"
+import type { Metadata } from 'next'
+import { getPageSEO } from '@/lib/seo'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const pageSEO = await getPageSEO('services')
+  if (!pageSEO?.seo) return {}
+  return {
+    title: pageSEO.seo.title,
+    description: pageSEO.seo.description,
+    keywords: pageSEO.seo.focusKeywords ?? undefined,
+    alternates: {
+      canonical: pageSEO.seo.canonicalUrl ?? undefined,
+    },
+  }
+}
 
 
 export default function ServicesPage() {

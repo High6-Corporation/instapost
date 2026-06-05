@@ -136,7 +136,7 @@ export default function Footer() {
 
             {/* 2nd Column - Social Icons */}
             <div className="flex gap-[13px] items-center max-lg:justify-center">
-              <a href="https://www.facebook.com/instapostph/" target="_blank" rel="noopener noreferrer" className="relative rounded-full w-[40px] h-[40px] bg-primary hover:bg-secondary hover:shadow-[0px_0px_16px_0px_rgba(0,0,0,0.2)] flex items-center justify-center transition-opacity transition-all duration-300">
+              <a href="https://www.facebook.com/instapostph/" target="_blank" rel="noopener noreferrer" className="relative rounded-full w-[40px] h-[40px] bg-primary hover:bg-secondary hover:shadow-[0px_0px_16px_0px_rgba(0,0,0,0.2)] flex items-center justify-center transition-all duration-300">
                 <Image
                   src="/icons/fb-icon.svg"
                   alt="Facebook"
@@ -145,7 +145,7 @@ export default function Footer() {
                   className="object-contain"
                 />
               </a>
-              <a href="https://www.instagram.com/instapostph/" target="_blank" rel="noopener noreferrer" className="relative rounded-full w-[40px] h-[40px] bg-primary hover:bg-secondary hover:shadow-[0px_0px_16px_0px_rgba(0,0,0,0.2)] flex items-center justify-center transition-opacity transition-all duration-300">
+              <a href="https://www.instagram.com/instapostph/" target="_blank" rel="noopener noreferrer" className="relative rounded-full w-[40px] h-[40px] bg-primary hover:bg-secondary hover:shadow-[0px_0px_16px_0px_rgba(0,0,0,0.2)] flex items-center justify-center transition-all duration-300">
                 <Image
                   src="/icons/ig-icon.svg"
                   alt="Instagram"
@@ -154,7 +154,7 @@ export default function Footer() {
                   className="object-contain"
                 />
               </a>
-              <a href="https://www.tiktok.com/@instapostph" target="_blank" rel="noopener noreferrer" className="relative rounded-full w-[40px] h-[40px]  bg-primary hover:bg-secondary hover:shadow-[0px_0px_16px_0px_rgba(0,0,0,0.2)] flex items-center justify-center transition-opacity transition-all duration-300">
+              <a href="https://www.tiktok.com/@instapostph" target="_blank" rel="noopener noreferrer" className="relative rounded-full w-[40px] h-[40px]  bg-primary hover:bg-secondary hover:shadow-[0px_0px_16px_0px_rgba(0,0,0,0.2)] flex items-center justify-center transition-all duration-300">
                 <Image
                   src="/icons/tiktok-icon.svg"
                   alt="TikTok"
@@ -171,7 +171,7 @@ export default function Footer() {
         {/* 2nd Column - Copyright */}
           <div className="flex flex-col items-center gap-2">
             <p className="body-xs font-medium text-neutral-900 text-center">
-              {currentYear} Copyright Instapost. All Rights Reserved.
+              © {currentYear} Copyright Instapost. All Rights Reserved.
             </p>
             <CookieSettingsLink />
           </div>

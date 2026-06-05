@@ -3,10 +3,24 @@ import SubpageBanner from "@/components/shared/SubpageBanner";
 import Footer from "@/components/layout/Footer";
 import { CtaSection } from "@/components/global/CtaSection";
 import { IntroText } from "@/components/sections/packages/IntroText";
-import { MediaTextSection } from '@/components/shared/MediaTextSection'
 import { PackagesMain, PackageItem } from '@/components/sections/packages/PackagesMain'
 import { ProcessStepsSection, ProcessStep } from '@/components/sections/packages/ProcessStepsSection'
 import { AddOnsSection } from '@/components/sections/packages/AddOnsSection'
+import type { Metadata } from 'next'
+import { getPageSEO } from '@/lib/seo'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const pageSEO = await getPageSEO('packages')
+  if (!pageSEO?.seo) return {}
+  return {
+    title: pageSEO.seo.title,
+    description: pageSEO.seo.description,
+    keywords: pageSEO.seo.focusKeywords ?? undefined,
+    alternates: {
+      canonical: pageSEO.seo.canonicalUrl ?? undefined,
+    },
+  }
+}
 
 // ─── MAIN PACKAGES ────────────────────────────────────────────────────────────
 const packages: PackageItem[] = [
@@ -22,7 +36,7 @@ const packages: PackageItem[] = [
     bgImage: "",
     modal: {
       title: "Launch Package",
-      bestFor: "businesses starting consistent content basic ads",
+      bestFor: "businesses starting consistent content and basic ads",
       sections: [
         {
           heading: "Strategic Content (Ready-To-Post) Client Will Provide Materials",
@@ -35,7 +49,7 @@ const packages: PackageItem[] = [
         },
         {
           heading: "Video",
-          bullets: ["1 reels (15-30s) edited from our shoot"],
+          bullets: ["1 reel (15-30s) edited from our shoot"],
         },
         {
           heading: "Ads Management (For 1 Month)",
@@ -58,7 +72,7 @@ const packages: PackageItem[] = [
         {
           heading: "Add-On For Outside Shoots",
           bullets: [
-            "For Shoot outside our Studios (will apply for on-site, public spaces & etc)",
+            "For shoots outside our studio (will apply for on-site, public spaces, etc.)",
             "Transportation Fee",
           ],
         },
@@ -79,7 +93,7 @@ const packages: PackageItem[] = [
     bgImage: "/images/cta-background.png",
     modal: {
       title: "Momentum Package",
-      bestFor: "businesses starting consistent content basic ads",
+      bestFor: "businesses starting consistent content and basic ads",
       sections: [
         {
           heading: "Organic Shoot (2 Hours) For Materials",
@@ -105,8 +119,8 @@ const packages: PackageItem[] = [
         {
           heading: "Influencer Content",
           bullets: [
-            "2 micro Influencer to post FB/IG (client will provide x-deal)",
-            "Rights and ownership to (2 Influencer vertical video 15–30s)",
+            "2 micro influencers to post FB/IG (client will provide x-deal)",
+            "Rights and ownership to (2 influencer vertical videos 15–30s)",
           ],
         },
         {
@@ -123,7 +137,7 @@ const packages: PackageItem[] = [
         {
           heading: "Add-On For Studio Shoots",
           bullets: [
-            "For Shoot outside our Studios (will apply for on site, public spaces & etc)",
+            "For shoots outside our studio (will apply for on-site, public spaces, etc.)",
             "Transportation Fee",
           ],
         },
@@ -144,7 +158,7 @@ const packages: PackageItem[] = [
     bgImage: "",
     modal: {
       title: "Scale Package",
-      bestFor: "businesses starting consistent content basic ads",
+      bestFor: "businesses starting consistent content and basic ads",
       sections: [
         {
           heading: "Organic Shoot (2 Hours) For Materials",
@@ -170,8 +184,8 @@ const packages: PackageItem[] = [
         {
           heading: "Influencer Content",
           bullets: [
-            "4 micro Influencer to post FB/IG (client will provide x-deal)",
-            "Rights and ownership to (4 Influencer vertical video 15–30s)",
+            "4 micro influencers to post FB/IG (client will provide x-deal)",
+            "Rights and ownership to (4 influencer vertical videos 15–30s)",
           ],
         },
         {
@@ -188,7 +202,7 @@ const packages: PackageItem[] = [
         {
           heading: "Add-On For Studio Shoots",
           bullets: [
-            "For Shoot outside our Studios (will apply for on site, public spaces & etc)",
+            "For shoots outside our studio (will apply for on-site, public spaces, etc.)",
             "Transportation Fee",
           ],
         },

@@ -1,7 +1,6 @@
 'use client'
 
 import { GuaranteeSection } from '@/components/sections/agency/GuaranteeSection'
-import { IntroText } from '@/components/sections/packages/IntroText'
 import { PhotoVideoPackageSection } from '@/components/sections/agency/PhotoVideoPackageSection'
 import { CoreValuesSection } from '@/components/shared/CoreValuesSection'
 import { MediaTextSection } from '@/components/shared/MediaTextSection'
@@ -271,13 +270,13 @@ export function AgencyPageClient() {
 
       <MediaTextSection
         variant="primary"
-        title="Short form Videos"
+        title="Short-Form Videos"
         bulletPoints={[
           "Best for reels",
           "Engagement Boost",
-          "Promotions Create",
+          "Promotions Creation",
           "Hype Social Noise",
-          "30 Seconder max",
+          "30 seconds max",
         ]}
         buttonText="Inquire Now"
         onButtonClick={() => openQuote('Short form Videos')}
@@ -292,9 +291,9 @@ export function AgencyPageClient() {
         variant="light"
         title="Corporate / Infomercial / Video / Concept Video / Commercial Video"
         bulletPoints={[
-          "Integrity Building Video",
-          "For Brand Awareness Can be use as",
-          "Main Video to boost credibility",
+          "Brand Building Video",
+          "For Brand Awareness, can be used as",
+          "Main video to boost credibility",
         ]}
         buttonText="Inquire Now"
         onButtonClick={() => openQuote('Corporate / Infomercial / Video')}

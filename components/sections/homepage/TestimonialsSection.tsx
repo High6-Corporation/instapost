@@ -300,7 +300,7 @@ export function TestimonialsSection() {
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`h-[12px] w-[12px] sm:w-[24px] sm:h-[24px] rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-primary border-[2px] sm:border-[6px] border-neutral-0' : 'bg-neutral-0 hover:opacity-[0.7] hover:border-[6px] hover:border-netural-0  '
+                  index === currentIndex ? 'bg-primary border-[2px] sm:border-[6px] border-neutral-0' : 'bg-neutral-0 hover:opacity-[0.7] hover:border-[6px] hover:border-neutral-0  '
                 }`}
                 aria-label={`Go to slide ${index + 1}`}
               />

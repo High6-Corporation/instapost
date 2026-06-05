@@ -12,9 +12,29 @@ import Footer from '@/components/layout/Footer'
 import { getAboutPageData, type AboutPageData } from '@/lib/about'
 import type { CoreValueItem } from '@/components/shared/CoreValuesSection'
 import type { TeamMember } from '@/components/sections/about/TeamSliderSection'
+import type { Metadata } from 'next'
+import { getPageSEO } from '@/lib/seo'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const pageSEO = await getPageSEO('about-us')
+  if (!pageSEO?.seo) return {}
+  return {
+    title: pageSEO.seo.title,
+    description: pageSEO.seo.description,
+    keywords: pageSEO.seo.focusKeywords ?? undefined,
+    alternates: {
+      canonical: pageSEO.seo.canonicalUrl ?? undefined,
+    },
+  }
+}
 
 export default async function AboutPage() {
-  const data: AboutPageData = await getAboutPageData()
+  const data: AboutPageData | null = await getAboutPageData()
+  
+  if (!data) {
+    return <div>Failed to load page content. Please try again later.</div>
+  }
+  
   const dc = data.dynamicContent
 
   // Map GraphQL core values to CoreValueItem[]

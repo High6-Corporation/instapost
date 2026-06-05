@@ -80,7 +80,7 @@ export function IndustriesSection() {
         </div>
 
         {/* CTA Button */}
-        <div className="relative z-10 flex justify-center mt-[26px] md:mt-[40px] md:mt-[60px]">
+        <div className="relative z-10 flex justify-center mt-[26px] md:mt-[40px] lg:mt-[60px]">
           <Link href="/industries">
             <Button variant="primary" showArrow={false}>
               View All Industries

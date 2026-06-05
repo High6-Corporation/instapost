@@ -114,7 +114,7 @@ const ABOUT_PAGE_QUERY_ID =
 
 // ── Fetch ────────────────────────────────────────────────────────────────────
 
-export async function getAboutPageData(): Promise<AboutPageData> {
+export async function getAboutPageData(): Promise<AboutPageData | null> {
   const data = await wpGraphQLPersistedQuery<{ page: AboutPageData }>(
     ABOUT_PAGE_QUERY_ID,
   )
