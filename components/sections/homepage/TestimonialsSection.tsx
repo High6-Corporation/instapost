@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
 import Badge from '@/components/blocks/Badge'
@@ -10,52 +11,54 @@ import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 const testimonials = [
   {
     id: 1,
-    image: '/images/glenn.jpg',
+    video: '/videos/RBG_SUCCESS STORIES',
+    thumbnail: '/images/glenn-thumbnail.jpg',
     brand: "Razon's by Glenn",
     name: 'GLENN CARRAEON',
     title: 'OWNER & CEO',
-    playIcon: '/icons/play-button.svg',
   },
   {
     id: 2,
-    image: '/images/tiffany.jpg',
+    video: '/videos/MILKMAGIC_SUCCESS STORIES',
     brand: 'Milk Magic',
     name: 'TIFFANY CO',
     title: 'CONSOLIDATED DAIRY REPRESENTATIVE',
-    playIcon: '/icons/play-button.svg',
   },
   {
     id: 3,
-    image: '/images/ivan.jpg',
+    video: '/videos/CUTS4TOTS_SUCCESS STORIES',
     brand: 'Cuts 4 Tots',
     name: 'IVAN',
     title: 'REGIONAL MANAGER',
-    playIcon: '/icons/play-button.svg',
   },
-  // Dummy testimonials for testing
   {
     id: 4,
-    image: '/images/glenn.jpg',
-    brand: 'Brand Four',
-    name: 'JOHN DOE',
-    title: 'MARKETING DIRECTOR',
-    playIcon: '/icons/play-button.svg',
+    video: '/videos/CVMP_ SUCCESS STORIES',
+    brand: 'CVM Pawnshop',
+    name: 'ZAIRHA GHAILE MEDROZO',
+    title: 'MARKETING SPECIALIST',
   },
   {
     id: 5,
-    image: '/images/tiffany.jpg',
-    brand: 'Brand Five',
-    name: 'JANE SMITH',
-    title: 'CREATIVE DIRECTOR',
-    playIcon: '/icons/play-button.svg',
+    video: '/videos/ONESIMUS_ SUCCESS STORIES',
+    thumbnail: '/images/kenneth-thumbnail.jpg',
+    brand: 'One Simus',
+    name: 'KENNETH AGUILAR',
+    title: 'SALES OPERATION DEPARTMENT MANAGER',
   },
   {
     id: 6,
-    image: '/images/ivan.jpg',
-    brand: 'Brand Six',
-    name: 'MIKE JOHNSON',
-    title: 'SALES MANAGER',
-    playIcon: '/icons/play-button.svg',
+    video: '/videos/MY STRONG HOME_SUCCESS STORIES',
+    brand: 'My Strong Home',
+    name: 'JUAN DELA CRUZ',
+    title: 'OPERATIONS MANAGER',
+  },
+  {
+    id: 7,
+    video: '/videos/SCRUBDADDY_ SUCCESS STORIES',
+    brand: 'Scrub Daddy',
+    name: 'JUAN DELA CRUZ',
+    title: 'BRAND MANAGER',
   },
 ]
 
@@ -67,6 +70,8 @@ export function TestimonialsSection() {
   const [isDragging, setIsDragging] = useState(false)
   const [dragStart, setDragStart] = useState(0)
   const [dragOffset, setDragOffset] = useState(0)
+  const [modalVideo, setModalVideo] = useState<{ id: number; src: string; brand: string } | null>(null)
+  const modalVideoRef = useRef<HTMLVideoElement>(null)
 
   // Minimum swipe distance to trigger slide change
   const minSwipeDistance = 50
@@ -153,11 +158,45 @@ export function TestimonialsSection() {
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % totalPages)
+    setModalVideo(null)
   }
 
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages)
+    setModalVideo(null)
   }
+
+  const openVideoModal = (testimonial: typeof testimonials[0]) => {
+    setModalVideo({
+      id: testimonial.id,
+      src: testimonial.video,
+      brand: testimonial.brand,
+    })
+  }
+
+  const closeVideoModal = () => {
+    if (modalVideoRef.current) {
+      modalVideoRef.current.pause()
+    }
+    setModalVideo(null)
+  }
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeVideoModal()
+    }
+    if (modalVideo) {
+      document.addEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflow = 'hidden'
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
+    }
+  }, [modalVideo])
 
   // Generate slides based on itemsPerSlide
   const slides = []
@@ -213,27 +252,42 @@ export function TestimonialsSection() {
                       {slideItems.map((testimonial) => (
                         <div
                           key={testimonial.id}
-                          className="bg-white p-[6px] md:p-[8px] lg:p-[15px] min-h-[280px] sm:min-h-[300px] md:min-h-[350px] lg:min-h-[422px] flex items-center justify-center border border-[rgba(0,0,0,0.08)] rounded-[32px] shadow-[0px_0px_16px_0px_rgba(0,0,0,0.08)] overflow-hidden relative"
+                          className="bg-white p-[6px] md:p-[8px] lg:p-[15px] min-h-[280px] max-sm:max-h-[280px] sm:min-h-[300px] max-lg:max-h-[350px] md:min-h-[350px] lg:min-h-[422px] flex items-center justify-center border border-[rgba(0,0,0,0.08)] rounded-[32px] shadow-[0px_0px_16px_0px_rgba(0,0,0,0.08)] overflow-hidden relative"
                         >
-                          {/* Main Image */}
-                          <div className="relative h-full rounded-[24px] overflow-hidden w-full max-w-[315px] max-h-[388px]">
-                            <img
-                              src={testimonial.image}
-                              alt={testimonial.brand}
-                              className="object-cover w-full h-full rounded-[24px]"
-                            />
+                          {/* Thumbnail */}
+                          <div className="relative h-full rounded-[24px] overflow-hidden w-full max-w-[315px] max-h-[388px] cursor-pointer"
+                            onClick={() => openVideoModal(testimonial)}
+                          >
+                            {/* Show thumbnail image if available, otherwise show video */}
+                            {testimonial.thumbnail ? (
+                              <img
+                                src={testimonial.thumbnail}
+                                alt={testimonial.brand}
+                                className="object-cover w-full h-full rounded-[24px]"
+                              />
+                            ) : (
+                              <video
+                                muted
+                                loop
+                                playsInline
+                                className="object-cover w-full h-full rounded-[24px]"
+                              >
+                                <source src={`${testimonial.video}.webm`} type="video/webm" />
+                                <source src={`${testimonial.video}.mp4`} type="video/mp4" />
+                              </video>
+                            )}
 
                             {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-b from-transparent from-30% via-black/40 via-50% to-black/90" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-transparent from-30% via-black/40 via-50% to-black/90 pointer-events-none" />
 
-                            {/* Play Button (Absolute) */}
-                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition-opacity cursor-pointer">
+                            {/* Play Button */}
+                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70 hover:opacity-100 transition-opacity">
                               <Image
-                                src={testimonial.playIcon}
+                                src="/icons/play-button.svg"
                                 alt="Play video"
                                 width={75}
                                 height={75}
-                                className="object-contain max-md:w-[40px] max-md:h-[40px] md-w-[60px] md:h-[60px] lg-w-[75px] lg-h-[75px]"
+                                className="object-contain max-md:w-[40px] max-md:h-[40px] md:w-[60px] md:h-[60px] lg:w-[75px] lg:h-[75px]"
                               />
                             </div>
 
@@ -320,6 +374,44 @@ export function TestimonialsSection() {
         </div>
       </Row>
     </Section>
+
+    {/* Video Lightbox Modal - Rendered via Portal */}
+    {modalVideo && createPortal(
+      <div 
+        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90"
+        onClick={closeVideoModal}
+      >
+        {/* Close Button */}
+        <button
+          onClick={closeVideoModal}
+          className="fixed top-4 right-4 z-10 w-10 h-10 flex items-center justify-center text-white hover:text-neutral-300 transition-colors"
+          aria-label="Close video"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        {/* Video Container - Solid Black Frame */}
+        <div 
+          className="relative w-full max-w-5xl h-[80vh] flex items-center justify-center bg-black"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <video
+            ref={modalVideoRef}
+            controls
+            autoPlay
+            playsInline
+            className="max-w-full max-h-full object-contain"
+          >
+            <source src={`${modalVideo.src}.webm`} type="video/webm" />
+            <source src={`${modalVideo.src}.mp4`} type="video/mp4" />
+          </video>
+        </div>
+      </div>,
+      document.body
+    )}
     </ScrollAnimationWrapper>
   )
 }
