@@ -46,7 +46,7 @@ export default function Footer() {
           <div className="flex flex-col lg:flex-row gap-[24px] justify-between w-full items-center">
             {/* Logo */}
             <div className="w-[220px] lg:w-[295px] shrink-0">
-              <a href="/coming-soon">
+              <a href="/">
                 <Image
                   src="/logo/header-logo.png"
                   alt="Instapost logo"

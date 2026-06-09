@@ -50,15 +50,15 @@ const testimonials = [
     id: 6,
     video: '/videos/MY STRONG HOME_SUCCESS STORIES',
     brand: 'My Strong Home',
-    name: 'JUAN DELA CRUZ',
-    title: 'OPERATIONS MANAGER',
+    name: 'HANZ CHAN',
+    title: 'OWNER & CEO',
   },
   {
     id: 7,
     video: '/videos/SCRUBDADDY_ SUCCESS STORIES',
-    brand: 'Scrub Daddy',
-    name: 'JUAN DELA CRUZ',
-    title: 'BRAND MANAGER',
+    brand: 'ScrubDaddy',
+    name: 'DUSTIN NG',
+    title: 'MANAGING PARTNER',
   },
 ]
 

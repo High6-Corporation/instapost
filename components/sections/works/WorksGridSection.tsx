@@ -33,9 +33,9 @@ export default function WorksGridSection({
     <>
       <ScrollAnimationWrapper>
         <Section className="bg-white pb-[40px] md:pb-[64px] lg:pb-[80px]">
-          <Row>
+          <Row >
             {/* Grid: 1 col mobile, 2 cols tablet, 3 cols desktop */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[repeat(3,413px)] gap-4 md:gap-5 xl:gap-6 justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 lg:gap-6 justify-center max-w-[1440px] mx-auto">
               {visibleWorks.map((work) => (
                 <WorkCard
                   key={work.id}
