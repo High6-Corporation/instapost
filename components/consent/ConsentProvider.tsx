@@ -17,6 +17,7 @@ import {
 type ConsentContextValue = {
   consent: ConsentState
   hasChosen: boolean
+  isReady: boolean
   isSettingsOpen: boolean
   acceptAll: () => void
   rejectAll: () => void
@@ -30,6 +31,7 @@ const ConsentContext = createContext<ConsentContextValue | null>(null)
 export function ConsentProvider({ children }: { children: React.ReactNode }) {
   const [consent, setConsent] = useState<ConsentState>(defaultConsent)
   const [hasChosen, setHasChosen] = useState(false)
+  const [isReady, setIsReady] = useState(false)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   useEffect(() => {
@@ -46,6 +48,8 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
 
       setHasChosen(true)
     }
+
+    setIsReady(true)
 
     const openSettings = () => setIsSettingsOpen(true)
 
@@ -89,6 +93,7 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
     () => ({
       consent,
       hasChosen,
+      isReady,
       isSettingsOpen,
       acceptAll,
       rejectAll,
@@ -96,7 +101,7 @@ export function ConsentProvider({ children }: { children: React.ReactNode }) {
       openSettings: () => setIsSettingsOpen(true),
       closeSettings: () => setIsSettingsOpen(false),
     }),
-    [consent, hasChosen, isSettingsOpen]
+    [consent, hasChosen, isReady, isSettingsOpen]
   )
 
   return (
