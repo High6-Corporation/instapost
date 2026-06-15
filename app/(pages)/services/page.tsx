@@ -5,6 +5,21 @@ import { IntroText } from "@/components/sections/services/IntroText";
 import ServiceFeatureSection from "@/components/sections/services/ServiceFeatureSection";
 import { CtaSection } from "@/components/global/CtaSection";
 import { getServices } from "@/lib/services";
+import type { Metadata } from 'next'
+import { getPageSEO } from '@/lib/seo'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const pageSEO = await getPageSEO('services')
+  if (!pageSEO?.seo) return {}
+  return {
+    title: pageSEO.seo.title,
+    description: pageSEO.seo.description,
+    keywords: pageSEO.seo.focusKeywords ?? undefined,
+    alternates: {
+      canonical: pageSEO.seo.canonicalUrl ?? undefined,
+    },
+  }
+}
 
 export default async function ServicesPage() {
   const services = await getServices();
