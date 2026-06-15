@@ -22,6 +22,7 @@ interface CoreValuesSectionProps {
   shapeSrc?: string
   ctaText?: string
   ctaHref?: string
+  onButtonClick?: () => void
   ctaVariant?: 'primary' | 'secondary' | 'white'
   ctaClassName?: string
   className?: string
@@ -41,6 +42,7 @@ export function CoreValuesSection({
   shapeSrc = '/images/vector-yellow.png',
   ctaText,
   ctaHref,
+  onButtonClick,
   ctaVariant = 'primary',
   ctaClassName,
   className,
@@ -144,16 +146,26 @@ export function CoreValuesSection({
                 ))}
               </div>
 
-              {ctaText && ctaHref && (
+              {ctaText && (onButtonClick || ctaHref) && (
                 <div>
-                  <Link href={ctaHref}>
+                  {onButtonClick ? (
                     <Button
                       variant={ctaVariant}
                       className={cn('heading-3 font-semibold', ctaClassName)}
+                      onClick={onButtonClick}
                     >
                       {ctaText}
                     </Button>
-                  </Link>
+                  ) : (
+                    <Link href={ctaHref ?? '/contact'}>
+                      <Button
+                        variant={ctaVariant}
+                        className={cn('heading-3 font-semibold', ctaClassName)}
+                      >
+                        {ctaText}
+                      </Button>
+                    </Link>
+                  )}
                 </div>
               )}
             </div>

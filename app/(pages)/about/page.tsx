@@ -11,9 +11,30 @@ import { CtaSection } from '@/components/global/CtaSection'
 import Footer from '@/components/layout/Footer'
 import { getAboutPageData, type AboutPageData } from '@/lib/about'
 import type { CoreValueItem } from '@/components/shared/CoreValuesSection'
+import type { TeamMember } from '@/components/sections/about/TeamSliderSection'
+import type { Metadata } from 'next'
+import { getPageSEO } from '@/lib/seo'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const pageSEO = await getPageSEO('about-us')
+  if (!pageSEO?.seo) return {}
+  return {
+    title: pageSEO.seo.title,
+    description: pageSEO.seo.description,
+    keywords: pageSEO.seo.focusKeywords ?? undefined,
+    alternates: {
+      canonical: pageSEO.seo.canonicalUrl ?? undefined,
+    },
+  }
+}
 
 export default async function AboutPage() {
-  const data: AboutPageData = await getAboutPageData()
+  const data: AboutPageData | null = await getAboutPageData()
+  
+  if (!data) {
+    return <div>Failed to load page content. Please try again later.</div>
+  }
+  
   const dc = data.dynamicContent
 
   // Map GraphQL core values to CoreValueItem[]
@@ -35,6 +56,15 @@ export default async function AboutPage() {
   // Mission & Vision (first item from each array)
   const mission = dc.missionAndVisionSection.missionContents[0]
   const vision = dc.missionAndVisionSection.visionContents[0]
+
+  // Map GraphQL team members to TeamMember[]
+  const teamMembers: TeamMember[] =
+    dc.ourTeamSection.teamMembersImage?.map((m, i) => ({
+      id: i + 1,
+      image: m.teamMembersImage.node.sourceUrl,
+      name: m.name,
+      title: m.role,
+    })) ?? []
 
   return (
     <>
@@ -87,6 +117,7 @@ export default async function AboutPage() {
       <TeamSliderSection
         title={dc.ourTeamSection.teamTitle}
         description={dc.ourTeamSection.teamParagraph}
+        members={teamMembers.length > 0 ? teamMembers : undefined}
       />
 
       {/* Projects Section - Custom Content, Hidden Description and Badge */}

@@ -19,6 +19,28 @@ export const metadata: Metadata = {
     ],
     apple: '/icons/favicon-512x512.png',
   },
+  openGraph: {
+    title: 'Instapost - Your Content Platform',
+    description: 'Instapost - Modern content and commerce platform',
+    url: 'https://instapost.beta01.site',
+    siteName: 'Instapost',
+    images: [
+      {
+        url: '/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Instapost - Your Content Platform',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Instapost - Your Content Platform',
+    description: 'Instapost - Modern content and commerce platform',
+    images: ['/images/og-image.png'],
+  },
 }
 
 export default function RootLayout({

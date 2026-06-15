@@ -15,6 +15,7 @@ interface PhotoVideoPackageSectionProps {
   packages: PhotoVideoPackageItem[]
   ctaText?: string
   ctaHref?: string
+  onButtonClick?: () => void
   className?: string
   backgroundPatternSrc?: string
 }
@@ -24,6 +25,7 @@ export function PhotoVideoPackageSection({
   packages,
   ctaText = 'Inquire Now',
   ctaHref = '/contact',
+  onButtonClick,
   className,
   backgroundPatternSrc = '/images/cta-background.png',
 }: PhotoVideoPackageSectionProps) {
@@ -66,9 +68,13 @@ export function PhotoVideoPackageSection({
               </ul>
 
               <div>
-                <Link href={ctaHref}>
-                  <Button variant="primary">{ctaText}</Button>
-                </Link>
+                {onButtonClick ? (
+                  <Button variant="primary" onClick={onButtonClick}>{ctaText}</Button>
+                ) : (
+                  <Link href={ctaHref}>
+                    <Button variant="primary">{ctaText}</Button>
+                  </Link>
+                )}
               </div>
             </article>
           ))}

@@ -9,7 +9,7 @@ const philosophySteps = [
   },
   {
     circleText: 'Goals',
-    label: 'Where You\nWanna Go',
+    label: 'Where You\nWant to Go',
   },
   {
     circleText: 'Positioning',
