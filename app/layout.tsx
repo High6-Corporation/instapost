@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 import { ConsentProvider } from '@/components/consent/ConsentProvider'
 import { CookieConsentBanner } from '@/components/consent/CookieConsentBanner'
@@ -62,10 +61,6 @@ export default function RootLayout({
           <ConsentScriptLoader />
         </ConsentProvider>
       </body>
-      {/* GA4: loads only in this Next.js app — WordPress admin is a separate domain and is never affected */}
-      {process.env.NEXT_PUBLIC_GA_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-      )}
     </html>
   )
 }
