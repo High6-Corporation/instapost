@@ -2,22 +2,22 @@ import { wpGraphQLPersistedQuery } from './wp-graphql'
 
 // ── Shared query fragment for service fields ──────────────────────────────────
 
-const SERVICE_FIELDS_FRAGMENT = `
-  id
-  title
-  content
-  featuredImage {
-    node {
-      sourceUrl
-      altText
-    }
-  }
-  servicesField {
-    serviceTags {
-      serviceTagFields
-    }
-  }
-`
+// const SERVICE_FIELDS_FRAGMENT = `
+//   id
+//   title
+//   content
+//   featuredImage {
+//     node {
+//       sourceUrl
+//       altText
+//     }
+//   }
+//   servicesField {
+//     serviceTags {
+//       serviceTagFields
+//     }
+//   }
+// `
 
 // ── WPGraphQL response types ──────────────────────────────────────────────────
 
