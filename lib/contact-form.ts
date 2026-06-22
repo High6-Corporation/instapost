@@ -19,9 +19,9 @@ export async function submitContactForm(data: ContactFormData): Promise<FormSubm
   const consumerSecret = process.env.NEXT_PUBLIC_WP_CONSUMER_SECRET;
   const formId = process.env.NEXT_PUBLIC_GRAVITY_FORM_ID || '1';
 
-  console.log('Submitting form with data:', data);
-  console.log('WordPress URL:', wordpressUrl);
-  console.log('Form ID:', formId);
+  //console.log('Submitting form with data:', data);
+  //console.log('WordPress URL:', wordpressUrl);
+  //console.log('Form ID:', formId);
 
   // Map form data to Gravity Forms field structure
   const formFields = [
@@ -33,11 +33,11 @@ export async function submitContactForm(data: ContactFormData): Promise<FormSubm
     { id: 7, value: data.message },
   ];
 
-  console.log('Form fields:', formFields);
+  //console.log('Form fields:', formFields);
 
   try {
     const apiUrl = `${wordpressUrl}/wp-json/gf/v2/forms/${formId}/submissions?consumer_key=${consumerKey}&consumer_secret=${consumerSecret}`;
-    console.log('API Endpoint:', apiUrl);
+    //console.log('API Endpoint:', apiUrl);
 
     const response = await fetch(
       apiUrl,
@@ -57,17 +57,17 @@ export async function submitContactForm(data: ContactFormData): Promise<FormSubm
       }
     );
 
-    console.log('Response status:', response.status);
+    //console.log('Response status:', response.status);
 
     const result = await response.json();
-    console.log('Full API response:', JSON.stringify(result, null, 2));
+    //console.log('Full API response:', JSON.stringify(result, null, 2));
     
     if (!response.ok) {
       console.error('API Error Response:', result);
       throw new Error(result.message || result.error || `HTTP error! status: ${response.status}`);
     }
 
-    console.log('Form submission successful:', result);
+    //console.log('Form submission successful:', result);
     return result;
   } catch (error) {
     console.error('Error submitting form:', error);
