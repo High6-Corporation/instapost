@@ -80,6 +80,7 @@ function mapServiceNode(node: WPServiceNode): Service {
 export async function getServices(): Promise<Service[]> {
   const data = await wpGraphQLPersistedQuery<GetServicesResponse>(
     'f5fc7b7d67fd64b2d5669ad88fa22c58ff35aef7966ec980c055d78338ee4b11',
+    ['wordpress-services'],
   )
   return data.services.nodes.map(mapServiceNode)
 }

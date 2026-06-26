@@ -183,7 +183,11 @@ export async function getIndustries(): Promise<Industry[]> {
       }
     }
   `
-  const data = await wpGraphQLQuery<GetIndustriesResponse>(query)
+  const data = await wpGraphQLQuery<GetIndustriesResponse>(
+    query,
+    undefined,
+    ['wordpress-industries', 'wordpress-sitemap'],
+  )
   return data.industries.nodes.map(mapIndustryNode)
 }
 
@@ -195,7 +199,11 @@ export async function getIndustryBySlug(slug: string): Promise<Industry | null> 
       }
     }
   `
-  const data = await wpGraphQLQuery<{ industry: WPIndustryNode | null }>(query, { slug })
+  const data = await wpGraphQLQuery<{ industry: WPIndustryNode | null }>(
+    query,
+    { slug },
+    ['wordpress-industries'],
+  )
   if (!data.industry) return null
   return mapIndustryNode(data.industry)
 }
@@ -210,6 +218,10 @@ export async function getAllIndustrySlugs(): Promise<string[]> {
       }
     }
   `
-  const data = await wpGraphQLQuery<{ industries: { nodes: { slug: string }[] } }>(query)
+  const data = await wpGraphQLQuery<{ industries: { nodes: { slug: string }[] } }>(
+    query,
+    undefined,
+    ['wordpress-industries', 'wordpress-sitemap'],
+  )
   return data.industries.nodes.map((n) => n.slug)
 }

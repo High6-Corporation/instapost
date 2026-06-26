@@ -117,6 +117,7 @@ const ABOUT_PAGE_QUERY_ID =
 export async function getAboutPageData(): Promise<AboutPageData | null> {
   const data = await wpGraphQLPersistedQuery<{ page: AboutPageData }>(
     ABOUT_PAGE_QUERY_ID,
+    ['wordpress-pages'],
   )
   return data.page
 }

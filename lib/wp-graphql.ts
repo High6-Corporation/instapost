@@ -1,17 +1,25 @@
-const GRAPHQL_URL = process.env.WORDPRESS_GRAPHQL_URL || 'https://instapost.beta01.site/graphql'
+const GRAPHQL_URL =
+  process.env.WORDPRESS_GRAPHQL_URL || 'https://instapost.beta01.site/graphql'
+
+type FetchTags = string[]
 
 /**
  * Execute a standard GraphQL query against WordPress.
+ * Pass `tags` to enable on-demand revalidation via `revalidateTag()`.
  */
 export async function wpGraphQLQuery<T = unknown>(
   query: string,
   variables?: Record<string, unknown>,
+  tags?: FetchTags,
 ): Promise<T> {
   const res = await fetch(GRAPHQL_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ query, variables }),
-    next: { revalidate: 60 },
+    next: {
+      revalidate: 3600,
+      ...(tags ? { tags } : {}),
+    },
   })
 
   if (!res.ok) {
@@ -21,7 +29,9 @@ export async function wpGraphQLQuery<T = unknown>(
   const json = await res.json()
 
   if (json.errors) {
-    throw new Error(`WPGraphQL errors: ${json.errors.map((e: { message: string }) => e.message).join(', ')}`)
+    throw new Error(
+      `WPGraphQL errors: ${json.errors.map((e: { message: string }) => e.message).join(', ')}`,
+    )
   }
 
   return json.data as T
@@ -29,15 +39,21 @@ export async function wpGraphQLQuery<T = unknown>(
 
 /**
  * Execute a persisted (saved) GraphQL query by its hash/alias.
+ * Pass `tags` to enable on-demand revalidation via `revalidateTag()`.
  */
 export async function wpGraphQLPersistedQuery<T = unknown>(
   queryId: string,
+  tags?: FetchTags,
 ): Promise<T> {
   const url = `${GRAPHQL_URL}?id=${queryId}`
 
   const res = await fetch(url, {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
+    next: {
+      revalidate: 3600,
+      ...(tags ? { tags } : {}),
+    },
   })
 
   if (!res.ok) {
@@ -47,7 +63,9 @@ export async function wpGraphQLPersistedQuery<T = unknown>(
   const json = await res.json()
 
   if (json.errors) {
-    throw new Error(`WPGraphQL errors: ${json.errors.map((e: { message: string }) => e.message).join(', ')}`)
+    throw new Error(
+      `WPGraphQL errors: ${json.errors.map((e: { message: string }) => e.message).join(', ')}`,
+    )
   }
 
   return json.data as T

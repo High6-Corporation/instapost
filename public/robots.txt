@@ -1,0 +1,12 @@
+# https://instapost.co/robots.txt
+# This file only controls the Next.js frontend (instapost.co).
+# WordPress admin (admin.instapost.co) needs its own robots.txt on the WP side.
+
+User-agent: *
+Allow: /
+Disallow: /api/*
+Disallow: /cart
+Disallow: /checkout
+
+# Sitemap location
+Sitemap: https://instapost.co/sitemap.xml

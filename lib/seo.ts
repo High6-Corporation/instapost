@@ -43,6 +43,7 @@ async function fetchAllPagesSEO(): Promise<Map<string, PageSEO>> {
 
   const data = await wpGraphQLPersistedQuery<AllPagesSEOData>(
     ALL_PAGES_SEO_QUERY_ID,
+    ['wordpress-pages', 'wordpress-seo'],
   )
 
   // Build map by slug for fast lookup
