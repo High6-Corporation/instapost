@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'instapost.beta01.site',
+        hostname: 'admin.instapost.co',
         pathname: '/wp-content/**',
       },
     ],

@@ -23,14 +23,25 @@ const STATIC_ROUTES: MetadataRoute.Sitemap = [
 
 // ── WordPress REST helpers ─────────────────────────────────────────────────────
 
-type WPItem = { slug: string; modified?: string }
+type WPItem = { slug: string; modified?: string; modified_gmt?: string }
+
+/**
+ * Safely parse a date string into a valid Date object.
+ * Returns the current date if the input is missing, empty, or invalid
+ * (e.g. WordPress "0000-00-00T00:00:00").
+ */
+function safeDate(raw: string | undefined | null, fallback: Date): Date {
+  if (!raw) return fallback
+  const d = new Date(raw)
+  return Number.isNaN(d.getTime()) ? fallback : d
+}
 
 async function fetchWPRest(
   endpoint: string,
   perPage = 100,
 ): Promise<WPItem[]> {
   try {
-    const url = `${WP_URL}/wp-json/wp/v2/${endpoint}?per_page=${perPage}&_fields=slug,modified`
+    const url = `${WP_URL}/wp-json/wp/v2/${endpoint}?per_page=${perPage}&_fields=slug,modified,modified_gmt`
     const res = await fetch(url, {
       next: { revalidate: 3600, tags: ['wordpress-sitemap'] },
     })
@@ -59,7 +70,7 @@ async function fetchWooProducts(perPage = 100): Promise<WPItem[]> {
 // ── Sitemap generator ──────────────────────────────────────────────────────────
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date().toISOString()
+  const now = new Date()
 
   // Fetch all dynamic content in parallel
   const [posts, pages, industries, products] = await Promise.all([
@@ -74,7 +85,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `/blog/${p.slug}`,
     changeFrequency: 'weekly',
     priority: 0.6,
-    lastModified: p.modified || now,
+    lastModified: safeDate(p.modified_gmt ?? p.modified, now),
   }))
 
   // Pages → /[slug] (exclude homepage-related slugs)
@@ -85,7 +96,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `/${p.slug}`,
       changeFrequency: 'monthly',
       priority: 0.6,
-      lastModified: p.modified || now,
+      lastModified: safeDate(p.modified_gmt ?? p.modified, now),
     }))
 
   // Industries → /industries/[slug]
@@ -93,7 +104,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `/industries/${p.slug}`,
     changeFrequency: 'monthly',
     priority: 0.6,
-    lastModified: p.modified || now,
+    lastModified: safeDate(p.modified_gmt ?? p.modified, now),
   }))
 
   // Products → /product/[slug]
@@ -101,7 +112,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `/product/${p.slug}`,
     changeFrequency: 'weekly',
     priority: 0.7,
-    lastModified: p.modified || now,
+    lastModified: safeDate(p.modified_gmt ?? p.modified, now),
   }))
 
   // Combine: static routes get SITE_URL prefix, dynamic ones too
