@@ -40,7 +40,7 @@ export function HowWeWorkSection() {
             <h2 className="heading-2 font-medium text-text-primary">
               How we work
             </h2>
-            <p className="body-md text-text-secondary max-w-[480px] lg:text-right">
+            <p className="body-md text-text-secondary max-w-[480px]">
               A five-step engagement that starts with your numbers and ends with proof — every single week.
             </p>
           </div>

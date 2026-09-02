@@ -217,7 +217,7 @@ export function TestimonialsSection() {
           <h2 className="heading-2 font-medium max-lg:text-center text-text-primary">
             In their words
           </h2>
-          <p className="body-md text-text-secondary max-lg:text-center lg:max-w-[480px] lg:text-right">
+          <p className="body-md text-text-secondary max-lg:text-center lg:max-w-[480px]">
             Owners and marketing leads on what changed after they moved to Insta Post — on camera, in their own words.
           </p>
         </div>

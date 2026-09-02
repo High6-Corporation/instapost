@@ -59,7 +59,7 @@ export function SwitchToInstaPostSection() {
             <h2 className="heading-2 font-medium  max-md:text-center text-text-primary max-w-[600px]">
               Why brands switch to Insta Post
             </h2>
-            <p className="body-md text-text-secondary max-md:text-center lg:max-w-[480px] lg:text-right">
+            <p className="body-md text-text-secondary max-md:text-center lg:max-w-[480px]">
               Most agencies report reach and likes. We built the agency around the question your CFO actually asks: what did it return?
             </p>
           </div>

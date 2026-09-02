@@ -41,7 +41,7 @@ export function BuiltForBrandsSection() {
             <h2 className="heading-2 font-medium text-text-primary max-md:text-center">
               Built for brands with a story
             </h2>
-            <p className="body-md text-text-secondary max-md:text-center lg:max-w-[480px] lg:text-right">
+            <p className="body-md text-text-secondary max-md:text-center lg:max-w-[480px]">
               We specialize where heritage, story, and performance meet — the categories where our playbooks are deepest.
             </p>
           </div>

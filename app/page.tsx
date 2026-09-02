@@ -16,7 +16,7 @@ import { MarketingSection } from "@/components/sections/homepage/MarketingSectio
 import { IndustriesSection } from "@/components/sections/homepage/IndustriesSection"
 import { TestimonialsSection } from "@/components/sections/homepage/TestimonialsSection"
 import { ProofSection } from "@/components/sections/homepage/ProofSection"
-import { CtaSection } from "@/components/global/CtaSection"
+import { HomeCtaSection } from "@/components/sections/homepage/HomeCtaSection"
 import type { Metadata } from 'next'
 import { getPageSEO } from '@/lib/seo'
 
@@ -56,7 +56,7 @@ export default function Home() {
       <IndustriesSection />
       <TestimonialsSection />
       <ProofSection />
-      <CtaSection />
+      <HomeCtaSection />
       <Footer />
       <BackToTop />
     </main>
