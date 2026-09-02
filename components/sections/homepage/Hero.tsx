@@ -97,15 +97,15 @@ export function Hero() {
             </div>
 
             {/* Text Content */}
-            <div className="flex flex-col items-center gap-4 max-w-[805px]">
+            <div className="flex flex-col items-center gap-4 max-w-[905px]">
               {/* H1 Heading */}
               <h1 className="heading-1 font-medium text-neutral-900 text-center !tracking-[-3%]">
-                Content That Keeps Your Brand Moving
+                Content That Connects & Converts — and Proves It. 
               </h1>
 
               {/* Body Text */}
               <p className="body-lg text-text-secondary text-center">
-                Helping businesses stay visible and relevant through strategic social media content.
+                Insta Post puts strategy, production, paid ads, and KOL marketing under one roof for Filipino brands - then runs every campaign to a measurable return, reported weekly. Not impressions. Revenue.
               </p>
             </div>
 

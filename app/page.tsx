@@ -2,14 +2,20 @@ import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import BackToTop from "@/components/global/BackToTop"
 import { Hero } from "@/components/sections/homepage/Hero"
+import { RoasArchiveSection } from "@/components/sections/homepage/RoasArchiveSection"
 import { HighlightsSection } from "@/components/sections/homepage/HighlightsSection"
 import { BrandsSection } from "@/components/sections/homepage/BrandsSection"
 import { ProjectsSection } from "@/components/shared/ProjectsSection"
-import { MaskedMediaSection } from "@/components/shared/MaskedMediaSection"
+import { SwitchToInstaPostSection } from "@/components/sections/homepage/SwitchToInstaPostSection"
 import { ServicesSection } from "@/components/sections/homepage/ServicesSection"
+import { PerformancePackageSection } from "@/components/sections/homepage/PerformancePackageSection"
+import { BuiltForBrandsSection } from "@/components/sections/homepage/BuiltForBrandsSection"
+import { HowWeWorkSection } from "@/components/sections/homepage/HowWeWorkSection"
+import { GuaranteeSection } from "@/components/sections/homepage/GuaranteeSection"
 import { MarketingSection } from "@/components/sections/homepage/MarketingSection"
 import { IndustriesSection } from "@/components/sections/homepage/IndustriesSection"
 import { TestimonialsSection } from "@/components/sections/homepage/TestimonialsSection"
+import { ProofSection } from "@/components/sections/homepage/ProofSection"
 import { CtaSection } from "@/components/global/CtaSection"
 import type { Metadata } from 'next'
 import { getPageSEO } from '@/lib/seo'
@@ -32,6 +38,7 @@ export default function Home() {
     <main className="bg-white min-h-screen w-full overflow-x-hidden">
       <Header />
       <Hero />
+      <RoasArchiveSection />
       <HighlightsSection />
       <BrandsSection />
       <ProjectsSection 
@@ -39,11 +46,16 @@ export default function Home() {
         title="Discover how we bring brands to life through content and campaigns that deliver."
         showDescription={false}
       />
-      <MaskedMediaSection />
+      <SwitchToInstaPostSection />
       <ServicesSection />
+      <PerformancePackageSection />
+      <BuiltForBrandsSection />
+      <HowWeWorkSection />
+      <GuaranteeSection />
       <MarketingSection />
       <IndustriesSection />
       <TestimonialsSection />
+      <ProofSection />
       <CtaSection />
       <Footer />
       <BackToTop />

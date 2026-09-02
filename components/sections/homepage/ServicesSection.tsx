@@ -34,7 +34,7 @@ const services = [
 export function ServicesSection() {
   return (
     <ScrollAnimationWrapper>
-      <Section className="bg-white relative overflow-hidden pb-[40px] md:pb-[80px lg:pb-[120px] pt-[20px] md:pt-[40px] lg:pt-[5px]">
+      <Section className="bg-white relative overflow-hidden pt-[20px] md:pt-[40px] lg:pt-[5px]">
         <Row 
           className="!max-w-[1155px] relative rounded-[32px] flex items-center flex-col px-3 md:px-8 pb-[12px] md:pb-[36px] lg:pb-[100px]" 
           style={{

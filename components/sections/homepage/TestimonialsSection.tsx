@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
-import Badge from '@/components/blocks/Badge'
 import Image from 'next/image'
 import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
@@ -214,15 +213,13 @@ export function TestimonialsSection() {
           }}
         >
         {/* Header */}
-        <div className="relative z-10 flex flex-col items-center pt-[40px] pb-[24px] md:pb-[40px] md:pt-[60px] lg:pt-[81px] lg:pb-[58px]">
-          <Badge className="max-w-[158px] w-full bg-neutral-0">
-            What Our Clients Say
-          </Badge>
-          <h2 className="heading-2 font-normal text-neutral-900 text-center">
-            We love the work.
-            <br />
-            Our clients love the results.
+        <div className="relative z-10 flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4 pt-[40px] pb-[24px] md:pb-[40px] md:pt-[60px] lg:pt-[81px] lg:pb-[58px]">
+          <h2 className="heading-2 font-medium max-lg:text-center text-text-primary">
+            In their words
           </h2>
+          <p className="body-md text-text-secondary max-lg:text-center lg:max-w-[480px] lg:text-right">
+            Owners and marketing leads on what changed after they moved to Insta Post — on camera, in their own words.
+          </p>
         </div>
 
         {/* Testimonials Slider */}
@@ -360,17 +357,6 @@ export function TestimonialsSection() {
               />
             ))}
           </div>
-        </div>
-
-        {/* Decorative Social Icons */}
-        <div className="hidden lg:block absolute top-[40px] left-[120px] rotate-[18deg]">
-          <Image
-            src="/icons/social-icons.png"
-            alt="Social icons decoration"
-            width={197.52}
-            height={144.84}
-            className="object-contain"
-          />
         </div>
       </Row>
     </Section>
