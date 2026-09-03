@@ -5,7 +5,21 @@ import Button from '@/components/ui/Button'
 import Link from 'next/link'
 import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
-export function HomeCtaSection() {
+// Fallback content
+const FALLBACK_HEADING = 'Ready for returns you can measure?'
+const FALLBACK_SUBTEXT = 'Book a discovery call. Bring your numbers — we\'ll bring ours, including the cases closest to your category and a straight answer on what\'s achievable.'
+
+interface HomeCtaSectionProps {
+  data?: {
+    mainHeading: string
+    subtext: string
+  } | null
+}
+
+export function HomeCtaSection({ data }: HomeCtaSectionProps) {
+  const heading = data?.mainHeading || FALLBACK_HEADING
+  const subtext = data?.subtext || FALLBACK_SUBTEXT
+
   return (
     <ScrollAnimationWrapper>
       <Section className="bg-white relative overflow-hidden py-[40px] md:py-[64px] lg:py-[70px]">
@@ -28,10 +42,10 @@ export function HomeCtaSection() {
           {/* Text Content */}
           <div className="flex flex-col gap-4 items-center max-w-[770px] w-full">
             <h2 className="heading-2 font-normal text-neutral-0 text-center">
-              Ready for returns you can measure?
+              {heading}
             </h2>
             <p className="body-lg font-medium text-neutral-0 text-center">
-              Book a discovery call. Bring your numbers — we&apos;ll bring ours, including the cases closest to your category and a straight answer on what&apos;s achievable.
+              {subtext}
             </p>
           </div>
 

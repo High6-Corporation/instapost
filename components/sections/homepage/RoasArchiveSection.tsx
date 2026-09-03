@@ -1,7 +1,18 @@
 import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
 
-const clientResults = [
+// Fallback content
+const FALLBACK_MAIN_HEADING = 'From the ROAS Archive'
+const FALLBACK_SUBTEXT = 'Documented Client Results'
+const FALLBACK_BOTTOM_SUMMARY = {
+  title: '100+ Filipino brands',
+  description: 'scaled',
+  resultLabel: 'Client retention above',
+  resultValue: '95%',
+}
+
+// Fallback client results
+const FALLBACK_CLIENTS = [
   {
     client: 'ABS-CBN',
     category: 'national media campaign',
@@ -22,17 +33,67 @@ const clientResults = [
   },
 ]
 
-export function RoasArchiveSection() {
+// Client node type from GraphQL
+interface ClientNode {
+  title: string
+  content: string
+  slug: string
+  clientCategories: {
+    nodes: Array<{
+      name: string
+      slug: string
+    }>
+  }
+  dynamicContentForClient: {
+    metricValue: string | null
+    metricLabel: string | null
+    redirectionLink: {
+      url: string
+      title: string
+      target: string
+    } | null
+  }
+}
+
+interface RoasArchiveProps {
+  data?: {
+    mainHeading: string
+    subtext: string
+    bottomSummary: {
+      title: string
+      description: string
+      resultLabel: string
+      resultValue: string
+    }
+  } | null
+  clients?: ClientNode[] | null
+}
+
+export function RoasArchiveSection({ data, clients }: RoasArchiveProps) {
+  const mainHeading = data?.mainHeading || FALLBACK_MAIN_HEADING
+  const subtext = data?.subtext || FALLBACK_SUBTEXT
+  const bottomSummary = data?.bottomSummary || FALLBACK_BOTTOM_SUMMARY
+
+  // Transform clients data to display format, or use fallback
+  const clientResults = clients && clients.length > 0
+    ? clients.map((client) => ({
+        client: client.title,
+        category: client.clientCategories?.nodes?.[0]?.name || '',
+        metric: client.dynamicContentForClient?.metricValue || '',
+        label: client.dynamicContentForClient?.metricLabel || '',
+      }))
+    : FALLBACK_CLIENTS
+
   return (
-    <Section className="bg-bg-secondary py-[40px] md:py-[60px] lg:py-[80px] my-[40px] md:my-[60px]">
+    <Section className="bg-bg-secondary py-[40px] md:py-[60px] lg:py-[80px] mb-[40px] md:mb-[60px]">
       <Row className="!max-w-[1270px]">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 mb-[24px] md:mb-[40px]">
           <span className="heading-4 font-bold max-md:text-center tracking-[2px] text-primary uppercase">
-            From the ROAS Archive
+            {mainHeading}
           </span>
           <span className="heading-4 font-bold max-md:text-center tracking-[2px] text-primary uppercase">
-            Documented Client Results
+            {subtext}
           </span>
         </div>
 
@@ -79,12 +140,22 @@ export function RoasArchiveSection() {
         {/* Bottom stats */}
         <div className="border-t border-dotted border-primary/40 pt-[24px]">
           <div className="flex flex-col md:flex-row md:justify-between gap-2">
-            <span className="body-md text-text-primary">
-              100+ Filipino brands scaled
-            </span>
-            <span className="body-md text-text-primary">
-              Client retention above 95%
-            </span>
+            <div className="flex items-baseline gap-3">
+              <span className="body-md font-semibold text-text-primary">
+                {bottomSummary.title}
+              </span>
+              <span className="body-sm text-text-secondary">
+                {bottomSummary.description}
+              </span>
+            </div>
+            <div className="flex items-baseline gap-2">
+              <span className="body-md text-text-primary">
+                {bottomSummary.resultLabel}
+              </span>
+              <span className="body-md font-bold text-primary">
+                {bottomSummary.resultValue}
+              </span>
+            </div>
           </div>
         </div>
       </Row>

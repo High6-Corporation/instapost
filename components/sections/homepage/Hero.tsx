@@ -6,7 +6,21 @@ import Button from '@/components/ui/Button'
 import Section from '@/components/layout/Section'
 import Row from '@/components/layout/Row'
 
-export function Hero() {
+// Fallback content
+const FALLBACK_HEADING = "Content That Connects & Converts — and Proves It."
+const FALLBACK_SUBTEXT = "Insta Post puts strategy, production, paid ads, and KOL marketing under one roof for Filipino brands - then runs every campaign to a measurable return, reported weekly. Not impressions. Revenue."
+
+interface HeroProps {
+  data?: {
+    mainHeading: string
+    subtext: string
+  } | null
+}
+
+export function Hero({ data }: HeroProps) {
+  const heading = data?.mainHeading || FALLBACK_HEADING
+  const subtext = data?.subtext || FALLBACK_SUBTEXT
+
   return (
     <Section 
       className="relative min-h-[400px] md:min-h-[550px] lg:min-h-[709px] flex items-center pt-[100px] pb-[60px] lg:py-[130px] overflow-hidden"
@@ -100,12 +114,12 @@ export function Hero() {
             <div className="flex flex-col items-center gap-4 max-w-[905px]">
               {/* H1 Heading */}
               <h1 className="heading-1 font-medium text-neutral-900 text-center !tracking-[-3%]">
-                Content That Connects & Converts — and Proves It. 
+                {heading}
               </h1>
 
               {/* Body Text */}
               <p className="body-lg text-text-secondary text-center">
-                Insta Post puts strategy, production, paid ads, and KOL marketing under one roof for Filipino brands - then runs every campaign to a measurable return, reported weekly. Not impressions. Revenue.
+                {subtext}
               </p>
             </div>
 

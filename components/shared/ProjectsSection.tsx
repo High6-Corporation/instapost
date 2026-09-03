@@ -89,7 +89,7 @@ export function ProjectsSection({
           )}
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] w-full mt-[24px] md:mt-[40px] lg:mt-[60px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 !gap-2 md:gap-[30px] w-full mt-[24px] md:mt-[40px] lg:mt-[60px]">
             {projects.map((project, index) => (
               <ProjectCard
                 key={index}

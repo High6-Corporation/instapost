@@ -7,10 +7,38 @@ import Row from '@/components/layout/Row'
 import Image from 'next/image'
 import ScrollAnimationWrapper from '@/components/global/ScrollAnimationWrapper'
 
-const testimonials = [
+interface VideoSource {
+  src: string
+  type: string
+}
+
+interface TestimonialItem {
+  id: number
+  sources: VideoSource[]
+  thumbnail: string | null
+  brand: string
+  name: string
+  title: string
+}
+
+// Infer a MIME type from a video URL extension
+function videoTypeFromUrl(url: string): string {
+  if (url.endsWith('.webm')) return 'video/webm'
+  if (url.endsWith('.ogg') || url.endsWith('.ogv')) return 'video/ogg'
+  return 'video/mp4'
+}
+
+// Fallback content (local video base paths, no extension)
+const FALLBACK_HEADING = 'In their words'
+const FALLBACK_SUBTEXT = 'Owners and marketing leads on what changed after they moved to Insta Post — on camera, in their own words.'
+
+const FALLBACK_TESTIMONIALS: TestimonialItem[] = [
   {
     id: 1,
-    video: '/videos/RBG_SUCCESS STORIES',
+    sources: [
+      { src: '/videos/RBG_SUCCESS STORIES.webm', type: 'video/webm' },
+      { src: '/videos/RBG_SUCCESS STORIES.mp4', type: 'video/mp4' },
+    ],
     thumbnail: '/images/glenn-thumbnail.jpg',
     brand: "Razon's by Glenn",
     name: 'GLENN CARRAEON',
@@ -18,28 +46,43 @@ const testimonials = [
   },
   {
     id: 2,
-    video: '/videos/MILKMAGIC_SUCCESS STORIES',
+    sources: [
+      { src: '/videos/MILKMAGIC_SUCCESS STORIES.webm', type: 'video/webm' },
+      { src: '/videos/MILKMAGIC_SUCCESS STORIES.mp4', type: 'video/mp4' },
+    ],
+    thumbnail: null,
     brand: 'Milk Magic',
     name: 'TIFFANY CO',
     title: 'CONSOLIDATED DAIRY REPRESENTATIVE',
   },
   {
     id: 3,
-    video: '/videos/CUTS4TOTS_SUCCESS STORIES',
+    sources: [
+      { src: '/videos/CUTS4TOTS_SUCCESS STORIES.webm', type: 'video/webm' },
+      { src: '/videos/CUTS4TOTS_SUCCESS STORIES.mp4', type: 'video/mp4' },
+    ],
+    thumbnail: null,
     brand: 'Cuts 4 Tots',
     name: 'IVAN',
     title: 'REGIONAL MANAGER',
   },
   {
     id: 4,
-    video: '/videos/CVMP_ SUCCESS STORIES',
+    sources: [
+      { src: '/videos/CVMP_ SUCCESS STORIES.webm', type: 'video/webm' },
+      { src: '/videos/CVMP_ SUCCESS STORIES.mp4', type: 'video/mp4' },
+    ],
+    thumbnail: null,
     brand: 'CVM Pawnshop',
     name: 'ZAIRHA GHAILE MEDROZO',
     title: 'MARKETING SPECIALIST',
   },
   {
     id: 5,
-    video: '/videos/ONESIMUS_ SUCCESS STORIES',
+    sources: [
+      { src: '/videos/ONESIMUS_ SUCCESS STORIES.webm', type: 'video/webm' },
+      { src: '/videos/ONESIMUS_ SUCCESS STORIES.mp4', type: 'video/mp4' },
+    ],
     thumbnail: '/images/kenneth-thumbnail.jpg',
     brand: 'One Simus',
     name: 'KENNETH AGUILAR',
@@ -47,21 +90,73 @@ const testimonials = [
   },
   {
     id: 6,
-    video: '/videos/MY STRONG HOME_SUCCESS STORIES',
+    sources: [
+      { src: '/videos/MY STRONG HOME_SUCCESS STORIES.webm', type: 'video/webm' },
+      { src: '/videos/MY STRONG HOME_SUCCESS STORIES.mp4', type: 'video/mp4' },
+    ],
+    thumbnail: null,
     brand: 'My Strong Home',
     name: 'HANZ CHAN',
     title: 'OWNER & CEO',
   },
   {
     id: 7,
-    video: '/videos/SCRUBDADDY_ SUCCESS STORIES',
+    sources: [
+      { src: '/videos/SCRUBDADDY_ SUCCESS STORIES.webm', type: 'video/webm' },
+      { src: '/videos/SCRUBDADDY_ SUCCESS STORIES.mp4', type: 'video/mp4' },
+    ],
+    thumbnail: null,
     brand: 'ScrubDaddy',
     name: 'DUSTIN NG',
     title: 'MANAGING PARTNER',
   },
 ]
 
-export function TestimonialsSection() {
+// GraphQL client type for testimonials
+interface TestimonialClientNode {
+  brandName: string
+  clientName: string
+  position: string
+  customThumbnailOptional: {
+    node: {
+      sourceUrl: string
+    } | null
+  } | null
+  video: {
+    node: {
+      guid: string
+    } | null
+  } | null
+}
+
+interface TestimonialsSectionProps {
+  data?: {
+    mainHeading: string
+    subtext: string
+    clients: TestimonialClientNode[]
+  } | null
+}
+
+export function TestimonialsSection({ data }: TestimonialsSectionProps) {
+  const heading = data?.mainHeading || FALLBACK_HEADING
+  const subtext = data?.subtext || FALLBACK_SUBTEXT
+
+  // Map dynamic clients to internal shape, or fall back to hardcoded list
+  const testimonials: TestimonialItem[] =
+    data?.clients && data.clients.length > 0
+      ? data.clients.map((client, index) => {
+          const url = client.video?.node?.guid || ''
+          return {
+            id: index + 1,
+            sources: url ? [{ src: url, type: videoTypeFromUrl(url) }] : [],
+            thumbnail: client.customThumbnailOptional?.node?.sourceUrl || null,
+            brand: client.brandName || '',
+            name: client.clientName || '',
+            title: client.position || '',
+          }
+        })
+      : FALLBACK_TESTIMONIALS
+
   const [currentIndex, setCurrentIndex] = useState(0)
   const [itemsPerSlide, setItemsPerSlide] = useState(2)
   const [touchStart, setTouchStart] = useState(0)
@@ -69,7 +164,7 @@ export function TestimonialsSection() {
   const [isDragging, setIsDragging] = useState(false)
   const [dragStart, setDragStart] = useState(0)
   const [dragOffset, setDragOffset] = useState(0)
-  const [modalVideo, setModalVideo] = useState<{ id: number; src: string; brand: string } | null>(null)
+  const [modalVideo, setModalVideo] = useState<{ id: number; sources: VideoSource[]; brand: string } | null>(null)
   const modalVideoRef = useRef<HTMLVideoElement>(null)
 
   // Minimum swipe distance to trigger slide change
@@ -168,7 +263,7 @@ export function TestimonialsSection() {
   const openVideoModal = (testimonial: typeof testimonials[0]) => {
     setModalVideo({
       id: testimonial.id,
-      src: testimonial.video,
+      sources: testimonial.sources,
       brand: testimonial.brand,
     })
   }
@@ -215,10 +310,10 @@ export function TestimonialsSection() {
         {/* Header */}
         <div className="relative z-10 flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4 pt-[40px] pb-[24px] md:pb-[40px] md:pt-[60px] lg:pt-[81px] lg:pb-[58px]">
           <h2 className="heading-2 font-medium max-lg:text-center text-text-primary">
-            In their words
+            {heading}
           </h2>
           <p className="body-md text-text-secondary max-lg:text-center lg:max-w-[480px]">
-            Owners and marketing leads on what changed after they moved to Insta Post — on camera, in their own words.
+            {subtext}
           </p>
         </div>
 
@@ -267,10 +362,12 @@ export function TestimonialsSection() {
                                 muted
                                 loop
                                 playsInline
+                                preload="metadata"
                                 className="object-cover w-full h-full rounded-[24px]"
                               >
-                                <source src={`${testimonial.video}.webm`} type="video/webm" />
-                                <source src={`${testimonial.video}.mp4`} type="video/mp4" />
+                                {testimonial.sources.map((source, i) => (
+                                  <source key={i} src={`${source.src}#t=0.1`} type={source.type} />
+                                ))}
                               </video>
                             )}
 
@@ -391,8 +488,9 @@ export function TestimonialsSection() {
             playsInline
             className="max-w-full max-h-full object-contain"
           >
-            <source src={`${modalVideo.src}.webm`} type="video/webm" />
-            <source src={`${modalVideo.src}.mp4`} type="video/mp4" />
+            {modalVideo.sources.map((source, i) => (
+              <source key={i} src={source.src} type={source.type} />
+            ))}
           </video>
         </div>
       </div>,
